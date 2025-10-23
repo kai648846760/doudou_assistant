@@ -8,16 +8,19 @@ from typing import Any, Dict, Optional
 
 @dataclass
 class CrawlState:
-    """Tracks the current state of a crawl session."""
+    """Tracks and serialises crawl progress for the UI."""
 
     active: bool = False
     mode: Optional[str] = None
     target: Optional[str] = None
+    status: str = "idle"
+    status_message: Optional[str] = None
     started_at: Optional[dt.datetime] = None
     items_received: int = 0
     items_inserted: int = 0
     items_updated: int = 0
     last_error: Optional[str] = None
+    context: Dict[str, Any] = field(default_factory=dict)
     lock: threading.Lock = field(default_factory=threading.Lock)
 
     def reset(self) -> None:
@@ -25,40 +28,68 @@ class CrawlState:
             self.active = False
             self.mode = None
             self.target = None
+            self.status = "idle"
+            self.status_message = None
             self.started_at = None
             self.items_received = 0
             self.items_inserted = 0
             self.items_updated = 0
             self.last_error = None
+            self.context = {}
 
-    def start(self, mode: str, target: str) -> None:
+    def start(self, mode: str, target: str, context: Optional[Dict[str, Any]] = None) -> None:
         with self.lock:
             self.active = True
             self.mode = mode
             self.target = target
+            self.context = context or {}
+            self.status = "running"
+            self.status_message = "Crawl started"
             self.started_at = dt.datetime.utcnow()
             self.items_received = 0
             self.items_inserted = 0
             self.items_updated = 0
             self.last_error = None
 
-    def stop(self) -> None:
+    def stop(self, status: str = "stopped", message: Optional[str] = None) -> None:
         with self.lock:
             self.active = False
+            self.status = status
+            if message is not None:
+                self.status_message = message
+
+    def complete(self, message: Optional[str] = None) -> None:
+        with self.lock:
+            self.active = False
+            self.status = "complete"
+            if message is not None:
+                self.status_message = message
+
+    def set_status(self, status: str, message: Optional[str] = None) -> None:
+        with self.lock:
+            self.status = status
+            if message is not None:
+                self.status_message = message
+
+    def increment_received(self, count: int) -> None:
+        if count <= 0:
+            return
+        with self.lock:
+            self.items_received += count
 
     def update_counts(self, inserted: int, updated: int) -> None:
+        if inserted == 0 and updated == 0:
+            return
         with self.lock:
             self.items_inserted += inserted
             self.items_updated += updated
-
-    def increment_received(self, count: int) -> None:
-        with self.lock:
-            self.items_received += count
 
     def set_error(self, error: str) -> None:
         with self.lock:
             self.last_error = error
             self.active = False
+            self.status = "error"
+            self.status_message = error
 
     def snapshot(self) -> Dict[str, Any]:
         with self.lock:
@@ -66,9 +97,12 @@ class CrawlState:
                 "active": self.active,
                 "mode": self.mode,
                 "target": self.target,
+                "status": self.status,
+                "status_message": self.status_message,
                 "started_at": self.started_at.isoformat() if self.started_at else None,
                 "items_received": self.items_received,
                 "items_inserted": self.items_inserted,
                 "items_updated": self.items_updated,
                 "last_error": self.last_error,
+                "context": self.context,
             }

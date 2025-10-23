@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aweme Crawler</title>
+    <title>DouDou Assistant - Douyin Crawler</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Aweme Crawler</h1>
+            <h1>DouDou Assistant</h1>
+            <p class="subtitle">Douyin Data Crawler</p>
         </header>
 
         <nav class="tabs">
@@ -20,64 +21,128 @@
 
         <main class="content">
             <div id="login" class="tab-content">
-                <h2>Login</h2>
-                <p>Use the crawler window to log in to the platform. Login status will be detected automatically.</p>
-                <button class="btn btn-primary" id="check-login-btn">Check Login Status</button>
+                <h2>Login to Douyin</h2>
+                <p>
+                    To crawl Douyin profiles, you must be logged in. Click "Open Douyin" to open a browser window
+                    where you can log in to your Douyin account. Your session will persist between runs and is stored
+                    securely on your machine.
+                </p>
+                <div style="margin: 1.5rem 0;">
+                    <button class="btn btn-primary" id="open-login-btn">Open Douyin</button>
+                    <button class="btn btn-secondary" id="check-login-btn">Check Login Status</button>
+                </div>
                 <div class="status">
                     <p id="login-status">Not checked</p>
+                </div>
+                <div class="info-box">
+                    <strong>Note:</strong> The Douyin window uses a persistent profile stored in <code>./data/webview_profile</code>.
+                    Login credentials and cookies remain local to your device.
                 </div>
             </div>
 
             <div id="crawl" class="tab-content active">
-                <h2>Crawl</h2>
+                <h2>Crawl Data</h2>
+                
                 <div class="crawl-section">
+                    <h3>Author Profile Crawler</h3>
+                    <p>Enter an author profile URL, unique_id, or sec_uid to crawl all videos from that author.</p>
                     <div class="form-group">
-                        <label for="author-url">Author Profile URL:</label>
-                        <input type="url" id="author-url" name="author-url" placeholder="https://example.com/@author">
+                        <label for="author-url">Author Profile URL or ID:</label>
+                        <input 
+                            type="text" 
+                            id="author-url" 
+                            name="author-url" 
+                            placeholder="https://www.douyin.com/user/MS4wLjA..."
+                        >
+                        <small>Examples: https://www.douyin.com/user/... or just the unique ID.</small>
                     </div>
                     <button class="btn btn-primary" id="start-author-btn">Start Author Crawl</button>
+                </div>
 
-                    <div class="form-group" style="margin-top: 2rem;">
+                <div class="crawl-section" style="margin-top: 2rem;">
+                    <h3>Video Crawler</h3>
+                    <p>Enter a single video URL to crawl that video's details.</p>
+                    <div class="form-group">
                         <label for="video-url">Video URL:</label>
-                        <input type="url" id="video-url" name="video-url" placeholder="https://example.com/video/123">
+                        <input 
+                            type="text" 
+                            id="video-url" 
+                            name="video-url" 
+                            placeholder="https://www.douyin.com/video/123456789"
+                        >
                     </div>
                     <button class="btn btn-primary" id="start-video-btn">Start Video Crawl</button>
+                </div>
 
-                    <div style="margin-top: 1rem;">
-                        <button class="btn btn-secondary" id="stop-crawl-btn">Stop Crawl</button>
-                        <button class="btn btn-secondary" id="mock-push-btn">Test Mock Push</button>
-                    </div>
+                <div style="margin-top: 2rem;">
+                    <button class="btn btn-secondary" id="stop-crawl-btn">Stop Crawl</button>
+                    <button class="btn btn-secondary" id="mock-push-btn" style="margin-left: 0.5rem;">Test with Mock Data</button>
+                </div>
 
-                    <div class="status">
-                        <p>Status: <span id="crawl-status">Ready</span></p>
-                        <div id="crawl-stats" style="margin-top: 1rem; font-size: 0.9rem;"></div>
-                    </div>
+                <div class="status">
+                    <h3>Crawl Status</h3>
+                    <p><strong>Status:</strong> <span id="crawl-status">Ready</span></p>
+                    <div id="crawl-stats" style="margin-top: 1rem; font-size: 0.9rem;"></div>
                 </div>
             </div>
 
             <div id="data" class="tab-content">
-                <h2>Data</h2>
+                <h2>Stored Data</h2>
                 <div class="data-section">
-                    <div style="margin-bottom: 1rem;">
-                        <button class="btn btn-primary" id="refresh-data-btn">Refresh</button>
-                        <button class="btn btn-secondary" id="export-csv-btn">Export CSV</button>
+                    <div class="filters">
+                        <div class="form-group inline">
+                            <label for="filter-author">Author</label>
+                            <input type="text" id="filter-author" placeholder="Author name or ID">
+                        </div>
+                        <div class="form-group inline">
+                            <label for="filter-from">From</label>
+                            <input type="date" id="filter-from">
+                        </div>
+                        <div class="form-group inline">
+                            <label for="filter-to">To</label>
+                            <input type="date" id="filter-to">
+                        </div>
+                        <div class="filter-actions">
+                            <button class="btn btn-secondary" id="apply-filters-btn">Apply Filters</button>
+                            <button class="btn btn-link" id="reset-filters-btn">Reset</button>
+                        </div>
                     </div>
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>Aweme ID</th>
-                                <th>Author</th>
-                                <th>Description</th>
-                                <th>Likes</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="data-tbody">
-                            <tr>
-                                <td colspan="5" class="empty-state">No records found</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                    <div class="data-actions">
+                        <button class="btn btn-primary" id="refresh-data-btn">Refresh</button>
+                        <button class="btn btn-secondary" id="export-csv-btn">Export to CSV</button>
+                    </div>
+                    
+                    <div class="table-info">
+                        <p id="table-summary">Loading...</p>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Aweme ID</th>
+                                    <th>Author</th>
+                                    <th>Description</th>
+                                    <th>Likes</th>
+                                    <th>Comments</th>
+                                    <th>Shares</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="data-tbody">
+                                <tr>
+                                    <td colspan="7" class="empty-state">No records found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="pagination" id="pagination" style="margin-top: 1rem;">
+                        <button class="btn btn-sm" id="prev-page-btn" disabled>Previous</button>
+                        <span id="page-info" style="margin: 0 1rem;">Page 1</span>
+                        <button class="btn btn-sm" id="next-page-btn" disabled>Next</button>
+                    </div>
                 </div>
             </div>
         </main>
