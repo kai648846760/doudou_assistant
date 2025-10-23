@@ -18,33 +18,37 @@ def main() -> None:
     profile_dir = data_dir / "webview_profile"
     profile_dir.mkdir(parents=True, exist_ok=True)
 
-    db_path = data_dir / "aweme.db"
+    db_path = data_dir / "douyin.db"
 
     api = BridgeAPI(db_path)
 
     inject_path = pathlib.Path(__file__).parent / "inject.js"
+    scroll_path = pathlib.Path(__file__).parent / "scroll.js"
+    
     with inject_path.open("r", encoding="utf-8") as fp:
         inject_js = fp.read()
+    
+    with scroll_path.open("r", encoding="utf-8") as fp:
+        scroll_js = fp.read()
+    
+    combined_js = inject_js + "\n\n" + scroll_js
 
     ui_window = webview.create_window(
-        "PyWebView App - Aweme Crawler",
+        "DouDou Assistant",
         url=(pathlib.Path(__file__).parent / "ui" / "index.html").resolve().as_uri(),
         js_api=api,
         storage_path=str(profile_dir.resolve()),
     )
 
-    crawler_profile = data_dir / "crawler_profile"
-    crawler_profile.mkdir(parents=True, exist_ok=True)
-
     crawler_window = webview.create_window(
-        "Crawler Session",
+        "Douyin Session",
         url="about:blank",
         js_api=api,
         hidden=True,
-        storage_path=str(crawler_profile.resolve()),
+        storage_path=str(profile_dir.resolve()),
     )
 
-    api.bind_windows(ui_window, crawler_window, inject_js)
+    api.bind_windows(ui_window, crawler_window, combined_js)
 
     webview.start()
 

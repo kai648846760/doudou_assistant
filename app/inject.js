@@ -1,13 +1,13 @@
 (function () {
-    if (window.__awemeBridge) {
+    if (window.__douyinBridge) {
         return;
     }
 
     const BRIDGE_NAME = "pywebview";
-    const BATCH_DELAY = 200;
+    const BATCH_DELAY = 250;
 
     function log(...args) {
-        console.debug("[aweme-bridge]", ...args);
+        console.debug("[douyin-bridge]", ...args);
     }
 
     function normalizeAweme(item) {
@@ -20,11 +20,12 @@
         const video = item.video || {};
         const cover = video.cover || {};
         const playAddr = video.play_addr || {};
+        const author = item.author || item.aweme_author_info || {};
 
         return {
             aweme_id: String(item.aweme_id || item.id || ""),
             desc: item.desc || item.description || "",
-            create_time: item.create_time || (statistics && statistics.create_time) || null,
+            create_time: item.create_time || statistics.create_time || null,
             duration: item.duration || null,
             statistics: {
                 digg_count: statistics.digg_count || 0,
@@ -33,14 +34,26 @@
                 play_count: statistics.play_count || 0,
                 collect_count: statistics.collect_count || statistics.collect_cnt || 0,
             },
-            author: item.author || item.aweme_author_info || null,
+            author: {
+                uid: author.uid || author.id || null,
+                id: author.id || null,
+                sec_uid: author.sec_uid || null,
+                unique_id: author.unique_id || author.short_id || null,
+                nickname: author.nickname || author.name || null,
+                signature: author.signature || author.bio_description || null,
+                avatar_thumb: author.avatar_thumb || author.avatar || null,
+                follower_count: author.follower_count || author.fans || null,
+                following_count: author.following_count || author.following || null,
+                aweme_count: author.aweme_count || null,
+                region: author.region || author.country || null,
+            },
             music: {
                 title: music.title || music.name || null,
                 author: music.author || music.owner_nickname || null,
             },
             video: {
-                cover: Array.isArray(cover.url_list) ? cover.url_list[0] : null,
-                play: Array.isArray(playAddr.url_list) ? playAddr.url_list[0] : null,
+                cover: Array.isArray(cover.url_list) ? cover.url_list[0] : cover.url_list || cover.uri || null,
+                play: Array.isArray(playAddr.url_list) ? playAddr.url_list[0] : playAddr.url_list || playAddr.uri || null,
             },
             item_type: item.item_type || item.type || null,
         };
@@ -97,6 +110,20 @@
         }
     }
 
+    function shouldInclude(item) {
+        const ctx = window.__douyinCrawlerContext;
+        if (!ctx) {
+            return true;
+        }
+        if (ctx.latest_aweme_id && String(item.aweme_id) === String(ctx.latest_aweme_id)) {
+            return false;
+        }
+        if (ctx.blockedIds && Array.isArray(ctx.blockedIds)) {
+            return !ctx.blockedIds.includes(item.aweme_id);
+        }
+        return true;
+    }
+
     async function pushBatch(batch) {
         if (!batch.length) {
             return;
@@ -127,7 +154,11 @@
 
         return {
             add(items) {
-                queue = queue.concat(items);
+                const filtered = items.filter(Boolean).filter(shouldInclude);
+                if (!filtered.length) {
+                    return;
+                }
+                queue = queue.concat(filtered);
 
                 if (!timer) {
                     timer = setTimeout(flush, BATCH_DELAY);
@@ -178,7 +209,7 @@
     const originalSend = XHR.prototype.send;
 
     XHR.prototype.open = function (...args) {
-        this._awemeBridgeMethod = args[0];
+        this._douyinBridgeMethod = args[0];
         return originalOpen.apply(this, args);
     };
 
@@ -197,7 +228,7 @@
                 }
                 const items = flatten(data);
                 if (items.length) {
-                    log(`Captured ${items.length} items from XHR ${this._awemeBridgeMethod || "GET"}`);
+                    log(`Captured ${items.length} items from XHR ${this._douyinBridgeMethod || "GET"}`);
                     queue.add(items);
                 }
             } catch (error) {
@@ -207,8 +238,8 @@
         return originalSend.apply(this, args);
     };
 
-    window.__awemeBridge = {
-        version: "1.0.0",
+    window.__douyinBridge = {
+        version: "1.1.0",
         captureJson(text) {
             const data = safeParse(text);
             if (!data) {
@@ -238,7 +269,9 @@
                         },
                         author: {
                             id: "author_1",
+                            uid: "author_1",
                             nickname: "Mock Author",
+                            sec_uid: "mock_sec_uid",
                         },
                         music: {
                             title: "Mock Music",
@@ -259,5 +292,8 @@
         },
     };
 
-    log("TikTok aweme hook installed");
+    // Backwards compatibility for older references
+    window.__awemeBridge = window.__douyinBridge;
+
+    log("Douyin aweme hook installed");
 })();

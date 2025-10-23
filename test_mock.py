@@ -30,8 +30,11 @@ def test_mock_push():
                 "collect_count": 20,
             },
             "author": {
+                "uid": "author_001",
                 "id": "author_001",
                 "nickname": "Test Author",
+                "sec_uid": "MS4wLjABAAAAtest123",
+                "unique_id": "testauthor",
             },
             "music": {
                 "title": "Test Music",
@@ -56,8 +59,11 @@ def test_mock_push():
                 "collect_count": 40,
             },
             "author": {
+                "uid": "author_002",
                 "id": "author_002",
                 "nickname": "Another Author",
+                "sec_uid": "MS4wLjABAAAAtest456",
+                "unique_id": "anotherauthor",
             },
             "music": {
                 "title": "Another Music",
