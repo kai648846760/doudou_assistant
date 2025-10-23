@@ -3,47 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PyWebView App</title>
+    <title>Aweme Crawler</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>PyWebView Application</h1>
+            <h1>Aweme Crawler</h1>
         </header>
 
         <nav class="tabs">
-            <button class="tab-button active" data-tab="login">Login</button>
-            <button class="tab-button" data-tab="crawl">Crawl</button>
+            <button class="tab-button" data-tab="login">Login</button>
+            <button class="tab-button active" data-tab="crawl">Crawl</button>
             <button class="tab-button" data-tab="data">Data</button>
         </nav>
 
         <main class="content">
-            <div id="login" class="tab-content active">
+            <div id="login" class="tab-content">
                 <h2>Login</h2>
-                <form class="login-form">
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" placeholder="Enter username">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Enter password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </form>
+                <p>Use the crawler window to log in to the platform. Login status will be detected automatically.</p>
+                <button class="btn btn-primary" id="check-login-btn">Check Login Status</button>
+                <div class="status">
+                    <p id="login-status">Not checked</p>
+                </div>
             </div>
 
-            <div id="crawl" class="tab-content">
+            <div id="crawl" class="tab-content active">
                 <h2>Crawl</h2>
                 <div class="crawl-section">
                     <div class="form-group">
-                        <label for="url">URL to Crawl:</label>
-                        <input type="url" id="url" name="url" placeholder="https://example.com">
+                        <label for="author-url">Author Profile URL:</label>
+                        <input type="url" id="author-url" name="author-url" placeholder="https://example.com/@author">
                     </div>
-                    <button class="btn btn-primary">Start Crawl</button>
+                    <button class="btn btn-primary" id="start-author-btn">Start Author Crawl</button>
+
+                    <div class="form-group" style="margin-top: 2rem;">
+                        <label for="video-url">Video URL:</label>
+                        <input type="url" id="video-url" name="video-url" placeholder="https://example.com/video/123">
+                    </div>
+                    <button class="btn btn-primary" id="start-video-btn">Start Video Crawl</button>
+
+                    <div style="margin-top: 1rem;">
+                        <button class="btn btn-secondary" id="stop-crawl-btn">Stop Crawl</button>
+                        <button class="btn btn-secondary" id="mock-push-btn">Test Mock Push</button>
+                    </div>
+
                     <div class="status">
                         <p>Status: <span id="crawl-status">Ready</span></p>
+                        <div id="crawl-stats" style="margin-top: 1rem; font-size: 0.9rem;"></div>
                     </div>
                 </div>
             </div>
@@ -51,19 +58,23 @@
             <div id="data" class="tab-content">
                 <h2>Data</h2>
                 <div class="data-section">
-                    <p>No data available yet.</p>
+                    <div style="margin-bottom: 1rem;">
+                        <button class="btn btn-primary" id="refresh-data-btn">Refresh</button>
+                        <button class="btn btn-secondary" id="export-csv-btn">Export CSV</button>
+                    </div>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Status</th>
+                                <th>Aweme ID</th>
+                                <th>Author</th>
+                                <th>Description</th>
+                                <th>Likes</th>
                                 <th>Date</th>
                             </tr>
                         </thead>
                         <tbody id="data-tbody">
                             <tr>
-                                <td colspan="4" class="empty-state">No records found</td>
+                                <td colspan="5" class="empty-state">No records found</td>
                             </tr>
                         </tbody>
                     </table>
