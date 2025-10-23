@@ -138,13 +138,57 @@ header h1 {
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
 }
 
+.btn-secondary {
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.btn-secondary:hover {
+    background-color: #dee2e6;
+}
+
+.login-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.status-indicator {
+    font-weight: 600;
+}
+
+.status-indicator.success {
+    color: #28a745;
+}
+
+.status-indicator.error {
+    color: #dc3545;
+}
+
+.help-text {
+    display: block;
+    margin-top: 0.5rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.info-text {
+    margin-bottom: 0.5rem;
+    color: #6c757d;
+}
+
 .login-form {
     max-width: 400px;
 }
 
 .crawl-section,
 .data-section {
-    max-width: 800px;
+    max-width: 100%;
+}
+
+.data-controls {
+    margin-bottom: 1rem;
 }
 
 .status {
@@ -155,13 +199,29 @@ header h1 {
 }
 
 .status p {
-    margin: 0;
+    margin: 0.25rem 0;
     font-size: 0.95rem;
 }
 
 #crawl-status {
     font-weight: 600;
     color: #28a745;
+}
+
+#progress-container {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #dee2e6;
+}
+
+#progress-container p {
+    margin: 0.25rem 0;
+}
+
+#total-collected,
+#new-items {
+    font-weight: 600;
+    color: #667eea;
 }
 
 .data-table {

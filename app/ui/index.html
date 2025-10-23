@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PyWebView App</title>
+    <title>Douyin Author Crawler</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>PyWebView Application</h1>
+            <h1>Douyin Author Crawler</h1>
         </header>
 
         <nav class="tabs">
@@ -20,50 +20,58 @@
 
         <main class="content">
             <div id="login" class="tab-content active">
-                <h2>Login</h2>
-                <form class="login-form">
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" placeholder="Enter username">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" placeholder="Enter password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </form>
+                <h2>Douyin Login</h2>
+                <div class="login-info">
+                    <p>Login status: <span id="login-status" class="status-indicator">Not logged in</span></p>
+                    <button id="mock-login-btn" class="btn btn-primary">Mock Login (Testing)</button>
+                </div>
+                <div class="form-group">
+                    <p class="info-text">In production, this tab would display a Douyin login page.</p>
+                    <p class="info-text">For testing purposes, use the "Mock Login" button above.</p>
+                </div>
             </div>
 
             <div id="crawl" class="tab-content">
-                <h2>Crawl</h2>
+                <h2>Author Crawl</h2>
                 <div class="crawl-section">
                     <div class="form-group">
-                        <label for="url">URL to Crawl:</label>
-                        <input type="url" id="url" name="url" placeholder="https://example.com">
+                        <label for="author-input">Author URL / unique_id / sec_uid:</label>
+                        <input type="text" id="author-input" name="author-input" 
+                               placeholder="https://www.douyin.com/user/MS4wL... or unique_id or sec_uid">
+                        <small class="help-text">Enter a Douyin author homepage URL, unique_id, or sec_uid</small>
                     </div>
-                    <button class="btn btn-primary">Start Crawl</button>
+                    <button id="start-crawl-btn" class="btn btn-primary">Start Crawl</button>
                     <div class="status">
                         <p>Status: <span id="crawl-status">Ready</span></p>
+                        <div id="progress-container" style="display: none;">
+                            <p>Progress: <span id="progress-message">Initializing...</span></p>
+                            <p>Total collected: <span id="total-collected">0</span></p>
+                            <p>New items: <span id="new-items">0</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div id="data" class="tab-content">
-                <h2>Data</h2>
+                <h2>Collected Videos</h2>
                 <div class="data-section">
-                    <p>No data available yet.</p>
+                    <div class="data-controls">
+                        <button id="refresh-data-btn" class="btn btn-secondary">Refresh</button>
+                    </div>
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Status</th>
-                                <th>Date</th>
+                                <th>Aweme ID</th>
+                                <th>Description</th>
+                                <th>Create Time</th>
+                                <th>Likes</th>
+                                <th>Comments</th>
+                                <th>Shares</th>
                             </tr>
                         </thead>
                         <tbody id="data-tbody">
                             <tr>
-                                <td colspan="4" class="empty-state">No records found</td>
+                                <td colspan="6" class="empty-state">No videos collected yet</td>
                             </tr>
                         </tbody>
                     </table>
