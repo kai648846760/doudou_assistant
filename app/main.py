@@ -2,6 +2,8 @@ import pathlib
 
 import webview
 
+from .database import init_db
+
 
 class API:
     def __init__(self) -> None:
@@ -12,6 +14,8 @@ class API:
 
 
 def main() -> None:
+    init_db()
+
     data_dir = pathlib.Path("./data/webview_profile")
     data_dir.mkdir(parents=True, exist_ok=True)
 
