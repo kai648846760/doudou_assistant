@@ -1,0 +1,22 @@
+[project]
+name = "pywebview-app"
+version = "0.1.0"
+description = "A simple pywebview application"
+requires-python = ">=3.11"
+dependencies = [
+    "pywebview",
+    "sqlmodel",
+    "pydantic",
+]
+
+[tool.uv]
+managed = true
+
+[tool.uv.dependency-group.dev]
+dependencies = [
+    "ruff",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
