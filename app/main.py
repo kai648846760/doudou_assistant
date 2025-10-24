@@ -1,5 +1,6 @@
 import logging
 import pathlib
+import sys
 
 import webview
 
@@ -9,6 +10,15 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
 )
+
+
+def get_resource_path(*relative_parts: str) -> pathlib.Path:
+    """Return the absolute path to a resource, supporting PyInstaller bundles."""
+    if getattr(sys, "_MEIPASS", None):
+        base_path = pathlib.Path(sys._MEIPASS) / "app"
+    else:
+        base_path = pathlib.Path(__file__).resolve().parent
+    return base_path.joinpath(*relative_parts)
 
 
 def main() -> None:
@@ -22,20 +32,14 @@ def main() -> None:
 
     api = BridgeAPI(db_path)
 
-    inject_path = pathlib.Path(__file__).parent / "inject.js"
-    scroll_path = pathlib.Path(__file__).parent / "scroll.js"
-    
-    with inject_path.open("r", encoding="utf-8") as fp:
-        inject_js = fp.read()
-    
-    with scroll_path.open("r", encoding="utf-8") as fp:
-        scroll_js = fp.read()
-    
+    inject_js = get_resource_path("inject.js").read_text(encoding="utf-8")
+    scroll_js = get_resource_path("scroll.js").read_text(encoding="utf-8")
+
     combined_js = inject_js + "\n\n" + scroll_js
 
     ui_window = webview.create_window(
         "DouDou Assistant",
-        url=(pathlib.Path(__file__).parent / "ui" / "index.html").resolve().as_uri(),
+        url=get_resource_path("ui", "index.html").resolve().as_uri(),
         js_api=api,
         storage_path=str(profile_dir.resolve()),
     )
