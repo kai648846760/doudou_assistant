@@ -47,6 +47,37 @@ A WebView-based crawler application for collecting and analyzing data from Douyi
 - **macOS 10.10 or higher** (uses built-in WKWebView)
 - No additional dependencies required
 
+## Download Pre-built Binaries
+
+For convenience, pre-built single-file executables are available for download from the [GitHub Releases](../../releases) page of this repository.
+
+### Windows
+
+1. Download `doudou_assistant-windows.exe` from the latest release
+2. Optionally verify the SHA256 checksum using the `.sha256` file
+3. Double-click the `.exe` to run
+
+**Important Notes:**
+- **SmartScreen Warning**: Windows may display a "Windows protected your PC" warning because the executable is unsigned. Click **"More info"** and then **"Run anyway"** to proceed.
+- **WebView2 Runtime**: If you see an error about missing WebView2, download and install it from: https://developer.microsoft.com/microsoft-edge/webview2/
+- The app will create a `./data/` folder in the same directory as the executable for storing the database and session data.
+
+### macOS
+
+1. Download `doudou_assistant-mac.zip` from the latest release
+2. Optionally verify the SHA256 checksum using the `.sha256` file
+3. Extract the zip file to get `doudou_assistant.app`
+4. Move the `.app` to your Applications folder (optional)
+5. **First launch**: Right-click the app and select **"Open"**, then click **"Open"** in the dialog
+
+**Important Notes:**
+- **Gatekeeper Warning**: Because the app is unsigned, macOS Gatekeeper will block it by default. You must use right-click → Open the first time.
+- **Alternative method**: If you prefer, you can remove the quarantine attribute from the terminal:
+  ```bash
+  xattr -r -d com.apple.quarantine /path/to/doudou_assistant.app
+  ```
+- The app will create a `./data/` folder in the same directory as the `.app` for storing the database and session data.
+
 ## Installation
 
 1. **Clone the repository** (or ensure you're in the project directory):
@@ -241,6 +272,32 @@ When crawling an author you've crawled before:
 uv run ruff check .
 uv run ruff format .
 ```
+
+### Building Standalone Executables
+
+To build standalone executables using PyInstaller:
+
+**Prerequisites:**
+```bash
+uv sync
+uv pip install pyinstaller
+```
+
+**Windows:**
+```powershell
+./scripts/build_win.ps1
+```
+
+**macOS:**
+```bash
+./scripts/build_mac.sh
+```
+
+The built artifacts will be in the `dist/` directory:
+- Windows: `dist/doudou_assistant-windows.exe`
+- macOS: `dist/doudou_assistant-mac.zip` (containing the `.app` bundle)
+
+SHA256 checksums are automatically generated alongside each artifact.
 
 ## Troubleshooting
 
