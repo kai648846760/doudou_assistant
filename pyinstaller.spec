@@ -5,7 +5,8 @@ from pathlib import Path
 block_cipher = None
 
 # Paths to static assets
-project_root = Path(__file__).resolve().parent
+# SPECPATH is a built-in variable provided by PyInstaller
+project_root = Path(SPECPATH)
 app_dir = project_root / "app"
 
 # Data files to include: UI assets and JavaScript injectors
