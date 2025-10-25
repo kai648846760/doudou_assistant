@@ -6,15 +6,25 @@
     const SCROLL_INTERVAL = 1500;
     const END_DETECTION_TIMEOUT = 3000;
     const MAX_SAME_HEIGHT_COUNT = 3;
+    const THROTTLE_DELAY = 100;
 
     let scrollActive = false;
     let scrollTimer = null;
     let lastHeight = 0;
     let sameHeightCount = 0;
     let endDetectionTimer = null;
+    let lastScrollTime = 0;
 
     function log(...args) {
+        console.info("[douyin-scroller]", ...args);
+    }
+
+    function logDebug(...args) {
         console.debug("[douyin-scroller]", ...args);
+    }
+
+    function logError(...args) {
+        console.error("[douyin-scroller]", ...args);
     }
 
     function getScrollHeight() {
@@ -25,10 +35,22 @@
     }
 
     function scrollToBottom() {
-        window.scrollTo({
-            top: getScrollHeight(),
-            behavior: "smooth",
-        });
+        const now = Date.now();
+        if (now - lastScrollTime < THROTTLE_DELAY) {
+            logDebug("Scroll throttled");
+            return;
+        }
+        lastScrollTime = now;
+
+        try {
+            window.scrollTo({
+                top: getScrollHeight(),
+                behavior: "smooth",
+            });
+            logDebug(`Scrolled to ${getScrollHeight()}`);
+        } catch (error) {
+            logError("Error scrolling:", error);
+        }
     }
 
     function checkEndOfList() {
@@ -43,6 +65,7 @@
                 return true;
             }
         } else {
+            logDebug(`Height changed: ${lastHeight} -> ${currentHeight}`);
             sameHeightCount = 0;
             lastHeight = currentHeight;
         }
@@ -50,11 +73,17 @@
     }
 
     function notifyComplete() {
-        const api = window.pywebview && window.pywebview.api;
-        if (api && typeof api.on_scroll_complete === "function") {
-            api.on_scroll_complete();
+        try {
+            const api = window.pywebview && window.pywebview.api;
+            if (api && typeof api.on_scroll_complete === "function") {
+                api.on_scroll_complete();
+                log("Notified Python: scroll complete");
+            } else {
+                logError("Cannot notify Python: API not available");
+            }
+        } catch (error) {
+            logError("Error notifying completion:", error);
         }
-        log("Scroll complete");
     }
 
     function scrollStep() {

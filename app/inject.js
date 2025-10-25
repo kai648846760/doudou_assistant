@@ -5,9 +5,23 @@
 
     const BRIDGE_NAME = "pywebview";
     const BATCH_DELAY = 250;
+    const MAX_RETRY_ATTEMPTS = 3;
+    const RETRY_DELAY = 1000;
 
     function log(...args) {
+        console.info("[douyin-bridge]", ...args);
+    }
+
+    function logDebug(...args) {
         console.debug("[douyin-bridge]", ...args);
+    }
+
+    function logError(...args) {
+        console.error("[douyin-bridge]", ...args);
+    }
+
+    function logWarning(...args) {
+        console.warn("[douyin-bridge]", ...args);
     }
 
     function normalizeAweme(item) {
@@ -124,20 +138,34 @@
         return true;
     }
 
-    async function pushBatch(batch) {
+    async function pushBatch(batch, retryCount = 0) {
         if (!batch.length) {
             return;
         }
         const api = window[BRIDGE_NAME] && window[BRIDGE_NAME].api;
         if (!api || typeof api.push_chunk !== "function") {
-            log("Bridge API not available");
+            logError("Bridge API not available");
             return;
         }
 
         try {
-            await api.push_chunk(batch);
+            log(`Pushing batch of ${batch.length} items`);
+            const result = await api.push_chunk(batch);
+            if (result && result.success) {
+                logDebug(`Batch pushed successfully: ${result.inserted} inserted, ${result.updated} updated`);
+            } else {
+                logWarning("Batch push returned non-success result:", result);
+            }
         } catch (error) {
-            log("Failed to push chunk", error);
+            logError(`Failed to push chunk (attempt ${retryCount + 1}/${MAX_RETRY_ATTEMPTS}):`, error);
+            if (retryCount < MAX_RETRY_ATTEMPTS - 1) {
+                logWarning(`Retrying in ${RETRY_DELAY}ms...`);
+                setTimeout(() => {
+                    pushBatch(batch, retryCount + 1);
+                }, RETRY_DELAY);
+            } else {
+                logError("All retry attempts exhausted, batch lost");
+            }
         }
     }
 
@@ -174,33 +202,37 @@
             return;
         }
 
-        const cloned = response.clone();
-        const contentType = cloned.headers.get("content-type") || "";
-        if (!contentType.includes("application/json")) {
-            return;
-        }
+        try {
+            const cloned = response.clone();
+            const contentType = cloned.headers.get("content-type") || "";
+            if (!contentType.includes("application/json")) {
+                return;
+            }
 
-        const text = await cloned.text();
-        if (!text) {
-            return;
-        }
+            const text = await cloned.text();
+            if (!text) {
+                return;
+            }
 
-        const data = safeParse(text);
-        if (!data) {
-            return;
-        }
+            const data = safeParse(text);
+            if (!data) {
+                return;
+            }
 
-        const items = flatten(data);
-        if (items.length) {
-            log(`Captured ${items.length} aweme items`);
-            queue.add(items);
+            const items = flatten(data);
+            if (items.length) {
+                log(`Captured ${items.length} aweme items from response`);
+                queue.add(items);
+            }
+        } catch (error) {
+            logError("Error inspecting response:", error);
         }
     }
 
     const originalFetch = window.fetch;
     window.fetch = async function (...args) {
         const response = await originalFetch.apply(this, args);
-        inspectResponse(response).catch((error) => log("Fetch inspect error", error));
+        inspectResponse(response).catch((error) => logError("Fetch inspect error:", error));
         return response;
     };
 
@@ -232,7 +264,7 @@
                     queue.add(items);
                 }
             } catch (error) {
-                log("Error inspecting XHR response", error);
+                logError("Error inspecting XHR response:", error);
             }
         });
         return originalSend.apply(this, args);

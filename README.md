@@ -2,6 +2,66 @@
 
 A WebView-based crawler application for collecting and analyzing data from Douyin (Chinese TikTok). This application uses pywebview to provide a GUI interface for logging in, crawling author profiles, and exporting data to CSV.
 
+## Quick Start
+
+### Prerequisites
+
+**Required for all platforms:**
+- **Python 3.11 or higher**
+- **[uv](https://github.com/astral-sh/uv)** - Fast Python package installer and resolver
+
+**Platform-specific:**
+- **Windows**: Microsoft Edge WebView2 Runtime (usually pre-installed on Windows 10/11)
+  - If missing, the app will show a message with a download link
+  - Download: https://developer.microsoft.com/microsoft-edge/webview2/
+- **macOS**: macOS 10.10 or higher (uses built-in WKWebView, no additional dependencies)
+- **Linux**: webkit2gtk package (typically pre-installed on most distributions)
+
+### Installation
+
+1. **Clone or download this repository**
+
+2. **Install dependencies:**
+   ```bash
+   uv sync
+   ```
+   This creates a virtual environment and installs all required packages.
+
+### Running the Application
+
+Start the application:
+```bash
+uv run python -m app.main
+```
+
+The application will:
+- Create a `./data/` directory for storing the database and session data
+- Launch the DouDou Assistant GUI
+- Initialize the SQLite database (`./data/douyin.db`)
+
+### First-Time Setup
+
+1. Click the **"Login"** tab
+2. Click **"Open Douyin"**
+3. Log in to your Douyin account in the browser window that opens
+4. Click **"Check Login Status"** to verify
+5. Your session is saved and will persist between application restarts
+
+### Basic Usage
+
+**To crawl an author's videos:**
+1. Go to the **"Crawl"** tab
+2. Enter an author profile URL (e.g., `https://www.douyin.com/user/MS4wLjABAAAA...`) or just the user ID
+3. Click **"Start Author Crawl"**
+4. The app will automatically scroll through the profile and collect all videos
+5. View collected data in the **"Data"** tab
+
+**To export data:**
+1. Go to the **"Data"** tab
+2. Apply any filters you want (optional)
+3. Click **"Export to CSV"**
+4. CSV files are saved to `./data/douyin_export_YYYYMMDD_HHMMSS.csv`
+
 ## Features
 
 - **🔐 Persistent Login**: Log in once and your session persists between runs
@@ -11,6 +71,8 @@ A WebView-based crawler application for collecting and analyzing data from Douyi
 - **📁 CSV Export**: Export your data to CSV format with UTF-8 encoding
 - **🔄 Incremental Sync**: Only new videos are added on subsequent crawls of the same author
 - **🎯 Smart Deduplication**: Automatically prevents duplicate entries
+- **🔄 Retry & Backoff**: Automatic retry with exponential backoff on transient errors
+- **📝 Comprehensive Logging**: Detailed logs for debugging and monitoring
 
 ## Architecture
 
@@ -29,72 +91,7 @@ A WebView-based crawler application for collecting and analyzing data from Douyi
 - **`app/ui/app.js`**: UI interactions, event handling, and API communication
 - **`app/ui/styles.css`**: Styling with Douyin-inspired color scheme
 
-## Prerequisites
-
-### All Platforms
-
-- **Python 3.11 or higher**
-- **uv** - Fast Python package installer and resolver ([Install uv](https://github.com/astral-sh/uv))
-
-### Windows
-
-- **Microsoft Edge WebView2 Runtime** - Usually pre-installed on Windows 10/11
-  - If not installed, download from: https://developer.microsoft.com/microsoft-edge/webview2/
-  - The installer will prompt you if WebView2 is missing
-
-### macOS
-
-- **macOS 10.10 or higher** (uses built-in WKWebView)
-- No additional dependencies required
-
-## Installation
-
-1. **Clone the repository** (or ensure you're in the project directory):
-
-```bash
-cd doudou_assistant
-```
-
-2. **Install dependencies with uv**:
-
-```bash
-uv sync
-```
-
-This will:
-- Create a virtual environment (`.venv/`)
-- Install all required dependencies (pywebview, sqlmodel, sqlalchemy, pydantic, ruff)
-
-## Usage
-
-### Running the Application
-
-Start the application using uv:
-
-```bash
-uv run python -m app.main
-```
-
-Or on some systems:
-
-```bash
-uv run python app/main.py
-```
-
-The application will:
-1. Create a `./data/` directory for storing the database and profiles
-2. Launch the DouDou Assistant GUI
-3. Initialize the SQLite database (`./data/douyin.db`)
-
-### Logging In to Douyin
-
-1. Click on the **"Login"** tab
-2. Click **"Open Douyin"** to open a browser window
-3. Log in to your Douyin account in the browser window
-4. Click **"Check Login Status"** to verify you're logged in
-5. Your session is automatically saved in `./data/webview_profile/`
-
-**Note**: The login persists between application restarts. You only need to log in once.
+## Detailed Usage
 
 ### Crawling Author Profiles
 
@@ -244,35 +241,131 @@ uv run ruff format .
 
 ## Troubleshooting
 
-### Windows: "WebView2 not found"
+### Windows: WebView2 Runtime Issues
 
-Download and install Microsoft Edge WebView2 Runtime:
-- https://developer.microsoft.com/microsoft-edge/webview2/
+**Symptom:** Application fails to start or shows "WebView2 not found" error.
 
-### macOS: "Cannot open application"
+**Solution:**
+1. Download and install Microsoft Edge WebView2 Runtime:
+   - https://developer.microsoft.com/microsoft-edge/webview2/
+2. Choose the "Evergreen Standalone Installer" for the architecture (x64 or x86)
+3. Restart the application after installation
 
-On macOS, you may need to allow the application in System Preferences > Security & Privacy.
+**Note:** Windows 11 and recent Windows 10 versions include WebView2 by default. If you're on an older Windows 10, you may need to install it manually.
 
-### "Login not detected"
+### macOS: WKWebView Notes
 
-1. Make sure you're actually logged in to Douyin in the crawler window
-2. Try clicking "Open Douyin" again and logging in
-3. Check that cookies are not blocked in the webview
+**System Requirements:**
+- macOS 10.10 (Yosemite) or higher
+- No additional dependencies required (WKWebView is built into macOS)
 
-### "No data is being captured"
+**Common Issues:**
+- **"Cannot open application"**: Allow the application in System Preferences > Security & Privacy
+- **Permission dialogs**: macOS may ask for permissions to access network or storage on first run
 
-1. Verify you're logged in (some content may require login)
-2. Check the Python console for errors
-3. Open browser DevTools (if available) and look for JavaScript errors
-4. Try the "Test with Mock Data" button to verify the data pipeline works
+### Linux: WebKit Issues
 
-### Data directory permissions
+**Missing Dependencies:**
+If the application fails to start, ensure webkit2gtk is installed:
 
-If the app can't create `./data/`, ensure you have write permissions in the project directory.
+```bash
+# Ubuntu/Debian
+sudo apt install libwebkit2gtk-4.0-37
 
-### Database locked
+# Fedora
+sudo dnf install webkit2gtk3
 
-If you see "database is locked" errors, close any other applications that might be accessing `data/douyin.db`.
+# Arch
+sudo pacman -S webkit2gtk
+```
+
+### Login Issues
+
+**Symptom:** "Login not detected" or session expires quickly.
+
+**Solutions:**
+1. Ensure you're completely logged in to Douyin (check for any verification steps)
+2. Click "Open Douyin" and wait for the page to fully load before logging in
+3. After logging in, navigate to your profile page to verify the session is active
+4. Click "Check Login Status" to confirm
+5. If cookies are being blocked, check your system's privacy settings
+
+**Note:** Sessions are stored in `./data/webview_profile/` and persist between runs.
+
+### Data Not Being Captured
+
+**Symptom:** Crawl runs but no data appears in the database.
+
+**Diagnosis:**
+1. Check the console/terminal output for error messages (logs are verbose and helpful)
+2. Verify you're logged in (some profiles require authentication)
+3. Look for messages like "Captured N items" in the logs
+4. Try the "Test with Mock Data" button to verify the data pipeline is working
+
+**Common Causes:**
+- Profile is private or restricted
+- Network connectivity issues (watch for retry messages in logs)
+- Douyin changed their API structure (check for JavaScript errors in logs)
+
+### Performance Issues
+
+**Symptom:** Application is slow or unresponsive during crawling.
+
+**Solutions:**
+1. The auto-scroll has built-in throttling (100ms minimum between scrolls)
+2. Data is batched (250ms delay) to avoid overwhelming the database
+3. Close other applications to free up memory
+4. For very large profiles (1000+ videos), expect the crawl to take 5-10 minutes
+
+### Database Issues
+
+**"Database is locked":**
+- Close any other applications or database tools accessing `data/douyin.db`
+- The app uses SQLite which only allows one writer at a time
+- If the error persists, check if any Python processes are still running
+
+**Corrupt database:**
+- Backup your `data/douyin.db` file
+- Delete the corrupted file and restart the app
+- The app will create a fresh database automatically
+
+### Permission Errors
+
+**Symptom:** Cannot create `./data/` directory or write to database.
+
+**Solutions:**
+- Ensure you have write permissions in the project directory
+- On Linux/macOS, check with `ls -la` and use `chmod` if needed
+- On Windows, run the application from a folder you own (not Program Files)
+
+### Logging and Debugging
+
+**To see more detailed logs:**
+- All logs are printed to the console/terminal where you ran `uv run python -m app.main`
+- Look for messages prefixed with `[INFO]`, `[WARNING]`, `[ERROR]`
+- JavaScript console messages are piped to Python logs with `[JS Console]` prefix
+- Logs include timestamps and module names for easy tracking
+
+**Log Levels:**
+- `INFO`: Normal operations (navigation, data received, etc.)
+- `WARNING`: Recoverable issues (retries, missing optional data)
+- `ERROR`: Serious problems (failed requests, database errors)
+- `DEBUG`: Detailed information (scroll positions, batch sizes)
+
+### Network/Retry Issues
+
+**Symptom:** "Retrying in X seconds" messages in logs.
+
+**Explanation:**
+- The application automatically retries failed operations (up to 3 attempts)
+- Exponential backoff is used (0.5s, 1s, 2s delays)
+- This is normal for transient network issues
+
+**If retries consistently fail:**
+1. Check your internet connection
+2. Verify you can access douyin.com in a regular browser
+3. Check if a firewall or proxy is blocking connections
+4. Look for specific error messages in the logs
 
 ## Acceptance Criteria
 
