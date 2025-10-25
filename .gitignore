@@ -52,3 +52,4 @@ data/
 .pytest_cache/
 .coverage
 htmlcov/
+test_data/

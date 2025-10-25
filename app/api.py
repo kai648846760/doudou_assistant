@@ -5,7 +5,7 @@ import logging
 import time
 from pathlib import Path
 from threading import Event
-from typing import Any, Dict, List, Optional
+from typing import Any
 from urllib.parse import urlparse
 
 from app.crawler import CrawlState
@@ -24,7 +24,7 @@ class BridgeAPI:
         self.crawler_window = None
         self.inject_js = ""
         self._stop_event = Event()
-        self._pending_action: Optional[Dict[str, Any]] = None
+        self._pending_action: dict[str, Any] | None = None
         self._duplicate_batches = 0
         logger.info("Bridge API initialised")
 
@@ -82,9 +82,7 @@ class BridgeAPI:
             )
             script = (
                 "(function(){"
-                "window.__douyinCrawlerContext = "
-                + payload
-                + ";"
+                "window.__douyinCrawlerContext = " + payload + ";"
                 "if (window.__douyinScroller) { window.__douyinScroller.start(); }"
                 "})();"
             )
@@ -134,7 +132,7 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     # Login helpers
     # ---------------------------------------------------------------------
-    def login_state(self) -> Dict[str, Any]:
+    def login_state(self) -> dict[str, Any]:
         if not self.crawler_window:
             return {"logged_in": False, "message": "Crawler window not ready"}
 
@@ -184,14 +182,16 @@ class BridgeAPI:
 
         logged_in = bool(data.get("logged_in"))
         message = (
-            "Logged in to Douyin" if logged_in else "Not logged in – open the Douyin window and sign in."
+            "Logged in to Douyin"
+            if logged_in
+            else "Not logged in – open the Douyin window and sign in."
         )
         return {"logged_in": logged_in, "message": message, "details": data}
 
     # ---------------------------------------------------------------------
     # Crawl entry points
     # ---------------------------------------------------------------------
-    def start_crawl_author(self, author_input: str) -> Dict[str, Any]:
+    def start_crawl_author(self, author_input: str) -> dict[str, Any]:
         if self.state.active:
             return {"success": False, "error": "Another crawl is already running"}
 
@@ -230,7 +230,7 @@ class BridgeAPI:
             "context": context,
         }
 
-    def start_crawl_video(self, url: str) -> Dict[str, Any]:
+    def start_crawl_video(self, url: str) -> dict[str, Any]:
         if self.state.active:
             return {"success": False, "error": "Another crawl is already running"}
 
@@ -249,9 +249,13 @@ class BridgeAPI:
         self._load_crawler_url(cleaned_url)
         self._emit_progress()
 
-        return {"success": True, "message": "Navigating to video", "target": cleaned_url}
+        return {
+            "success": True,
+            "message": "Navigating to video",
+            "target": cleaned_url,
+        }
 
-    def _resolve_author_input(self, author_input: str) -> Dict[str, Optional[str]]:
+    def _resolve_author_input(self, author_input: str) -> dict[str, str | None]:
         value = (author_input or "").strip()
         if not value:
             return {"url": None, "identifier": None}
@@ -279,7 +283,7 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     # Data ingestion
     # ---------------------------------------------------------------------
-    def push_chunk(self, items: List[Dict[str, Any]]) -> Dict[str, Any]:
+    def push_chunk(self, items: list[dict[str, Any]]) -> dict[str, Any]:
         if not isinstance(items, list) or not items:
             return {"success": False, "error": "Items must be a non-empty list"}
 
@@ -329,10 +333,10 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     def list_videos(
         self,
-        filters: Dict[str, Any] | None = None,
+        filters: dict[str, Any] | None = None,
         page: int = 1,
         page_size: int = 50,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         try:
             return self.db.list_videos(filters or {}, page, page_size)
         except Exception as exc:  # pragma: no cover - DB failure handling
@@ -345,7 +349,7 @@ class BridgeAPI:
                 "total": 0,
             }
 
-    def export_csv(self, filters: Dict[str, Any] | None = None) -> Dict[str, Any]:
+    def export_csv(self, filters: dict[str, Any] | None = None) -> dict[str, Any]:
         try:
             export_path = self.db.export_csv(filters or {})
             return {"success": True, "path": str(export_path)}
@@ -356,7 +360,7 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     # Flow control
     # ---------------------------------------------------------------------
-    def stop_crawl(self) -> Dict[str, Any]:
+    def stop_crawl(self) -> dict[str, Any]:
         if not self.state.active:
             return {"success": False, "error": "No active crawl"}
 
@@ -371,13 +375,13 @@ class BridgeAPI:
         self._emit_progress()
         return {"success": True, "message": "Crawl stopped"}
 
-    def on_scroll_complete(self) -> Dict[str, Any]:
+    def on_scroll_complete(self) -> dict[str, Any]:
         logger.info("Scroll reported as complete from JS bridge")
         if self.state.active:
             self._complete_crawl("Reached end of list")
         return {"success": True}
 
-    def open_login(self) -> Dict[str, Any]:
+    def open_login(self) -> dict[str, Any]:
         self._pending_action = None
         try:
             self._load_crawler_url("https://www.douyin.com/")
@@ -389,7 +393,7 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     # Utilities
     # ---------------------------------------------------------------------
-    def trigger_mock_push(self) -> Dict[str, Any]:
+    def trigger_mock_push(self) -> dict[str, Any]:
         if self.crawler_window:
             try:
                 self.crawler_window.evaluate_js("window.__awemeBridge?.mockPush();")

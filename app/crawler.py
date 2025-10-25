@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime as dt
 import threading
 from dataclasses import dataclass, field
-from typing import Any, Dict, Optional
+from typing import Any
 
 
 @dataclass
@@ -11,16 +11,16 @@ class CrawlState:
     """Tracks and serialises crawl progress for the UI."""
 
     active: bool = False
-    mode: Optional[str] = None
-    target: Optional[str] = None
+    mode: str | None = None
+    target: str | None = None
     status: str = "idle"
-    status_message: Optional[str] = None
-    started_at: Optional[dt.datetime] = None
+    status_message: str | None = None
+    started_at: dt.datetime | None = None
     items_received: int = 0
     items_inserted: int = 0
     items_updated: int = 0
-    last_error: Optional[str] = None
-    context: Dict[str, Any] = field(default_factory=dict)
+    last_error: str | None = None
+    context: dict[str, Any] = field(default_factory=dict)
     lock: threading.Lock = field(default_factory=threading.Lock)
 
     def reset(self) -> None:
@@ -37,7 +37,9 @@ class CrawlState:
             self.last_error = None
             self.context = {}
 
-    def start(self, mode: str, target: str, context: Optional[Dict[str, Any]] = None) -> None:
+    def start(
+        self, mode: str, target: str, context: dict[str, Any] | None = None
+    ) -> None:
         with self.lock:
             self.active = True
             self.mode = mode
@@ -51,21 +53,21 @@ class CrawlState:
             self.items_updated = 0
             self.last_error = None
 
-    def stop(self, status: str = "stopped", message: Optional[str] = None) -> None:
+    def stop(self, status: str = "stopped", message: str | None = None) -> None:
         with self.lock:
             self.active = False
             self.status = status
             if message is not None:
                 self.status_message = message
 
-    def complete(self, message: Optional[str] = None) -> None:
+    def complete(self, message: str | None = None) -> None:
         with self.lock:
             self.active = False
             self.status = "complete"
             if message is not None:
                 self.status_message = message
 
-    def set_status(self, status: str, message: Optional[str] = None) -> None:
+    def set_status(self, status: str, message: str | None = None) -> None:
         with self.lock:
             self.status = status
             if message is not None:
@@ -91,7 +93,7 @@ class CrawlState:
             self.status = "error"
             self.status_message = error
 
-    def snapshot(self) -> Dict[str, Any]:
+    def snapshot(self) -> dict[str, Any]:
         with self.lock:
             return {
                 "active": self.active,

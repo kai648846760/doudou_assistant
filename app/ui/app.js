@@ -161,7 +161,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         currentFilters = {};
         if (authorValue) {
-            currentFilters.author_name = authorValue;
+            if (authorValue.startsWith("MS4wLjABAAAA")) {
+                currentFilters.sec_uid = authorValue;
+            } else if (/^[a-zA-Z0-9_]{3,30}$/.test(authorValue) && !authorValue.includes(" ")) {
+                currentFilters.unique_id = authorValue;
+            } else {
+                currentFilters.author_name = authorValue;
+            }
         }
         if (fromValue) {
             currentFilters.date_from = fromValue;
@@ -246,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderData(result) {
         if (!result || !result.items || result.items.length === 0) {
-            dataTbody.innerHTML = '<tr><td colspan="7" class="empty-state">No records found</td></tr>';
+            dataTbody.innerHTML = '<tr><td colspan="11" class="empty-state">No records found</td></tr>';
             tableSummary.textContent = "No records found";
             pageInfo.textContent = "Page 1";
             document.getElementById("prev-page-btn").disabled = true;
@@ -263,19 +269,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
         dataTbody.innerHTML = result.items
             .map(
-                (item) => `
+                (item) => {
+                    const duration = item.duration ? `${Math.floor(item.duration / 1000)}s` : "";
+                    const createTime = item.create_time ? new Date(item.create_time).toLocaleDateString() : "";
+                    const desc = (item.desc || "").replace(/"/g, "&quot;");
+                    const descPreview = (item.desc || "").substring(0, 40);
+                    return `
             <tr>
                 <td>${item.aweme_id || ""}</td>
                 <td>${item.author_name || "Unknown"}</td>
-                <td><div class="text-ellipsis" title="${(item.desc || "").replace(/"/g, "&quot;")}">${
-                    (item.desc || "").substring(0, 60)
-                }${item.desc && item.desc.length > 60 ? "..." : ""}</div></td>
+                <td><div class="text-ellipsis" title="${desc}">${descPreview}${item.desc && item.desc.length > 40 ? "..." : ""}</div></td>
+                <td>${createTime}</td>
+                <td>${duration}</td>
                 <td>${item.digg_count || 0}</td>
                 <td>${item.comment_count || 0}</td>
                 <td>${item.share_count || 0}</td>
-                <td>${item.create_time ? new Date(item.create_time).toLocaleDateString() : ""}</td>
+                <td>${item.play_count || 0}</td>
+                <td>${item.collect_count || 0}</td>
+                <td><div class="text-ellipsis" title="${(item.music_title || "").replace(/"/g, "&quot;")}">${(item.music_title || "").substring(0, 20)}${item.music_title && item.music_title.length > 20 ? "..." : ""}</div></td>
             </tr>
-        `
+        `;
+                }
             )
             .join("");
     }

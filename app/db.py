@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import csv
 import datetime as dt
+from collections.abc import Iterable
 from pathlib import Path
-from typing import Any, Dict, Iterable, Optional
+from typing import Any
 
 from sqlalchemy import func, or_
 from sqlmodel import Field, Session, SQLModel, create_engine, select
@@ -13,15 +14,15 @@ class Author(SQLModel, table=True):
     """Normalized record for a Douyin author (creator)."""
 
     author_id: str = Field(primary_key=True, index=True)
-    unique_id: Optional[str] = Field(default=None, index=True)
-    sec_uid: Optional[str] = Field(default=None, index=True)
-    nickname: Optional[str] = Field(default=None, index=True)
-    signature: Optional[str] = None
-    avatar_thumb: Optional[str] = None
-    follower_count: Optional[int] = None
-    following_count: Optional[int] = None
-    aweme_count: Optional[int] = None
-    region: Optional[str] = None
+    unique_id: str | None = Field(default=None, index=True)
+    sec_uid: str | None = Field(default=None, index=True)
+    nickname: str | None = Field(default=None, index=True)
+    signature: str | None = None
+    avatar_thumb: str | None = None
+    follower_count: int | None = None
+    following_count: int | None = None
+    aweme_count: int | None = None
+    region: str | None = None
     received_at: dt.datetime = Field(default_factory=dt.datetime.utcnow)
 
 
@@ -29,24 +30,24 @@ class Video(SQLModel, table=True):
     """Normalized record for a Douyin video (aweme)."""
 
     aweme_id: str = Field(primary_key=True, index=True)
-    author_id: Optional[str] = Field(default=None, index=True)
-    author_name: Optional[str] = Field(default=None, index=True)
-    author_unique_id: Optional[str] = Field(default=None, index=True)
-    author_sec_uid: Optional[str] = Field(default=None, index=True)
-    desc: Optional[str] = None
-    create_time: Optional[dt.datetime] = Field(default=None, index=True)
-    duration: Optional[int] = None
-    digg_count: Optional[int] = None
-    comment_count: Optional[int] = None
-    share_count: Optional[int] = None
-    play_count: Optional[int] = None
-    collect_count: Optional[int] = None
-    region: Optional[str] = None
-    music_title: Optional[str] = None
-    music_author: Optional[str] = None
-    cover: Optional[str] = None
-    video_url: Optional[str] = None
-    item_type: Optional[str] = Field(default=None, index=True)
+    author_id: str | None = Field(default=None, index=True)
+    author_name: str | None = Field(default=None, index=True)
+    author_unique_id: str | None = Field(default=None, index=True)
+    author_sec_uid: str | None = Field(default=None, index=True)
+    desc: str | None = None
+    create_time: dt.datetime | None = Field(default=None, index=True)
+    duration: int | None = None
+    digg_count: int | None = None
+    comment_count: int | None = None
+    share_count: int | None = None
+    play_count: int | None = None
+    collect_count: int | None = None
+    region: str | None = None
+    music_title: str | None = None
+    music_author: str | None = None
+    cover: str | None = None
+    video_url: str | None = None
+    item_type: str | None = Field(default=None, index=True)
     received_at: dt.datetime = Field(default_factory=dt.datetime.utcnow)
 
 
@@ -63,7 +64,7 @@ class Database:
     # Normalisation helpers
     # ------------------------------------------------------------------
     @staticmethod
-    def _coerce_datetime(value: Any) -> Optional[dt.datetime]:
+    def _coerce_datetime(value: Any) -> dt.datetime | None:
         if value in (None, "", 0):
             return None
         if isinstance(value, dt.datetime):
@@ -86,7 +87,7 @@ class Database:
                     return dt.datetime.strptime(stripped, fmt)
                 except ValueError:
                     continue
-                
+
             try:
                 return dt.datetime.fromisoformat(stripped)
             except ValueError:
@@ -94,7 +95,7 @@ class Database:
         return None
 
     @staticmethod
-    def _coerce_int(value: Any) -> Optional[int]:
+    def _coerce_int(value: Any) -> int | None:
         if value in (None, "", "null"):
             return None
         if isinstance(value, bool):
@@ -114,12 +115,12 @@ class Database:
         return None
 
     @staticmethod
-    def _first(value: Any) -> Optional[str]:
+    def _first(value: Any) -> str | None:
         if isinstance(value, list) and value:
             return value[0]
         return value if isinstance(value, str) else None
 
-    def _normalize_author(self, raw: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    def _normalize_author(self, raw: dict[str, Any]) -> dict[str, Any] | None:
         if not raw:
             return None
 
@@ -128,8 +129,8 @@ class Database:
         if not author_id:
             return None
 
-        avatar_field = raw.get("avatar_thumb") or raw.get("avatar"),
-        avatar_value: Optional[str]
+        avatar_field = (raw.get("avatar_thumb") or raw.get("avatar"),)
+        avatar_value: str | None
         if isinstance(avatar_field, tuple):
             avatar_field = avatar_field[0]
         if isinstance(avatar_field, dict):
@@ -149,14 +150,18 @@ class Database:
                 or raw.get("fans")
                 or raw.get("followers_detail", {}).get("follower_count")
             ),
-            "following_count": self._coerce_int(raw.get("following_count") or raw.get("following")),
+            "following_count": self._coerce_int(
+                raw.get("following_count") or raw.get("following")
+            ),
             "aweme_count": self._coerce_int(raw.get("aweme_count")),
             "region": raw.get("region") or raw.get("country"),
             "received_at": dt.datetime.utcnow(),
         }
         return normalized
 
-    def _normalize_item(self, item: Dict[str, Any]) -> tuple[Dict[str, Any], Optional[Dict[str, Any]]]:
+    def _normalize_item(
+        self, item: dict[str, Any]
+    ) -> tuple[dict[str, Any], dict[str, Any] | None]:
         aweme_id = item.get("aweme_id") or item.get("id")
         if not aweme_id:
             raise ValueError("Missing aweme_id")
@@ -182,7 +187,7 @@ class Database:
             or author_unique_id
         )
 
-        video_data: Dict[str, Any] = {
+        video_data: dict[str, Any] = {
             "aweme_id": str(aweme_id),
             "author_id": str(author_id) if author_id else None,
             "author_name": author_block.get("nickname") or author_block.get("name"),
@@ -202,9 +207,14 @@ class Database:
             ),
             "region": item.get("region") or author_block.get("region"),
             "music_title": music_block.get("title") or music_block.get("name"),
-            "music_author": music_block.get("author") or music_block.get("owner_nickname"),
-            "cover": self._first(cover_block.get("url_list")) if isinstance(cover_block, dict) else self._first(cover_block),
-            "video_url": self._first(play_addr.get("url_list")) if isinstance(play_addr, dict) else self._first(play_addr),
+            "music_author": music_block.get("author")
+            or music_block.get("owner_nickname"),
+            "cover": self._first(cover_block.get("url_list"))
+            if isinstance(cover_block, dict)
+            else self._first(cover_block),
+            "video_url": self._first(play_addr.get("url_list"))
+            if isinstance(play_addr, dict)
+            else self._first(play_addr),
             "item_type": item.get("item_type") or item.get("type"),
         }
 
@@ -222,7 +232,7 @@ class Database:
     # ------------------------------------------------------------------
     # Author operations
     # ------------------------------------------------------------------
-    def upsert_author(self, author: Dict[str, Any]) -> Optional[Author]:
+    def upsert_author(self, author: dict[str, Any]) -> Author | None:
         normalized = self._normalize_author(author)
         if not normalized:
             return None
@@ -232,7 +242,7 @@ class Database:
             session.refresh(record)
             return record
 
-    def _upsert_author(self, session: Session, author_data: Dict[str, Any]) -> Author:
+    def _upsert_author(self, session: Session, author_data: dict[str, Any]) -> Author:
         author_id = author_data["author_id"]
         record = session.get(Author, author_id)
         if record:
@@ -244,7 +254,7 @@ class Database:
         record.received_at = dt.datetime.utcnow()
         return record
 
-    def find_author(self, identifier: str) -> Optional[Author]:
+    def find_author(self, identifier: str) -> Author | None:
         if not identifier:
             return None
         with Session(self._engine) as session:
@@ -256,7 +266,7 @@ class Database:
             )
             return session.exec(statement).first()
 
-    def get_latest_for_author(self, author_id: str) -> Optional[Dict[str, Any]]:
+    def get_latest_for_author(self, author_id: str) -> dict[str, Any] | None:
         if not author_id:
             return None
         with Session(self._engine) as session:
@@ -278,7 +288,7 @@ class Database:
     # ------------------------------------------------------------------
     # Video operations
     # ------------------------------------------------------------------
-    def upsert_videos(self, items: Iterable[Dict[str, Any]]) -> Dict[str, int]:
+    def upsert_videos(self, items: Iterable[dict[str, Any]]) -> dict[str, int]:
         inserted = 0
         updated = 0
         with Session(self._engine) as session:
@@ -297,7 +307,9 @@ class Database:
                         video_data["author_id"] = author_record.author_id
                     if author_record.nickname and not video_data.get("author_name"):
                         video_data["author_name"] = author_record.nickname
-                    if author_record.unique_id and not video_data.get("author_unique_id"):
+                    if author_record.unique_id and not video_data.get(
+                        "author_unique_id"
+                    ):
                         video_data["author_unique_id"] = author_record.unique_id
                     if author_record.sec_uid and not video_data.get("author_sec_uid"):
                         video_data["author_sec_uid"] = author_record.sec_uid
@@ -316,7 +328,7 @@ class Database:
     # ------------------------------------------------------------------
     # Querying and export
     # ------------------------------------------------------------------
-    def _build_conditions(self, filters: Dict[str, Any]) -> list[Any]:
+    def _build_conditions(self, filters: dict[str, Any]) -> list[Any]:
         conditions: list[Any] = []
         author_id = filters.get("author_id") or filters.get("author")
         if author_id:
@@ -353,10 +365,10 @@ class Database:
 
     def list_videos(
         self,
-        filters: Dict[str, Any],
+        filters: dict[str, Any],
         page: int,
         page_size: int,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         page = max(page, 1)
         page_size = max(min(page_size, 200), 1)
         conditions = self._build_conditions(filters)
@@ -368,16 +380,15 @@ class Database:
             total = session.exec(count_stmt).one()
 
             offset = (page - 1) * page_size
-            query = (
-                select(Video)
-                .where(*conditions) if conditions else select(Video)
-            )
+            query = select(Video).where(*conditions) if conditions else select(Video)
             query = query.order_by(Video.create_time.desc(), Video.received_at.desc())
             rows = session.exec(query.offset(offset).limit(page_size)).all()
 
-        def serialize(row: Video) -> Dict[str, Any]:
+        def serialize(row: Video) -> dict[str, Any]:
             data = row.model_dump()
-            data["create_time"] = row.create_time.isoformat() if row.create_time else None
+            data["create_time"] = (
+                row.create_time.isoformat() if row.create_time else None
+            )
             data["received_at"] = row.received_at.isoformat()
             return data
 
@@ -388,7 +399,7 @@ class Database:
             "total": total,
         }
 
-    def export_csv(self, filters: Dict[str, Any]) -> Path:
+    def export_csv(self, filters: dict[str, Any]) -> Path:
         conditions = self._build_conditions(filters)
         with Session(self._engine) as session:
             query = select(Video)
