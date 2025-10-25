@@ -66,23 +66,40 @@ uv run python -m app.main
 3. 点击 **"导出到 CSV"**
 4. CSV 文件会保存到 `~/.doudou_assistant/douyin_export_YYYYMMDD_HHMMSS.csv`
 
-## 下载已打包版本
+## 发布与下载
 
-在 [Releases](https://github.com/你的用户名/你的仓库名/releases) 页面可下载预编译版本：
+在 [Releases](https://github.com/你的用户名/你的仓库名/releases) 页面可以获取最新的官方构建包。每次发布都会附带 Windows 与 macOS 两个平台的应用，以及对应的 SHA256 校验文件，方便你校验下载是否完整。
 
-- **Windows**：`DouDouAssistant.exe`（单文件可执行程序，无需安装 Python）
-- **macOS**：`DouDouAssistant.zip`（解压后运行 .app）
+### 下载发布版本
 
-**Windows 注意事项：**
-- 首次运行需要安装 WebView2 运行时（如果尚未安装）
-- 下载地址：https://developer.microsoft.com/microsoft-edge/webview2/
-- 登录会话数据存储在用户目录，支持持久化
+- **Windows**：`DouDouAssistant.exe`（单文件可执行程序，无需本地 Python 环境）
+  - 首次运行如提示缺少 WebView2，请从 https://developer.microsoft.com/microsoft-edge/webview2/ 下载并安装运行时。
+  - 应用会在用户目录保存登录会话，可长期保持登录状态。
+- **macOS**：`DouDouAssistant-macOS.zip`（解压后得到 `DouDouAssistant.app`，双击即可运行）
+  - 初次启动可能出现“无法打开，因为来自身份不明的开发者”提示，可右键点击应用 → 选择“打开” → 再次确认即可。
+  - 如遇系统拦截，可在“系统设置”→“隐私与安全性”中允许运行该应用。
+  - macOS 版本使用 WKWebView，不支持自定义存储路径，登录状态由系统管理。
+- **校验文件**：同目录下的 `.sha256` 文件，用于校验下载是否被篡改。
 
-**macOS 注意事项：**
-- 首次运行可能提示"无法打开，因为来自身份不明的开发者"
-- 解决方法：右键点击应用 → 选择"打开" → 点击"打开"确认
-- 或在"系统偏好设置" → "安全性与隐私"中允许运行
-- **重要**：macOS 使用 WKWebView，不支持自定义存储路径，登录状态由系统管理
+### 验证 SHA256
+
+1. 下载产物及对应的 `.sha256` 文件；
+2. Windows 在 PowerShell 中运行 `Get-FileHash .\\DouDouAssistant.exe -Algorithm SHA256`，比较输出哈希与 `.sha256` 文件内容；
+3. macOS 在终端执行 `shasum -a 256 DouDouAssistant-macOS.zip`，确认结果与 `.sha256` 文件一致；
+4. 若哈希完全一致，即可放心使用。
+
+### 如何打 Tag 发布
+
+1. 确认 `main` 分支处于可发布状态，并完成必要的代码审查；
+2. 在本地创建新的语义化版本号（例如 `v0.1.1`）并推送远端：
+   ```bash
+   git tag v0.1.1
+   git push origin v0.1.1
+   ```
+3. 或者在 GitHub Releases 页面创建同名 Tag 并发布；
+4. Tag 推送后，GitHub Actions 会自动构建 Windows EXE 与 macOS 应用压缩包，并生成对应的 SHA256 校验文件；
+5. 工作流会自动创建 GitHub Release 并上传所有产物；
+6. 若仅需验证构建，可在 Actions 页面手动运行 `main` 分支的工作流，并在运行详情的 Artifacts 中下载调试产物。
 
 ## 功能特性
 
@@ -280,7 +297,7 @@ uv run ruff format .
 chmod +x ./scripts/build_mac.sh
 ./scripts/build_mac.sh
 ```
-生成：`dist/DouDouAssistant.zip`
+生成：`dist/DouDouAssistant-macOS.zip`
 
 ## 故障排除
 
@@ -419,34 +436,6 @@ sudo pacman -S webkit2gtk
 2. 验证可以在普通浏览器中访问 douyin.com
 3. 检查防火墙或代理是否阻止连接
 4. 查看日志中的具体错误消息
-
-## 打 Tag 发布新版本
-
-要发布新版本（如 v0.1.0）：
-
-1. **在本地创建 Tag：**
-   ```bash
-   git tag v0.1.0
-   git push origin v0.1.0
-   ```
-
-2. **或在 GitHub UI 创建：**
-   - 进入仓库的 "Releases" 页面
-   - 点击 "Create a new release"
-   - 填写 Tag 版本（如 `v0.1.0`）
-   - 填写发布标题和说明
-   - 点击 "Publish release"
-
-3. **自动构建：**
-   - Tag 推送后会自动触发 GitHub Actions 工作流
-   - 工作流会构建 Windows 和 macOS 版本
-   - 构建完成后自动创建 GitHub Release
-   - Release 页面会附上可下载的可执行文件和 SHA256 校验文件
-
-4. **手动下载产物：**
-   - 每次推送到 main 分支也会构建产物
-   - 产物作为 Artifacts 上传到 Actions 运行记录
-   - 可在 Actions 标签页下载测试版本
 
 ## 验收标准
 
