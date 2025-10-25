@@ -27,13 +27,20 @@
                     where you can log in to your Douyin account. Your session will persist between runs and is stored
                     securely on your machine.
                 </p>
+                
+                <div class="login-status-card" id="login-status-card">
+                    <div class="status-indicator" id="status-indicator">
+                        <span class="status-dot" id="status-dot"></span>
+                        <span class="status-text" id="status-text">Checking login status...</span>
+                    </div>
+                    <div class="status-details" id="status-details"></div>
+                </div>
+
                 <div style="margin: 1.5rem 0;">
                     <button class="btn btn-primary" id="open-login-btn">Open Douyin</button>
                     <button class="btn btn-secondary" id="check-login-btn">Check Login Status</button>
                 </div>
-                <div class="status">
-                    <p id="login-status">Not checked</p>
-                </div>
+                
                 <div class="info-box">
                     <strong>Note:</strong> The Douyin window uses a persistent profile stored in <code>./data/webview_profile</code>.
                     Login credentials and cookies remain local to your device.
@@ -79,10 +86,16 @@
                     <button class="btn btn-secondary" id="mock-push-btn" style="margin-left: 0.5rem;">Test with Mock Data</button>
                 </div>
 
-                <div class="status">
+                <div class="crawl-status-section">
                     <h3>Crawl Status</h3>
-                    <p><strong>Status:</strong> <span id="crawl-status">Ready</span></p>
-                    <div id="crawl-stats" style="margin-top: 1rem; font-size: 0.9rem;"></div>
+                    <div class="status-card" id="crawl-status-card">
+                        <div class="status-row">
+                            <span class="status-label">Status:</span>
+                            <span class="status-value" id="crawl-status">Ready</span>
+                        </div>
+                        <div id="crawl-stats" class="stats-grid"></div>
+                        <div id="error-display" class="error-message" style="display: none;"></div>
+                    </div>
                 </div>
             </div>
 
