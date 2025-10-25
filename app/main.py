@@ -24,13 +24,13 @@ def main() -> None:
 
     inject_path = pathlib.Path(__file__).parent / "inject.js"
     scroll_path = pathlib.Path(__file__).parent / "scroll.js"
-    
+
     with inject_path.open("r", encoding="utf-8") as fp:
         inject_js = fp.read()
-    
+
     with scroll_path.open("r", encoding="utf-8") as fp:
         scroll_js = fp.read()
-    
+
     combined_js = inject_js + "\n\n" + scroll_js
 
     ui_window = webview.create_window(

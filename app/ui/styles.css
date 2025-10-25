@@ -298,10 +298,12 @@ header h1 {
 
 .table-container {
     overflow-x: auto;
+    margin-bottom: 1rem;
 }
 
 .data-table {
     width: 100%;
+    min-width: 1200px;
     border-collapse: collapse;
     margin-top: 0.5rem;
 }
@@ -311,6 +313,14 @@ header h1 {
     padding: 0.75rem;
     text-align: left;
     border-bottom: 1px solid #dee2e6;
+    white-space: nowrap;
+}
+
+.data-table th:nth-child(3),
+.data-table td:nth-child(3),
+.data-table th:nth-child(11),
+.data-table td:nth-child(11) {
+    white-space: normal;
 }
 
 .data-table th {
@@ -331,10 +341,11 @@ header h1 {
 }
 
 .text-ellipsis {
-    max-width: 300px;
+    max-width: 250px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    display: inline-block;
 }
 
 .empty-state {
