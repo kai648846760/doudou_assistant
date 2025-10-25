@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import logging
 import time
+from collections.abc import Callable
 from pathlib import Path
 from threading import Event
 from typing import Any
@@ -12,6 +13,35 @@ from app.crawler import CrawlState
 from app.db import Database
 
 logger = logging.getLogger(__name__)
+
+
+def retry_with_backoff(
+    func: Callable[[], Any],
+    max_retries: int = 3,
+    initial_delay: float = 1.0,
+    backoff_factor: float = 2.0,
+    exceptions: tuple = (Exception,),
+) -> Any:
+    """Retry a function with exponential backoff on transient errors."""
+    delay = initial_delay
+    last_exception = None
+
+    for attempt in range(max_retries):
+        try:
+            return func()
+        except exceptions as exc:
+            last_exception = exc
+            if attempt < max_retries - 1:
+                logger.warning(
+                    f"Attempt {attempt + 1}/{max_retries} failed: {exc}. "
+                    f"Retrying in {delay:.1f}s..."
+                )
+                time.sleep(delay)
+                delay *= backoff_factor
+            else:
+                logger.error(f"All {max_retries} attempts failed: {exc}")
+
+    raise last_exception
 
 
 class BridgeAPI:
@@ -104,20 +134,31 @@ class BridgeAPI:
             logger.debug("Unable to show crawler window")
 
         self.state.set_status("navigating", f"Opening {url}")
-        try:
+        logger.info(f"Loading URL: {url}")
+
+        def load_with_retry():
             self.crawler_window.load_url(url)
+
+        try:
+            retry_with_backoff(
+                load_with_retry, max_retries=3, initial_delay=0.5, backoff_factor=2.0
+            )
+            logger.info(f"Successfully loaded URL: {url}")
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.exception("Failed to load URL in crawler window")
+            logger.exception("Failed to load URL in crawler window after retries")
+            self.state.set_error(f"Failed to load {url}")
 
     def _stop_js_runtime(self) -> None:
         if not self.crawler_window:
             return
+        logger.info("Stopping JavaScript runtime")
         try:
             self.crawler_window.evaluate_js(
                 "window.__douyinScroller && window.__douyinScroller.stop && window.__douyinScroller.stop();"
             )
+            logger.debug("JavaScript scroller stopped successfully")
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.debug("Failed to stop scroller runtime")
+            logger.warning("Failed to stop scroller runtime", exc_info=True)
 
     def _complete_crawl(self, message: str = "Crawl complete") -> None:
         self._stop_js_runtime()
@@ -285,14 +326,27 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     def push_chunk(self, items: list[dict[str, Any]]) -> dict[str, Any]:
         if not isinstance(items, list) or not items:
+            logger.debug("Received empty or invalid items list")
             return {"success": False, "error": "Items must be a non-empty list"}
 
-        try:
+        logger.info(f"Received chunk of {len(items)} items")
+
+        def process_chunk():
             self.state.increment_received(len(items))
             result = self.db.upsert_videos(items)
+            return result
+
+        try:
+            result = retry_with_backoff(
+                process_chunk, max_retries=3, initial_delay=0.5, backoff_factor=2.0
+            )
             inserted = result.get("inserted", 0)
             updated = result.get("updated", 0)
             self.state.update_counts(inserted, updated)
+            logger.info(
+                f"Processed chunk: {inserted} inserted, {updated} updated, "
+                f"totals: {self.state.items_inserted} inserted, {self.state.items_updated} updated"
+            )
 
             if self.state.mode == "author":
                 if inserted == 0:
@@ -323,7 +377,7 @@ class BridgeAPI:
                 "total_updated": self.state.items_updated,
             }
         except Exception as exc:  # pragma: no cover - runtime side effects
-            logger.exception("Error processing chunk")
+            logger.exception("Error processing chunk after retries")
             self.state.set_error(str(exc))
             self._emit_progress()
             return {"success": False, "error": str(exc)}
@@ -362,17 +416,21 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     def stop_crawl(self) -> dict[str, Any]:
         if not self.state.active:
+            logger.warning("Stop crawl requested but no active crawl")
             return {"success": False, "error": "No active crawl"}
 
+        logger.info("Stopping crawl (user request)")
         self._stop_event.set()
         self._stop_js_runtime()
         self.state.stop(message="Stopped by user")
         try:
             if self.crawler_window:
                 self.crawler_window.hide()
+                logger.debug("Crawler window hidden")
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.debug("Unable to hide crawler window")
+            logger.warning("Unable to hide crawler window", exc_info=True)
         self._emit_progress()
+        logger.info("Crawl stopped successfully")
         return {"success": True, "message": "Crawl stopped"}
 
     def on_scroll_complete(self) -> dict[str, Any]:
