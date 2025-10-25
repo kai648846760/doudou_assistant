@@ -479,6 +479,117 @@ class BridgeAPI:
             logger.exception("Failed to open Douyin login window")
             return {"success": False, "error": str(exc)}
 
+    def open_login_window(self) -> dict[str, Any]:
+        """创建独立登录窗口，检测登录状态，成功后自动关闭"""
+        try:
+            import webview
+            import threading
+            
+            logger.info("创建登录窗口")
+            
+            # 创建登录窗口
+            login_window = webview.create_window(
+                "抖音登录",
+                "https://www.douyin.com/",
+                width=800,
+                height=600,
+            )
+            
+            def check_login_status():
+                """在后台线程中检测登录状态"""
+                import time
+                max_attempts = 300  # 最多检测5分钟
+                attempt = 0
+                
+                # 等待窗口加载
+                time.sleep(2)
+                
+                while attempt < max_attempts:
+                    try:
+                        if not hasattr(login_window, 'evaluate_js'):
+                            logger.debug("登录窗口未就绪")
+                            time.sleep(1)
+                            attempt += 1
+                            continue
+                        
+                        # 检测登录状态
+                        script = """
+                            (function() {
+                                try {
+                                    const cookies = document.cookie || "";
+                                    const hasSession = /sessionid(_ss)?=/.test(cookies);
+                                    const loginButton = document.querySelector('[data-e2e="top-login-button"]')
+                                        || document.querySelector('button[data-e2e="login-button"]')
+                                        || document.querySelector('.login-button');
+                                    const avatar = document.querySelector('[class*="avatar"]') 
+                                        || document.querySelector('[class*="Avatar"]');
+                                    const userInfo = document.querySelector('[class*="user-info"]')
+                                        || document.querySelector('[class*="UserInfo"]');
+                                    
+                                    const isLoggedIn = hasSession || (!loginButton && (avatar || userInfo));
+                                    
+                                    return {
+                                        logged_in: isLoggedIn,
+                                        has_session: hasSession,
+                                        has_login_button: !!loginButton,
+                                        has_avatar: !!avatar,
+                                        has_user_info: !!userInfo,
+                                        url: window.location.href
+                                    };
+                                } catch (error) {
+                                    return { logged_in: false, error: error.message };
+                                }
+                            })();
+                        """
+                        
+                        result = login_window.evaluate_js(script)
+                        
+                        if isinstance(result, str):
+                            try:
+                                import json
+                                result = json.loads(result)
+                            except json.JSONDecodeError:
+                                result = {}
+                        
+                        if result and result.get("logged_in"):
+                            logger.info("检测到登录成功")
+                            # 给用户一点时间看到登录成功的页面
+                            time.sleep(1)
+                            try:
+                                login_window.destroy()
+                                logger.info("登录窗口已关闭")
+                            except Exception as e:
+                                logger.warning(f"关闭登录窗口失败: {e}")
+                            
+                            # 通知主窗口更新登录状态
+                            if self.ui_window:
+                                try:
+                                    self.ui_window.evaluate_js(
+                                        "window.dispatchEvent(new CustomEvent('login-success'));"
+                                    )
+                                except Exception:
+                                    pass
+                            
+                            return
+                        
+                    except Exception as e:
+                        logger.debug(f"检测登录状态出错: {e}")
+                    
+                    time.sleep(1)
+                    attempt += 1
+                
+                logger.info("登录检测超时或用户关闭了窗口")
+            
+            # 在后台线程中检测登录状态
+            thread = threading.Thread(target=check_login_status, daemon=True)
+            thread.start()
+            
+            return {"success": True, "message": "登录窗口已打开，请在弹出窗口中登录"}
+            
+        except Exception as exc:  # pragma: no cover - pywebview runtime
+            logger.exception("创建登录窗口失败")
+            return {"success": False, "error": str(exc)}
+
     # ---------------------------------------------------------------------
     # Utilities
     # ---------------------------------------------------------------------
