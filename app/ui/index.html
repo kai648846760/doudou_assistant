@@ -1,77 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DouDou Assistant - Douyin Crawler</title>
+    <title>豆豆助手 - 抖音数据采集工具</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>DouDou Assistant</h1>
-            <p class="subtitle">Douyin Data Crawler</p>
+            <h1>豆豆助手</h1>
+            <p class="subtitle">抖音数据采集工具</p>
         </header>
 
         <nav class="tabs">
-            <button class="tab-button" data-tab="login">Login</button>
-            <button class="tab-button active" data-tab="crawl">Crawl</button>
-            <button class="tab-button" data-tab="data">Data</button>
+            <button class="tab-button" data-tab="login">登录</button>
+            <button class="tab-button active" data-tab="crawl">采集</button>
+            <button class="tab-button" data-tab="data">数据</button>
         </nav>
 
         <main class="content">
             <div id="login" class="tab-content">
-                <h2>Login to Douyin</h2>
+                <h2>登录抖音</h2>
                 <p>
-                    To crawl Douyin profiles, you must be logged in. Click "Open Douyin" to open a browser window
-                    where you can log in to your Douyin account. Your session will persist between runs and is stored
-                    securely on your machine.
+                    要采集抖音数据，您需要先登录。点击"登录抖音"按钮，将弹出登录窗口，
+                    在该窗口中登录您的抖音账号。您的登录会话将在每次运行时保持，并安全地存储在您的设备上。
                 </p>
                 
                 <div class="login-status-card" id="login-status-card">
                     <div class="status-indicator" id="status-indicator">
                         <span class="status-dot" id="status-dot"></span>
-                        <span class="status-text" id="status-text">Checking login status...</span>
+                        <span class="status-text" id="status-text">正在检查登录状态...</span>
                     </div>
                     <div class="status-details" id="status-details"></div>
                 </div>
 
                 <div style="margin: 1.5rem 0;">
-                    <button class="btn btn-primary" id="open-login-btn">Open Douyin</button>
-                    <button class="btn btn-secondary" id="check-login-btn">Check Login Status</button>
+                    <button class="btn btn-primary" id="open-login-btn">登录抖音</button>
+                    <button class="btn btn-secondary" id="check-login-btn">手动刷新</button>
                 </div>
                 
                 <div class="info-box">
-                    <strong>Note:</strong> Login credentials and cookies remain local to your device.
-                    On Windows, session data is stored in <code>~/.doudou_assistant/webview_profile</code>.
-                    On macOS, session data is managed by the system (WKWebView).
+                    <strong>提示：</strong>登录凭据和 Cookie 仅保存在您的本地设备上。
+                    在 Windows 上，会话数据存储在 <code>~/.doudou_assistant/webview_profile</code> 目录。
+                    在 macOS 上，会话数据由系统管理（WKWebView）。
                 </div>
             </div>
 
             <div id="crawl" class="tab-content active">
-                <h2>Crawl Data</h2>
+                <h2>采集数据</h2>
                 
                 <div class="crawl-section">
-                    <h3>Author Profile Crawler</h3>
-                    <p>Enter an author profile URL, unique_id, or sec_uid to crawl all videos from that author.</p>
+                    <h3>作者主页采集</h3>
+                    <p>输入作者主页链接、抖音号或 sec_uid，采集该作者的所有视频。</p>
                     <div class="form-group">
-                        <label for="author-url">Author Profile URL or ID:</label>
+                        <label for="author-url">作者主页链接或 ID：</label>
                         <input 
                             type="text" 
                             id="author-url" 
                             name="author-url" 
                             placeholder="https://www.douyin.com/user/MS4wLjA..."
                         >
-                        <small>Examples: https://www.douyin.com/user/... or just the unique ID.</small>
+                        <small>示例：https://www.douyin.com/user/... 或直接输入抖音号</small>
                     </div>
-                    <button class="btn btn-primary" id="start-author-btn">Start Author Crawl</button>
+                    <button class="btn btn-primary" id="start-author-btn">开始采集</button>
                 </div>
 
                 <div class="crawl-section" style="margin-top: 2rem;">
-                    <h3>Video Crawler</h3>
-                    <p>Enter a single video URL to crawl that video's details.</p>
+                    <h3>单个视频采集</h3>
+                    <p>输入单个视频的链接，采集该视频的详细信息。</p>
                     <div class="form-group">
-                        <label for="video-url">Video URL:</label>
+                        <label for="video-url">视频链接：</label>
                         <input 
                             type="text" 
                             id="video-url" 
@@ -79,20 +78,20 @@
                             placeholder="https://www.douyin.com/video/123456789"
                         >
                     </div>
-                    <button class="btn btn-primary" id="start-video-btn">Start Video Crawl</button>
+                    <button class="btn btn-primary" id="start-video-btn">开始采集</button>
                 </div>
 
                 <div style="margin-top: 2rem;">
-                    <button class="btn btn-secondary" id="stop-crawl-btn">Stop Crawl</button>
-                    <button class="btn btn-secondary" id="mock-push-btn" style="margin-left: 0.5rem;">Test with Mock Data</button>
+                    <button class="btn btn-secondary" id="stop-crawl-btn">停止采集</button>
+                    <button class="btn btn-secondary" id="mock-push-btn" style="margin-left: 0.5rem;">测试数据</button>
                 </div>
 
                 <div class="crawl-status-section">
-                    <h3>Crawl Status</h3>
+                    <h3>采集状态</h3>
                     <div class="status-card" id="crawl-status-card">
                         <div class="status-row">
-                            <span class="status-label">Status:</span>
-                            <span class="status-value" id="crawl-status">Ready</span>
+                            <span class="status-label">状态：</span>
+                            <span class="status-value" id="crawl-status">就绪</span>
                         </div>
                         <div id="crawl-stats" class="stats-grid"></div>
                         <div id="error-display" class="error-message" style="display: none;"></div>
@@ -101,72 +100,72 @@
             </div>
 
             <div id="data" class="tab-content">
-                <h2>Stored Data</h2>
+                <h2>已采集数据</h2>
                 <div class="data-section">
                     <div class="filters">
                         <div class="form-group inline">
-                            <label for="filter-author">Author</label>
-                            <input type="text" id="filter-author" placeholder="Name, unique_id, or sec_uid">
+                            <label for="filter-author">作者</label>
+                            <input type="text" id="filter-author" placeholder="昵称、抖音号或 sec_uid">
                         </div>
                         <div class="form-group inline">
-                            <label for="filter-from">From</label>
+                            <label for="filter-from">起始日期</label>
                             <input type="date" id="filter-from">
                         </div>
                         <div class="form-group inline">
-                            <label for="filter-to">To</label>
+                            <label for="filter-to">结束日期</label>
                             <input type="date" id="filter-to">
                         </div>
                         <div class="filter-actions">
-                            <button class="btn btn-secondary" id="apply-filters-btn">Apply Filters</button>
-                            <button class="btn btn-link" id="reset-filters-btn">Reset</button>
+                            <button class="btn btn-secondary" id="apply-filters-btn">应用筛选</button>
+                            <button class="btn btn-link" id="reset-filters-btn">重置</button>
                         </div>
                     </div>
 
                     <div class="data-actions">
-                        <button class="btn btn-primary" id="refresh-data-btn">Refresh</button>
-                        <button class="btn btn-secondary" id="export-csv-btn">Export to CSV</button>
+                        <button class="btn btn-primary" id="refresh-data-btn">手动刷新</button>
+                        <button class="btn btn-secondary" id="export-csv-btn">导出 CSV</button>
                     </div>
                     
                     <div class="table-info">
-                        <p id="table-summary">Loading...</p>
+                        <p id="table-summary">加载中...</p>
                     </div>
 
                     <div class="table-container">
                         <table class="data-table">
                             <thead>
                                 <tr>
-                                    <th>Aweme ID</th>
-                                    <th>Author</th>
-                                    <th>Description</th>
-                                    <th>Date</th>
-                                    <th>Duration</th>
-                                    <th>Likes</th>
-                                    <th>Comments</th>
-                                    <th>Shares</th>
-                                    <th>Plays</th>
-                                    <th>Collects</th>
-                                    <th>Music</th>
+                                    <th>视频 ID</th>
+                                    <th>作者</th>
+                                    <th>描述</th>
+                                    <th>日期</th>
+                                    <th>时长</th>
+                                    <th>点赞</th>
+                                    <th>评论</th>
+                                    <th>分享</th>
+                                    <th>播放</th>
+                                    <th>收藏</th>
+                                    <th>音乐</th>
                                 </tr>
                             </thead>
                             <tbody id="data-tbody">
                                 <tr>
-                                    <td colspan="11" class="empty-state">No records found</td>
+                                    <td colspan="11" class="empty-state">暂无数据</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     
                     <div class="pagination" id="pagination" style="margin-top: 1rem;">
-                        <button class="btn btn-sm" id="prev-page-btn" disabled>Previous</button>
-                        <span id="page-info" style="margin: 0 1rem;">Page 1</span>
-                        <button class="btn btn-sm" id="next-page-btn" disabled>Next</button>
+                        <button class="btn btn-sm" id="prev-page-btn" disabled>上一页</button>
+                        <span id="page-info" style="margin: 0 1rem;">第 1 页</span>
+                        <button class="btn btn-sm" id="next-page-btn" disabled>下一页</button>
                     </div>
                 </div>
             </div>
         </main>
 
         <footer>
-            <p id="message">Loading...</p>
+            <p id="message">加载中...</p>
         </footer>
     </div>
     

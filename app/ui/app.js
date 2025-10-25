@@ -1,3 +1,6 @@
+// 全局 API 变量
+let api = null;
+
 document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll(".tab-button");
     const contents = document.querySelectorAll(".tab-content");
@@ -13,7 +16,28 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentFilters = {};
     let totalItems = 0;
 
-    const api = window.pywebview?.api;
+    // 禁用所有交互按钮，直到 API 就绪
+    function disableAllButtons() {
+        document.querySelectorAll("button").forEach(btn => {
+            if (!btn.classList.contains("tab-button")) {
+                btn.disabled = true;
+            }
+        });
+    }
+
+    // 启用所有交互按钮
+    function enableAllButtons() {
+        document.querySelectorAll("button").forEach(btn => {
+            btn.disabled = false;
+        });
+        // 停止按钮初始状态应为禁用
+        const stopBtn = document.getElementById("stop-crawl-btn");
+        if (stopBtn) stopBtn.disabled = true;
+    }
+
+    // 初始化时禁用所有按钮
+    disableAllButtons();
+    messageElement.textContent = "API 未就绪，请稍候...";
 
     // ------------------------------------------------------------
     // Tab switching
@@ -33,18 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
-            // Auto-check login status when switching to login tab
+            // 切换到登录标签时自动检查登录状态
             if (target === "login") {
                 updateLoginStatus();
             }
         });
     });
-
-    if (api) {
-        messageElement.textContent = "Ready";
-    } else {
-        messageElement.textContent = "PyWebView API not available";
-    }
 
     // ------------------------------------------------------------
     // Login tab
@@ -58,45 +76,51 @@ document.addEventListener("DOMContentLoaded", () => {
         const statusDetails = document.getElementById("status-details");
 
         try {
-            // Show checking state
+            // 显示检查状态
             statusDot.className = "status-dot checking";
-            statusText.textContent = "Checking login status...";
+            statusText.textContent = "正在检查登录状态...";
             statusDetails.textContent = "";
 
             const result = await api.login_state();
             
             if (result.logged_in) {
                 statusDot.className = "status-dot logged-in";
-                statusText.textContent = "✓ Logged in to Douyin";
-                statusDetails.textContent = "You are successfully logged in and can start crawling.";
+                statusText.textContent = "✓ 已登录抖音";
+                statusDetails.textContent = "您已成功登录，可以开始采集数据。";
             } else {
                 statusDot.className = "status-dot logged-out";
-                statusText.textContent = "✗ Not logged in";
+                statusText.textContent = "✗ 未登录";
                 statusDetails.innerHTML = 
-                    'Please click <strong>"Open Douyin"</strong> and log in to your account to start crawling.';
+                    '请点击<strong>"登录抖音"</strong>按钮，在弹出窗口中登录您的抖音账号。';
             }
         } catch (error) {
             statusDot.className = "status-dot logged-out";
-            statusText.textContent = "✗ Error checking login status";
+            statusText.textContent = "✗ 检查登录状态失败";
             statusDetails.textContent = error.message;
         }
     }
 
     document.getElementById("open-login-btn")?.addEventListener("click", async () => {
         if (!api) {
-            alert("API not available");
+            alert("API 未就绪");
             return;
         }
         try {
-            const result = await api.open_login();
+            messageElement.textContent = "正在打开登录窗口...";
+            const result = await api.open_login_window();
             if (result.success) {
-                messageElement.textContent = result.message || "Login window opened";
-                setTimeout(updateLoginStatus, 1000);
+                messageElement.textContent = result.message || "登录窗口已打开";
+                // 登录成功后自动更新状态
+                if (result.logged_in) {
+                    setTimeout(updateLoginStatus, 500);
+                }
             } else {
-                alert(result.error || "Failed to open login window");
+                alert(result.error || "打开登录窗口失败");
+                messageElement.textContent = "就绪";
             }
         } catch (error) {
-            alert("Error: " + error.message);
+            alert("错误: " + error.message);
+            messageElement.textContent = "就绪";
         }
     });
 
@@ -127,25 +151,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const urlInput = document.getElementById("author-url");
         const url = urlInput?.value?.trim();
         if (!url) {
-            alert("Please enter an author profile URL or ID");
+            alert("请输入作者主页链接或 ID");
             return;
         }
         if (!api) {
-            alert("API not available");
+            alert("API 未就绪");
             return;
         }
         try {
             const result = await api.start_crawl_author(url);
             if (result.success) {
-                statusElement.textContent = "Starting author crawl...";
+                statusElement.textContent = "正在开始作者采集...";
                 statusElement.className = "status-value running";
-                messageElement.textContent = result.message || "Crawl started";
+                messageElement.textContent = result.message || "采集已启动";
                 updateCrawlButtons(true);
             } else {
-                alert(result.error || "Failed to start crawl");
+                alert(result.error || "启动采集失败");
             }
         } catch (error) {
-            alert("Error: " + error.message);
+            alert("错误: " + error.message);
         }
     });
 
@@ -153,45 +177,45 @@ document.addEventListener("DOMContentLoaded", () => {
         const urlInput = document.getElementById("video-url");
         const url = urlInput?.value?.trim();
         if (!url) {
-            alert("Please enter a video URL");
+            alert("请输入视频链接");
             return;
         }
         if (!api) {
-            alert("API not available");
+            alert("API 未就绪");
             return;
         }
         try {
             const result = await api.start_crawl_video(url);
             if (result.success) {
-                statusElement.textContent = "Starting video crawl...";
+                statusElement.textContent = "正在开始视频采集...";
                 statusElement.className = "status-value running";
-                messageElement.textContent = result.message || "Crawl started";
+                messageElement.textContent = result.message || "采集已启动";
                 updateCrawlButtons(true);
             } else {
-                alert(result.error || "Failed to start crawl");
+                alert(result.error || "启动采集失败");
             }
         } catch (error) {
-            alert("Error: " + error.message);
+            alert("错误: " + error.message);
         }
     });
 
     document.getElementById("stop-crawl-btn")?.addEventListener("click", async () => {
         if (!api) {
-            alert("API not available");
+            alert("API 未就绪");
             return;
         }
         try {
             const result = await api.stop_crawl();
             if (result.success) {
-                statusElement.textContent = "Stopped";
+                statusElement.textContent = "已停止";
                 statusElement.className = "status-value stopped";
-                messageElement.textContent = result.message || "Crawl stopped";
+                messageElement.textContent = result.message || "采集已停止";
                 updateCrawlButtons(false);
             } else {
-                alert(result.error || "Failed to stop crawl");
+                alert(result.error || "停止采集失败");
             }
         } catch (error) {
-            alert("Error: " + error.message);
+            alert("错误: " + error.message);
         }
     });
 
@@ -253,18 +277,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("export-csv-btn")?.addEventListener("click", async () => {
         if (!api) {
-            alert("API not available");
+            alert("API 未就绪");
             return;
         }
         try {
             const result = await api.export_csv(currentFilters);
             if (result.success) {
-                alert("CSV exported successfully to:\n" + result.path);
+                alert("CSV 导出成功，文件路径：\n" + result.path);
             } else {
-                alert(result.error || "Failed to export CSV");
+                alert(result.error || "导出 CSV 失败");
             }
         } catch (error) {
-            alert("Error: " + error.message);
+            alert("错误: " + error.message);
         }
     });
 
@@ -304,17 +328,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderData(result) {
         if (!result || !result.items || result.items.length === 0) {
-            dataTbody.innerHTML = '<tr><td colspan="11" class="empty-state">No records found</td></tr>';
-            tableSummary.textContent = "No records found";
-            pageInfo.textContent = "Page 1";
+            dataTbody.innerHTML = '<tr><td colspan="11" class="empty-state">暂无数据</td></tr>';
+            tableSummary.textContent = "暂无数据";
+            pageInfo.textContent = "第 1 页";
             document.getElementById("prev-page-btn").disabled = true;
             document.getElementById("next-page-btn").disabled = true;
             return;
         }
 
         const maxPage = Math.ceil(totalItems / currentPageSize);
-        tableSummary.textContent = `Showing ${result.items.length} of ${totalItems} records`;
-        pageInfo.textContent = `Page ${currentPage} of ${maxPage}`;
+        tableSummary.textContent = `显示 ${result.items.length} 条，共 ${totalItems} 条记录`;
+        pageInfo.textContent = `第 ${currentPage} 页，共 ${maxPage} 页`;
 
         document.getElementById("prev-page-btn").disabled = currentPage <= 1;
         document.getElementById("next-page-btn").disabled = currentPage >= maxPage;
@@ -322,14 +346,14 @@ document.addEventListener("DOMContentLoaded", () => {
         dataTbody.innerHTML = result.items
             .map(
                 (item) => {
-                    const duration = item.duration ? `${Math.floor(item.duration / 1000)}s` : "";
+                    const duration = item.duration ? `${Math.floor(item.duration / 1000)}秒` : "";
                     const createTime = item.create_time ? new Date(item.create_time).toLocaleDateString() : "";
                     const desc = (item.desc || "").replace(/"/g, "&quot;");
                     const descPreview = (item.desc || "").substring(0, 40);
                     return `
             <tr>
                 <td>${item.aweme_id || ""}</td>
-                <td>${item.author_name || "Unknown"}</td>
+                <td>${item.author_name || "未知"}</td>
                 <td><div class="text-ellipsis" title="${desc}">${descPreview}${item.desc && item.desc.length > 40 ? "..." : ""}</div></td>
                 <td>${createTime}</td>
                 <td>${duration}</td>
@@ -360,11 +384,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update button states based on crawl activity
         updateCrawlButtons(progress.active);
 
-        // Update status text with appropriate styling
+        // 更新状态文本和样式
         if (progress.active) {
             const target = progress.target || "";
             const mode = progress.mode || "";
-            const statusMsg = progress.status_message || `Crawling ${mode}`;
+            const statusMsg = progress.status_message || `正在采集${mode}`;
             statusElement.textContent = `${statusMsg}`;
             statusElement.className = "status-value running";
             
@@ -373,15 +397,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } else {
             if (progress.last_error) {
-                statusElement.textContent = "Error";
+                statusElement.textContent = "错误";
                 statusElement.className = "status-value error";
                 
                 if (errorDisplay) {
-                    errorDisplay.innerHTML = `<strong>Error:</strong> ${progress.last_error}`;
+                    errorDisplay.innerHTML = `<strong>错误:</strong> ${progress.last_error}`;
                     errorDisplay.style.display = "block";
                 }
             } else {
-                const statusMsg = progress.status_message || "Ready";
+                const statusMsg = progress.status_message || "就绪";
                 statusElement.textContent = statusMsg;
                 
                 if (progress.status === "complete") {
@@ -398,19 +422,19 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Update stats with better formatting
+        // 更新统计信息
         if (statsElement) {
             statsElement.innerHTML = `
                 <div class="stat-item">
-                    <span class="stat-label">Received</span>
+                    <span class="stat-label">已接收</span>
                     <span class="stat-value">${progress.items_received || 0}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Inserted</span>
+                    <span class="stat-label">已插入</span>
                     <span class="stat-value">${progress.items_inserted || 0}</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-label">Updated</span>
+                    <span class="stat-label">已更新</span>
                     <span class="stat-value">${progress.items_updated || 0}</span>
                 </div>
             `;
@@ -426,4 +450,47 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCrawlButtons(false);
     
     loadData();
+});
+
+// 等待 pywebview 就绪
+document.addEventListener('pywebviewready', () => {
+    console.log('PyWebView API is ready');
+    api = window.pywebview.api;
+    
+    const messageElement = document.getElementById("message");
+    if (messageElement) {
+        messageElement.textContent = "就绪";
+    }
+    
+    // 启用所有按钮
+    document.querySelectorAll("button").forEach(btn => {
+        btn.disabled = false;
+    });
+    
+    // 停止按钮初始状态应为禁用
+    const stopBtn = document.getElementById("stop-crawl-btn");
+    if (stopBtn) stopBtn.disabled = true;
+});
+
+// 监听登录成功事件
+window.addEventListener('login-success', () => {
+    console.log('Login success event received');
+    const messageElement = document.getElementById("message");
+    if (messageElement) {
+        messageElement.textContent = "登录成功";
+    }
+    
+    // 如果当前在登录标签页，自动更新登录状态
+    const loginTab = document.querySelector('.tab-button[data-tab="login"]');
+    if (loginTab && loginTab.classList.contains('active')) {
+        setTimeout(() => {
+            const statusDot = document.getElementById("status-dot");
+            const statusText = document.getElementById("status-text");
+            const statusDetails = document.getElementById("status-details");
+            
+            if (statusDot) statusDot.className = "status-dot logged-in";
+            if (statusText) statusText.textContent = "✓ 已登录抖音";
+            if (statusDetails) statusDetails.textContent = "您已成功登录，可以开始采集数据。";
+        }, 500);
+    }
 });
