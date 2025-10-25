@@ -4,7 +4,7 @@ import json
 import logging
 import time
 from pathlib import Path
-from threading import Event
+from threading import Event, Timer
 from typing import Any
 from urllib.parse import urlparse
 
@@ -26,6 +26,7 @@ class BridgeAPI:
         self._stop_event = Event()
         self._pending_action: dict[str, Any] | None = None
         self._duplicate_batches = 0
+        self._video_complete_timer: Timer | None = None
         logger.info("Bridge API initialised")
 
     # ---------------------------------------------------------------------
@@ -121,6 +122,7 @@ class BridgeAPI:
 
     def _complete_crawl(self, message: str = "Crawl complete") -> None:
         self._stop_js_runtime()
+        self._cancel_video_timer()
         self.state.complete(message)
         try:
             if self.crawler_window:
@@ -128,6 +130,24 @@ class BridgeAPI:
         except Exception:  # pragma: no cover - pywebview runtime
             logger.debug("Unable to hide crawler window")
         self._emit_progress()
+
+    def _cancel_video_timer(self) -> None:
+        """Cancel any pending video completion timer."""
+        if self._video_complete_timer:
+            self._video_complete_timer.cancel()
+            self._video_complete_timer = None
+
+    def _schedule_video_completion(self, delay: float = 2.0) -> None:
+        """Schedule automatic completion of video crawl after a delay."""
+        self._cancel_video_timer()
+
+        def complete_video_crawl():
+            if self.state.active and self.state.mode == "video":
+                logger.info("Auto-completing video crawl after successful capture")
+                self._complete_crawl("Video captured successfully")
+
+        self._video_complete_timer = Timer(delay, complete_video_crawl)
+        self._video_complete_timer.start()
 
     # ---------------------------------------------------------------------
     # Login helpers
@@ -218,6 +238,7 @@ class BridgeAPI:
         self.state.start("author", url, context=context)
         self._stop_event.clear()
         self._duplicate_batches = 0
+        self._cancel_video_timer()
         self._pending_action = {"mode": "author", "latest": latest}
 
         self._load_crawler_url(url)
@@ -244,6 +265,7 @@ class BridgeAPI:
         self.state.start("video", cleaned_url)
         self._stop_event.clear()
         self._duplicate_batches = 0
+        self._cancel_video_timer()
         self._pending_action = {"mode": "video"}
 
         self._load_crawler_url(cleaned_url)
@@ -308,6 +330,14 @@ class BridgeAPI:
                         "running",
                         f"Inserted {inserted} new videos, {updated} refreshed",
                     )
+            elif self.state.mode == "video":
+                self.state.set_status(
+                    "running", f"Captured {inserted} new videos, {updated} refreshed"
+                )
+                # Auto-complete video crawl after capturing data
+                if inserted > 0 or updated > 0:
+                    logger.info("Video data captured, scheduling completion")
+                    self._schedule_video_completion(delay=2.0)
             else:
                 self.state.set_status(
                     "running", f"Captured {inserted} new videos, {updated} refreshed"
@@ -366,6 +396,7 @@ class BridgeAPI:
 
         self._stop_event.set()
         self._stop_js_runtime()
+        self._cancel_video_timer()
         self.state.stop(message="Stopped by user")
         try:
             if self.crawler_window:
