@@ -22,7 +22,7 @@ def retry_with_backoff(
     backoff_factor: float = 2.0,
     exceptions: tuple = (Exception,),
 ) -> Any:
-    """Retry a function with exponential backoff on transient errors."""
+    """遇到临时错误时使用指数退避重试函数。"""
     delay = initial_delay
     last_exception = None
 
@@ -45,7 +45,7 @@ def retry_with_backoff(
 
 
 class BridgeAPI:
-    """Python API exposed to JavaScript via pywebview bridge."""
+    """通过 pywebview 桥接暴露给 JavaScript 的 Python API。"""
 
     def __init__(self, db_path: Path) -> None:
         self.db = Database(db_path)

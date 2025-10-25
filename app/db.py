@@ -11,7 +11,7 @@ from sqlmodel import Field, Session, SQLModel, create_engine, select
 
 
 class Author(SQLModel, table=True):
-    """Normalized record for a Douyin author (creator)."""
+    """抖音作者（创作者）的规范化记录。"""
 
     author_id: str = Field(primary_key=True, index=True)
     unique_id: str | None = Field(default=None, index=True)
@@ -27,7 +27,7 @@ class Author(SQLModel, table=True):
 
 
 class Video(SQLModel, table=True):
-    """Normalized record for a Douyin video (aweme)."""
+    """抖音视频（aweme）的规范化记录。"""
 
     aweme_id: str = Field(primary_key=True, index=True)
     author_id: str | None = Field(default=None, index=True)
@@ -52,7 +52,7 @@ class Video(SQLModel, table=True):
 
 
 class Database:
-    """Lightweight database layer backed by SQLite."""
+    """基于 SQLite 的轻量级数据库层。"""
 
     def __init__(self, db_path: Path) -> None:
         self.db_path = db_path

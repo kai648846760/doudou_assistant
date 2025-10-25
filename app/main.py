@@ -14,8 +14,23 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
+def get_resource_path(relative_path: str) -> pathlib.Path:
+    """获取资源文件的绝对路径，兼容 PyInstaller 打包后的运行时环境。
+    
+    在开发环境中返回相对于当前文件的路径，
+    在 PyInstaller 打包后返回临时解压目录（_MEIPASS）中的路径。
+    """
+    if hasattr(sys, '_MEIPASS'):
+        # PyInstaller 打包后的临时目录
+        base_path = pathlib.Path(sys._MEIPASS)
+    else:
+        # 开发环境
+        base_path = pathlib.Path(__file__).parent
+    return base_path / relative_path
+
+
 def check_webview_runtime() -> bool:
-    """Check if the required WebView runtime is available on the current platform."""
+    """检查当前平台是否有所需的 WebView 运行时。"""
     system = platform.system()
     logger.info(f"Running on {system} {platform.release()}")
 
@@ -51,14 +66,14 @@ def check_webview_runtime() -> bool:
 
 
 def show_webview2_error() -> None:
-    """Display error message for missing WebView2 runtime."""
+    """显示缺少 WebView2 运行时的错误消息。"""
     error_message = """
-Microsoft Edge WebView2 Runtime is required but not installed.
+需要 Microsoft Edge WebView2 运行时，但未安装。
 
-Please download and install it from:
+请从以下地址下载并安装：
 https://developer.microsoft.com/microsoft-edge/webview2/
 
-After installation, restart the application.
+安装后重启应用程序。
 """
     print(error_message, file=sys.stderr)
     logger.error("WebView2 runtime not installed. Application cannot start.")
@@ -70,11 +85,11 @@ After installation, restart the application.
         root = tk.Tk()
         root.withdraw()
         messagebox.showerror(
-            "WebView2 Required",
-            "Microsoft Edge WebView2 Runtime is not installed.\n\n"
-            "Download from:\n"
+            "需要 WebView2",
+            "未安装 Microsoft Edge WebView2 运行时。\n\n"
+            "下载地址：\n"
             "https://developer.microsoft.com/microsoft-edge/webview2/\n\n"
-            "The application will now exit.",
+            "应用程序现在将退出。",
         )
         root.destroy()
     except Exception:
@@ -82,7 +97,7 @@ After installation, restart the application.
 
 
 def setup_console_logging(window) -> None:
-    """Set up console message logging from the webview window."""
+    """设置 webview 窗口的控制台消息日志记录。"""
 
     def on_console_message(message, level):
         log_level = logging.DEBUG
@@ -119,8 +134,8 @@ def main() -> None:
 
     api = BridgeAPI(db_path)
 
-    inject_path = pathlib.Path(__file__).parent / "inject.js"
-    scroll_path = pathlib.Path(__file__).parent / "scroll.js"
+    inject_path = get_resource_path("app/inject.js")
+    scroll_path = get_resource_path("app/scroll.js")
 
     with inject_path.open("r", encoding="utf-8") as fp:
         inject_js = fp.read()
@@ -135,7 +150,7 @@ def main() -> None:
     logger.info("Creating UI window")
     ui_window = webview.create_window(
         "DouDou Assistant",
-        url=(pathlib.Path(__file__).parent / "ui" / "index.html").resolve().as_uri(),
+        url=get_resource_path("app/ui/index.html").resolve().as_uri(),
         js_api=api,
         storage_path=str(profile_dir.resolve()),
     )

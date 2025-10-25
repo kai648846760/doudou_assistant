@@ -1,3 +1,6 @@
+// 自动滚动脚本
+// 用于作者主页自动滚动加载所有视频
+// Auto-scroll script for loading all videos on author profile pages
 (function () {
     if (window.__douyinScroller) {
         return;

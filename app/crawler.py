@@ -8,7 +8,7 @@ from typing import Any
 
 @dataclass
 class CrawlState:
-    """Tracks and serialises crawl progress for the UI."""
+    """跟踪和序列化爬取进度供 UI 使用。"""
 
     active: bool = False
     mode: str | None = None

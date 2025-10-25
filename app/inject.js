@@ -1,3 +1,6 @@
+// 抖音数据拦截脚本
+// 拦截 fetch 和 XMLHttpRequest，捕获视频列表和详情数据
+// Douyin data interception script - hooks fetch/XMLHttpRequest to capture video data
 (function () {
     if (window.__douyinBridge) {
         return;
