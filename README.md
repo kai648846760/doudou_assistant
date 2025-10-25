@@ -1,272 +1,309 @@
-# DouDou Assistant - Douyin Data Crawler
+# 豆豆助手 - 抖音数据采集工具
 
-A WebView-based crawler application for collecting and analyzing data from Douyin (Chinese TikTok). This application uses pywebview to provide a GUI interface for logging in, crawling author profiles, and exporting data to CSV.
+基于 WebView 的抖音数据采集应用程序，用于采集和分析抖音数据。本应用使用 pywebview 提供 GUI 界面，支持登录、爬取作者主页、导出数据到 CSV 等功能。
 
-## Quick Start
+## 快速开始
 
-### Prerequisites
+### 系统要求
 
-**Required for all platforms:**
-- **Python 3.11 or higher**
-- **[uv](https://github.com/astral-sh/uv)** - Fast Python package installer and resolver
+**所有平台：**
+- **Python 3.11 或更高版本**
+- **[uv](https://github.com/astral-sh/uv)** - 快速的 Python 包管理工具
 
-**Platform-specific:**
-- **Windows**: Microsoft Edge WebView2 Runtime (usually pre-installed on Windows 10/11)
-  - If missing, the app will show a message with a download link
-  - Download: https://developer.microsoft.com/microsoft-edge/webview2/
-- **macOS**: macOS 10.10 or higher (uses built-in WKWebView, no additional dependencies)
-- **Linux**: webkit2gtk package (typically pre-installed on most distributions)
+**平台特定要求：**
+- **Windows**：Microsoft Edge WebView2 运行时（Windows 10/11 通常已预装）
+  - 如果缺失，应用会显示下载链接提示
+  - 下载地址：https://developer.microsoft.com/microsoft-edge/webview2/
+- **macOS**：macOS 10.10 或更高版本（使用内置 WKWebView，无需额外依赖）
+- **Linux**：webkit2gtk 包（大多数发行版已预装）
 
-### Installation
+### 安装
 
-1. **Clone or download this repository**
+1. **克隆或下载本仓库**
 
-2. **Install dependencies:**
+2. **安装依赖：**
    ```bash
    uv sync
    ```
-   This creates a virtual environment and installs all required packages.
+   这将创建虚拟环境并安装所有必需的包。
 
-### Running the Application
+### 运行应用
 
-Start the application:
+启动应用程序：
 ```bash
 uv run python -m app.main
 ```
 
-The application will:
-- Create a `./data/` directory for storing the database and session data
-- Launch the DouDou Assistant GUI
-- Initialize the SQLite database (`./data/douyin.db`)
+应用程序会：
+- 创建 `./data/` 目录存储数据库和会话数据
+- 启动豆豆助手 GUI 界面
+- 初始化 SQLite 数据库（`./data/douyin.db`）
 
-### First-Time Setup
+### 首次使用设置
 
-1. Click the **"Login"** tab
-2. Click **"Open Douyin"**
-3. Log in to your Douyin account in the browser window that opens
-4. Click **"Check Login Status"** to verify
-5. Your session is saved and will persist between application restarts
+1. 点击 **"登录"** 标签页
+2. 点击 **"打开抖音"**
+3. 在打开的浏览器窗口中登录你的抖音账号
+4. 点击 **"检查登录状态"** 验证登录
+5. 会话会被保存，在应用重启后会持续有效
 
-### Basic Usage
+### 基本使用
 
-**To crawl an author's videos:**
-1. Go to the **"Crawl"** tab
-2. Enter an author profile URL (e.g., `https://www.douyin.com/user/MS4wLjABAAAA...`) or just the user ID
-3. Click **"Start Author Crawl"**
-4. The app will automatically scroll through the profile and collect all videos
-5. View collected data in the **"Data"** tab
+**爬取作者视频：**
+1. 进入 **"爬取"** 标签页
+2. 输入作者主页 URL（如 `https://www.douyin.com/user/MS4wLjABAAAA...`）或用户 ID
+3. 点击 **"开始爬取作者"**
+4. 应用会自动滚动作者主页并采集所有视频
+5. 在 **"数据"** 标签页查看采集的数据
 
-**To export data:**
-1. Go to the **"Data"** tab
-2. Apply any filters you want (optional)
-3. Click **"Export to CSV"**
-4. CSV files are saved to `./data/douyin_export_YYYYMMDD_HHMMSS.csv`
+**导出数据：**
+1. 进入 **"数据"** 标签页
+2. 可选：应用筛选条件
+3. 点击 **"导出到 CSV"**
+4. CSV 文件会保存到 `./data/douyin_export_YYYYMMDD_HHMMSS.csv`
 
-## Features
+## 下载已打包版本
 
-- **🔐 Persistent Login**: Log in once and your session persists between runs
-- **👤 Author Profile Crawling**: Automatically scroll through and collect all videos from an author's profile
-- **🎬 Single Video Crawling**: Extract details and metrics from individual videos
-- **📊 Data Management**: View, filter, and paginate collected data
-- **📁 CSV Export**: Export your data to CSV format with UTF-8 encoding
-- **🔄 Incremental Sync**: Only new videos are added on subsequent crawls of the same author
-- **🎯 Smart Deduplication**: Automatically prevents duplicate entries
-- **🔄 Retry & Backoff**: Automatic retry with exponential backoff on transient errors
-- **📝 Comprehensive Logging**: Detailed logs for debugging and monitoring
+在 [Releases](https://github.com/你的用户名/你的仓库名/releases) 页面可下载预编译版本：
 
-## Architecture
+- **Windows**：`DouDouAssistant.exe`（单文件可执行程序，无需安装 Python）
+- **macOS**：`DouDouAssistant.zip`（解压后运行 .app）
 
-### Python Components
+**Windows 注意事项：**
+- 首次运行需要安装 WebView2 运行时（如果尚未安装）
+- 下载地址：https://developer.microsoft.com/microsoft-edge/webview2/
 
-- **`app/main.py`**: Application entry point, sets up windows and API
-- **`app/api.py`**: Bridge API exposed to JavaScript with methods for crawling, data management, and login
-- **`app/db.py`**: Database layer with SQLModel for Author and Video tables
-- **`app/crawler.py`**: Crawl state management and progress tracking
-- **`app/inject.js`**: Injected script that hooks fetch/XMLHttpRequest to capture API responses
-- **`app/scroll.js`**: Auto-scroll functionality for author profile pages
+**macOS 注意事项：**
+- 首次运行可能提示"无法打开，因为来自身份不明的开发者"
+- 解决方法：右键点击应用 → 选择"打开" → 点击"打开"确认
+- 或在"系统偏好设置" → "安全性与隐私"中允许运行
 
-### JavaScript Components
+## 功能特性
 
-- **`app/ui/index.html`**: User interface with Login, Crawl, and Data tabs
-- **`app/ui/app.js`**: UI interactions, event handling, and API communication
-- **`app/ui/styles.css`**: Styling with Douyin-inspired color scheme
+- **🔐 持久登录**：登录一次，会话在重启后仍然有效
+- **👤 作者主页爬取**：自动滚动并采集作者的所有视频
+- **🎬 单视频爬取**：提取单个视频的详细信息和统计数据
+- **📊 数据管理**：查看、筛选和分页浏览采集的数据
+- **📁 CSV 导出**：导出数据到 CSV 格式（UTF-8 编码）
+- **🔄 增量同步**：重复爬取同一作者时只添加新视频
+- **🎯 智能去重**：自动防止重复条目
+- **🔄 重试与退避**：遇到临时错误时自动重试（指数退避）
+- **📝 详细日志**：便于调试和监控的详细日志
 
-## Detailed Usage
+## 架构说明
 
-### Crawling Author Profiles
+### Python 组件
 
-1. Navigate to the **"Crawl"** tab
-2. Enter an author profile URL or ID in the **"Author Profile URL or ID"** field
-   - Full URL: `https://www.douyin.com/user/MS4wLjABAAAA...`
-   - Just the user ID: `MS4wLjABAAAA...`
-   - Unique ID or sec_uid also supported
-3. Click **"Start Author Crawl"**
-4. The Douyin window will open and automatically:
-   - Navigate to the author's profile
-   - Scroll to load all videos
-   - Capture video data as it loads
-   - Detect when the end of the list is reached
-5. Monitor progress in the "Crawl Status" section
-6. When complete, the crawler window will close and data will be available in the **"Data"** tab
+- **`app/main.py`**：应用入口，设置窗口和 API
+- **`app/api.py`**：桥接 API，向 JavaScript 暴露爬取、数据管理、登录等方法
+- **`app/db.py`**：数据库层，使用 SQLModel 定义 Author 和 Video 表
+- **`app/crawler.py`**：爬取状态管理和进度跟踪
+- **`app/inject.js`**：注入脚本，拦截 fetch/XMLHttpRequest 以捕获 API 响应
+- **`app/scroll.js`**：作者主页的自动滚动功能
 
-**Incremental Crawling**: If you crawl the same author again, only new videos (not already in the database) will be added.
+### JavaScript 组件
 
-### Crawling Single Videos
+- **`app/ui/index.html`**：用户界面，包含登录、爬取和数据标签页
+- **`app/ui/app.js`**：UI 交互、事件处理和 API 通信
+- **`app/ui/styles.css`**：抖音风格的样式设计
 
-1. Navigate to the **"Crawl"** tab
-2. Enter a video URL in the **"Video URL"** field
-   - Example: `https://www.douyin.com/video/7123456789012345678`
-3. Click **"Start Video Crawl"**
-4. The video details and metrics will be captured and saved
+## 详细使用指南
 
-### Viewing and Managing Data
+### 爬取作者主页
 
-1. Navigate to the **"Data"** tab
-2. Use filters to narrow down results:
-   - **Author**: Filter by author name or ID
-   - **From/To**: Filter by date range
-3. Click **"Apply Filters"** or **"Reset"** to clear filters
-4. Use pagination buttons to navigate through results
-5. Click **"Refresh"** to reload the data table
-6. Click **"Export to CSV"** to export current filtered data
+1. 进入 **"爬取"** 标签页
+2. 在 **"作者主页 URL 或 ID"** 字段中输入作者主页 URL 或 ID
+   - 完整 URL：`https://www.douyin.com/user/MS4wLjABAAAA...`
+   - 仅用户 ID：`MS4wLjABAAAA...`
+   - 也支持 unique_id 或 sec_uid
+3. 点击 **"开始爬取作者"**
+4. 抖音窗口会打开并自动：
+   - 导航到作者主页
+   - 滚动加载所有视频
+   - 捕获视频数据
+   - 检测列表末尾
+5. 在"爬取状态"部分监控进度
+6. 完成后爬取窗口会关闭，数据可在 **"数据"** 标签页查看
 
-### Exporting Data
+**增量爬取**：如果再次爬取同一作者，只会添加新视频（不在数据库中的）。
 
-CSV exports are saved to `./data/` with the format: `douyin_export_YYYYMMDD_HHMMSS.csv`
+### 爬取单个视频
 
-The CSV includes:
-- Aweme ID
-- Author information (ID, name, unique_id, sec_uid)
-- Description
-- Timestamps
-- Engagement metrics (likes, comments, shares, plays, collects)
-- Media URLs (cover, video)
-- Music information
+1. 进入 **"爬取"** 标签页
+2. 在 **"视频 URL"** 字段输入视频 URL
+   - 示例：`https://www.douyin.com/video/7123456789012345678`
+3. 点击 **"开始爬取视频"**
+4. 视频详情和统计数据会被捕获并保存
 
-## Data Model
+### 查看和管理数据
 
-### Author Table
+1. 进入 **"数据"** 标签页
+2. 使用筛选器缩小结果范围：
+   - **作者**：按作者名或 ID 筛选
+   - **起止日期**：按日期范围筛选
+3. 点击 **"应用筛选"** 或 **"重置"** 清除筛选
+4. 使用分页按钮浏览结果
+5. 点击 **"刷新"** 重新加载数据表
+6. 点击 **"导出到 CSV"** 导出当前筛选的数据
 
-- `author_id` (primary key)
-- `unique_id`, `sec_uid` (indexed)
-- `nickname` (author name)
-- `signature`, `avatar_thumb`
-- `follower_count`, `following_count`, `aweme_count`
+### 导出数据
+
+CSV 导出文件保存在 `./data/`，格式为：`douyin_export_YYYYMMDD_HHMMSS.csv`
+
+CSV 包含：
+- 视频 ID（Aweme ID）
+- 作者信息（ID、昵称、unique_id、sec_uid）
+- 描述
+- 时间戳
+- 互动数据（点赞、评论、分享、播放、收藏）
+- 媒体 URL（封面、视频）
+- 音乐信息
+
+## 数据模型
+
+### Author 表（作者）
+
+- `author_id`（主键）
+- `unique_id`、`sec_uid`（索引）
+- `nickname`（作者昵称）
+- `signature`、`avatar_thumb`
+- `follower_count`、`following_count`、`aweme_count`
 - `region`
-- `received_at` (timestamp)
+- `received_at`（时间戳）
 
-### Video Table
+### Video 表（视频）
 
-- `aweme_id` (primary key)
-- `author_id`, `author_name`, `author_unique_id`, `author_sec_uid` (indexed)
-- `desc` (description)
-- `create_time` (indexed)
+- `aweme_id`（主键）
+- `author_id`、`author_name`、`author_unique_id`、`author_sec_uid`（索引）
+- `desc`（描述）
+- `create_time`（索引）
 - `duration`
-- Statistics: `digg_count`, `comment_count`, `share_count`, `play_count`, `collect_count`
+- 统计数据：`digg_count`、`comment_count`、`share_count`、`play_count`、`collect_count`
 - `region`
-- Music: `music_title`, `music_author`
-- Media: `cover`, `video_url`
+- 音乐：`music_title`、`music_author`
+- 媒体：`cover`、`video_url`
 - `item_type`
-- `received_at` (timestamp)
+- `received_at`（时间戳）
 
-## How It Works
+## 工作原理
 
-### JavaScript Interception
+### JavaScript 拦截
 
-The application injects JavaScript into the Douyin session that:
+应用会向抖音会话注入 JavaScript，实现：
 
-1. **Hooks `fetch()` and `XMLHttpRequest`**: Intercepts all network requests
-2. **Detects aweme data**: Looks for JSON responses containing video lists (`aweme_list`) or video details (`aweme_detail`, `aweme_info`)
-3. **Normalizes data**: Extracts relevant fields from the raw API responses
-4. **Batches and sends**: Collects items and sends them to Python via `window.pywebview.api.push_chunk()`
+1. **拦截 `fetch()` 和 `XMLHttpRequest`**：拦截所有网络请求
+2. **检测视频数据**：查找包含视频列表（`aweme_list`）或视频详情（`aweme_detail`、`aweme_info`）的 JSON 响应
+3. **规范化数据**：从原始 API 响应中提取相关字段
+4. **批量发送**：收集数据项并通过 `window.pywebview.api.push_chunk()` 发送到 Python
 
-### Auto-Scroll
+### 自动滚动
 
-For author profile crawling, a separate scroll script:
+对于作者主页爬取，独立的滚动脚本会：
 
-1. Automatically scrolls to the bottom of the page
-2. Waits for new content to load (throttled to avoid overwhelming the page)
-3. Detects when the page height stops changing (end of list)
-4. Notifies the Python backend when scrolling is complete
+1. 自动滚动到页面底部
+2. 等待新内容加载（节流以避免页面过载）
+3. 检测页面高度停止变化（列表末尾）
+4. 滚动完成时通知 Python 后端
 
-### Incremental Sync
+### 增量同步
 
-When crawling an author you've crawled before:
+当爬取之前已爬取过的作者时：
 
-1. The system queries the database for the latest video by that author
-2. The latest `aweme_id` and `create_time` are passed to the JavaScript context
-3. As items are received, duplicates are detected at the database level
-4. The crawl stops after receiving 3 consecutive batches with no new items
+1. 系统查询数据库中该作者的最新视频
+2. 最新的 `aweme_id` 和 `create_time` 传递给 JavaScript 上下文
+3. 接收数据时在数据库层面检测重复
+4. 连续 3 批数据都没有新项目时停止爬取
 
-## Development
+## 开发指南
 
-### File Structure
+### 文件结构
 
 ```
 ├── app/
 │   ├── __init__.py
-│   ├── main.py          # Entry point
-│   ├── api.py           # Bridge API
-│   ├── db.py            # Database layer
-│   ├── crawler.py       # Crawl state management
-│   ├── inject.js        # JS injection for data capture
-│   ├── scroll.js        # Auto-scroll functionality
+│   ├── main.py          # 入口文件
+│   ├── api.py           # 桥接 API
+│   ├── db.py            # 数据库层
+│   ├── crawler.py       # 爬取状态管理
+│   ├── inject.js        # JS 注入脚本（数据捕获）
+│   ├── scroll.js        # 自动滚动功能
 │   └── ui/
-│       ├── index.html   # UI markup
+│       ├── index.html   # UI 标记
 │       ├── app.js       # UI JavaScript
-│       └── styles.css   # Styling
-├── data/                # Created on first run
-│   ├── douyin.db        # SQLite database
-│   ├── webview_profile/ # Persistent login session
-│   └── *.csv            # CSV exports
-├── pyproject.toml       # Project metadata and dependencies
-├── .ruff.toml           # Ruff linting configuration
+│       └── styles.css   # 样式
+├── scripts/             # 打包脚本
+│   ├── build_win.ps1    # Windows 打包脚本
+│   └── build_mac.sh     # macOS 打包脚本
+├── data/                # 运行时创建
+│   ├── douyin.db        # SQLite 数据库
+│   ├── webview_profile/ # 持久登录会话
+│   └── *.csv            # CSV 导出
+├── .github/
+│   └── workflows/
+│       └── build.yml    # CI/CD 工作流
+├── pyproject.toml       # 项目元数据和依赖
+├── .ruff.toml           # Ruff 代码检查配置
 ├── .gitignore
 └── README.md
 ```
 
-### Adding New Data Fields
+### 添加新数据字段
 
-1. Update the `Video` or `Author` model in `app/db.py`
-2. Update the normalization logic in `app/db.py::_normalize_item()` or `_normalize_author()`
-3. Update the JS normalization in `app/inject.js::normalizeAweme()` if needed
-4. Delete `data/douyin.db` to recreate the database schema
+1. 更新 `app/db.py` 中的 `Video` 或 `Author` 模型
+2. 更新 `app/db.py` 中的 `_normalize_item()` 或 `_normalize_author()` 规范化逻辑
+3. 如有需要，更新 `app/inject.js` 中的 `normalizeAweme()` JS 规范化逻辑
+4. 删除 `data/douyin.db` 以重新创建数据库架构
 
-### Linting and Formatting
+### 代码检查和格式化
 
 ```bash
 uv run ruff check .
 uv run ruff format .
 ```
 
-## Troubleshooting
+### 本地打包
 
-### Windows: WebView2 Runtime Issues
+**Windows（PowerShell）：**
+```powershell
+.\scripts\build_win.ps1
+```
+生成：`dist\DouDouAssistant.exe`
 
-**Symptom:** Application fails to start or shows "WebView2 not found" error.
+**macOS（Bash）：**
+```bash
+chmod +x ./scripts/build_mac.sh
+./scripts/build_mac.sh
+```
+生成：`dist/DouDouAssistant.zip`
 
-**Solution:**
-1. Download and install Microsoft Edge WebView2 Runtime:
+## 故障排除
+
+### Windows：WebView2 运行时问题
+
+**症状：**应用无法启动或显示"WebView2 not found"错误。
+
+**解决方法：**
+1. 下载并安装 Microsoft Edge WebView2 运行时：
    - https://developer.microsoft.com/microsoft-edge/webview2/
-2. Choose the "Evergreen Standalone Installer" for the architecture (x64 or x86)
-3. Restart the application after installation
+2. 选择与系统架构匹配的"Evergreen Standalone Installer"（x64 或 x86）
+3. 安装后重启应用
 
-**Note:** Windows 11 and recent Windows 10 versions include WebView2 by default. If you're on an older Windows 10, you may need to install it manually.
+**注意：**Windows 11 和较新的 Windows 10 版本默认包含 WebView2。旧版 Windows 10 可能需要手动安装。
 
-### macOS: WKWebView Notes
+### macOS：WKWebView 说明
 
-**System Requirements:**
-- macOS 10.10 (Yosemite) or higher
-- No additional dependencies required (WKWebView is built into macOS)
+**系统要求：**
+- macOS 10.10（Yosemite）或更高版本
+- 无需额外依赖（WKWebView 是 macOS 内置组件）
 
-**Common Issues:**
-- **"Cannot open application"**: Allow the application in System Preferences > Security & Privacy
-- **Permission dialogs**: macOS may ask for permissions to access network or storage on first run
+**常见问题：**
+- **"无法打开应用"**：在"系统偏好设置" → "安全性与隐私"中允许应用运行
+- **权限对话框**：macOS 首次运行时可能会请求网络或存储权限
 
-### Linux: WebKit Issues
+### Linux：WebKit 问题
 
-**Missing Dependencies:**
-If the application fails to start, ensure webkit2gtk is installed:
+**缺少依赖：**
+如果应用无法启动，确保已安装 webkit2gtk：
 
 ```bash
 # Ubuntu/Debian
@@ -279,116 +316,144 @@ sudo dnf install webkit2gtk3
 sudo pacman -S webkit2gtk
 ```
 
-### Login Issues
+### 登录问题
 
-**Symptom:** "Login not detected" or session expires quickly.
+**症状：**"未检测到登录"或会话快速过期。
 
-**Solutions:**
-1. Ensure you're completely logged in to Douyin (check for any verification steps)
-2. Click "Open Douyin" and wait for the page to fully load before logging in
-3. After logging in, navigate to your profile page to verify the session is active
-4. Click "Check Login Status" to confirm
-5. If cookies are being blocked, check your system's privacy settings
+**解决方法：**
+1. 确保已完全登录抖音（检查是否有验证步骤）
+2. 点击"打开抖音"并等待页面完全加载后再登录
+3. 登录后，导航到你的个人主页以验证会话是否活跃
+4. 点击"检查登录状态"确认
+5. 如果 Cookie 被阻止，检查系统的隐私设置
 
-**Note:** Sessions are stored in `./data/webview_profile/` and persist between runs.
+**注意：**会话存储在 `./data/webview_profile/` 中，重启后持续有效。
 
-### Data Not Being Captured
+### 未捕获数据
 
-**Symptom:** Crawl runs but no data appears in the database.
+**症状：**爬取运行但数据库中无数据。
 
-**Diagnosis:**
-1. Check the console/terminal output for error messages (logs are verbose and helpful)
-2. Verify you're logged in (some profiles require authentication)
-3. Look for messages like "Captured N items" in the logs
-4. Try the "Test with Mock Data" button to verify the data pipeline is working
+**诊断：**
+1. 检查控制台/终端输出的错误消息（日志详细且有帮助）
+2. 验证已登录（某些主页需要身份验证）
+3. 在日志中查找类似"Captured N items"的消息
+4. 尝试"使用模拟数据测试"按钮验证数据管道是否正常
 
-**Common Causes:**
-- Profile is private or restricted
-- Network connectivity issues (watch for retry messages in logs)
-- Douyin changed their API structure (check for JavaScript errors in logs)
+**常见原因：**
+- 主页是私密或受限制的
+- 网络连接问题（关注日志中的重试消息）
+- 抖音更改了 API 结构（检查日志中的 JavaScript 错误）
 
-### Performance Issues
+### 性能问题
 
-**Symptom:** Application is slow or unresponsive during crawling.
+**症状：**爬取期间应用缓慢或无响应。
 
-**Solutions:**
-1. The auto-scroll has built-in throttling (100ms minimum between scrolls)
-2. Data is batched (250ms delay) to avoid overwhelming the database
-3. Close other applications to free up memory
-4. For very large profiles (1000+ videos), expect the crawl to take 5-10 minutes
+**解决方法：**
+1. 自动滚动内置节流（最小间隔 100ms）
+2. 数据批处理（250ms 延迟）避免数据库过载
+3. 关闭其他应用以释放内存
+4. 对于大型主页（1000+ 视频），预计爬取需要 5-10 分钟
 
-### Database Issues
+### 数据库问题
 
-**"Database is locked":**
-- Close any other applications or database tools accessing `data/douyin.db`
-- The app uses SQLite which only allows one writer at a time
-- If the error persists, check if any Python processes are still running
+**"数据库被锁定"：**
+- 关闭其他正在访问 `data/douyin.db` 的应用或数据库工具
+- 应用使用 SQLite，一次只允许一个写入者
+- 如果错误持续，检查是否有 Python 进程仍在运行
 
-**Corrupt database:**
-- Backup your `data/douyin.db` file
-- Delete the corrupted file and restart the app
-- The app will create a fresh database automatically
+**数据库损坏：**
+- 备份 `data/douyin.db` 文件
+- 删除损坏的文件并重启应用
+- 应用会自动创建新数据库
 
-### Permission Errors
+### 权限错误
 
-**Symptom:** Cannot create `./data/` directory or write to database.
+**症状：**无法创建 `./data/` 目录或写入数据库。
 
-**Solutions:**
-- Ensure you have write permissions in the project directory
-- On Linux/macOS, check with `ls -la` and use `chmod` if needed
-- On Windows, run the application from a folder you own (not Program Files)
+**解决方法：**
+- 确保在项目目录中有写入权限
+- Linux/macOS：用 `ls -la` 检查，必要时使用 `chmod`
+- Windows：从你拥有的文件夹运行应用（不是 Program Files）
 
-### Logging and Debugging
+### 日志和调试
 
-**To see more detailed logs:**
-- All logs are printed to the console/terminal where you ran `uv run python -m app.main`
-- Look for messages prefixed with `[INFO]`, `[WARNING]`, `[ERROR]`
-- JavaScript console messages are piped to Python logs with `[JS Console]` prefix
-- Logs include timestamps and module names for easy tracking
+**查看更详细的日志：**
+- 所有日志输出到运行 `uv run python -m app.main` 的控制台/终端
+- 查找前缀为 `[INFO]`、`[WARNING]`、`[ERROR]` 的消息
+- JavaScript 控制台消息以 `[JS Console]` 前缀传递到 Python 日志
+- 日志包含时间戳和模块名，便于追踪
 
-**Log Levels:**
-- `INFO`: Normal operations (navigation, data received, etc.)
-- `WARNING`: Recoverable issues (retries, missing optional data)
-- `ERROR`: Serious problems (failed requests, database errors)
-- `DEBUG`: Detailed information (scroll positions, batch sizes)
+**日志级别：**
+- `INFO`：正常操作（导航、接收数据等）
+- `WARNING`：可恢复问题（重试、缺少可选数据）
+- `ERROR`：严重问题（请求失败、数据库错误）
+- `DEBUG`：详细信息（滚动位置、批次大小）
 
-### Network/Retry Issues
+### 网络/重试问题
 
-**Symptom:** "Retrying in X seconds" messages in logs.
+**症状：**日志中显示"Retrying in X seconds"消息。
 
-**Explanation:**
-- The application automatically retries failed operations (up to 3 attempts)
-- Exponential backoff is used (0.5s, 1s, 2s delays)
-- This is normal for transient network issues
+**说明：**
+- 应用会自动重试失败的操作（最多 3 次）
+- 使用指数退避（0.5s、1s、2s 延迟）
+- 这对于临时网络问题是正常的
 
-**If retries consistently fail:**
-1. Check your internet connection
-2. Verify you can access douyin.com in a regular browser
-3. Check if a firewall or proxy is blocking connections
-4. Look for specific error messages in the logs
+**如果重试持续失败：**
+1. 检查互联网连接
+2. 验证可以在普通浏览器中访问 douyin.com
+3. 检查防火墙或代理是否阻止连接
+4. 查看日志中的具体错误消息
 
-## Acceptance Criteria
+## 打 Tag 发布新版本
 
-✅ `uv run python -m app.main` launches the GUI
+要发布新版本（如 v0.1.0）：
 
-✅ Users can log in to douyin.com inside the app and the session persists between runs
+1. **在本地创建 Tag：**
+   ```bash
+   git tag v0.1.0
+   git push origin v0.1.0
+   ```
 
-✅ Given an author homepage or unique_id/sec_uid, the app scrolls to the end, intercepts data, and stores 50+ items on first run
+2. **或在 GitHub UI 创建：**
+   - 进入仓库的 "Releases" 页面
+   - 点击 "Create a new release"
+   - 填写 Tag 版本（如 `v0.1.0`）
+   - 填写发布标题和说明
+   - 点击 "Publish release"
 
-✅ Incremental runs add only new items without duplicates
+3. **自动构建：**
+   - Tag 推送后会自动触发 GitHub Actions 工作流
+   - 工作流会构建 Windows 和 macOS 版本
+   - 构建完成后自动创建 GitHub Release
+   - Release 页面会附上可下载的可执行文件和 SHA256 校验文件
 
-✅ Given a single video URL, details and metrics are stored idempotently
+4. **手动下载产物：**
+   - 每次推送到 main 分支也会构建产物
+   - 产物作为 Artifacts 上传到 Actions 运行记录
+   - 可在 Actions 标签页下载测试版本
 
-✅ Data view shows stored videos with filters and pagination; manual refresh updates the table
+## 验收标准
 
-✅ Export produces a CSV matching the current table rows (UTF-8 with headers)
+✅ `uv run python -m app.main` 启动 GUI
 
-✅ No Playwright dependency; only pywebview + minimal libs
+✅ 用户可在应用内登录 douyin.com，会话在重启后持续有效
 
-## License
+✅ 给定作者主页或 unique_id/sec_uid，应用滚动到末尾、拦截数据，首次运行存储 50+ 条目
 
-This project is for educational and research purposes only.
+✅ 增量运行只添加新条目，无重复
 
-## Disclaimer
+✅ 给定单个视频 URL，详情和统计数据幂等存储
 
-Please respect Douyin's Terms of Service and robots.txt. This tool is intended for personal use and data analysis only. Do not use it to scrape data in violation of applicable laws or regulations.
+✅ 数据视图显示已存储视频，支持筛选和分页；手动刷新更新表格
+
+✅ 导出生成与当前表格行匹配的 CSV（UTF-8 带标题）
+
+✅ 无 Playwright 依赖；仅 pywebview + 最小库
+
+## 许可证
+
+本项目仅用于教育和研究目的。
+
+## 免责声明
+
+请尊重抖音的服务条款和 robots.txt。本工具仅供个人使用和数据分析。请勿违反适用法律法规使用本工具爬取数据。
