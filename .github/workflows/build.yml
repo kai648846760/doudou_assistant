@@ -15,23 +15,75 @@ permissions:
   contents: write
 
 jobs:
-  build:
-    # 通过矩阵在 Windows 和 macOS 上构建发行包
-    name: 构建 ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
-        python-version: ['3.11']
+  check_paths:
+    # 预检查：确保仓库中没有 Windows 非法路径
+    name: 检查 Windows 路径合法性
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 运行 Windows 路径检查
+        run: |
+          chmod +x ./scripts/check_windows_paths.sh
+          ./scripts/check_windows_paths.sh
 
+  build_macos:
+    # macOS 构建任务（独立）
+    name: 构建 macOS
+    runs-on: macos-latest
+    needs: check_paths
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      - name: 安装 Python ${{ matrix.python-version }}
+      - name: 安装 Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.11'
+
+      - name: 安装 uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: 同步依赖
+        run: uv sync
+
+      - name: 安装 PyInstaller
+        run: uv pip install pyinstaller
+
+      - name: 构建 macOS 应用
+        shell: bash
+        run: |
+          chmod +x ./scripts/build_mac.sh
+          ./scripts/build_mac.sh
+
+      - name: 生成 macOS SHA256 校验文件
+        shell: bash
+        run: |
+          cd dist
+          shasum -a 256 DouDouAssistant-macOS.zip > DouDouAssistant-macOS.zip.sha256
+
+      - name: 上传 macOS 构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: DouDouAssistant-macOS
+          path: |
+            dist/DouDouAssistant-macOS.zip
+            dist/DouDouAssistant-macOS.zip.sha256
+
+  build_windows:
+    # Windows 构建任务（独立，依赖路径检查）
+    name: 构建 Windows
+    runs-on: windows-latest
+    needs: check_paths
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
 
       - name: 安装 uv
         uses: astral-sh/setup-uv@v3
@@ -43,34 +95,17 @@ jobs:
         run: uv pip install pyinstaller
 
       - name: 构建 Windows 可执行文件
-        if: runner.os == 'Windows'
         shell: pwsh
         run: |
           .\scripts\build_win.ps1
 
-      - name: 构建 macOS 应用
-        if: runner.os == 'macOS'
-        shell: bash
-        run: |
-          chmod +x ./scripts/build_mac.sh
-          ./scripts/build_mac.sh
-
       - name: 生成 Windows SHA256 校验文件
-        if: runner.os == 'Windows'
         shell: pwsh
         run: |
           $hash = Get-FileHash -Path dist\DouDouAssistant.exe -Algorithm SHA256
           "$($hash.Hash)  DouDouAssistant.exe" | Out-File -FilePath dist\DouDouAssistant.exe.sha256 -Encoding ASCII
 
-      - name: 生成 macOS SHA256 校验文件
-        if: runner.os == 'macOS'
-        shell: bash
-        run: |
-          cd dist
-          shasum -a 256 DouDouAssistant-macOS.zip > DouDouAssistant-macOS.zip.sha256
-
       - name: 上传 Windows 构建产物
-        if: runner.os == 'Windows'
         uses: actions/upload-artifact@v4
         with:
           name: DouDouAssistant-Windows
@@ -78,36 +113,50 @@ jobs:
             dist/DouDouAssistant.exe
             dist/DouDouAssistant.exe.sha256
 
-      - name: 上传 macOS 构建产物
-        if: runner.os == 'macOS'
-        uses: actions/upload-artifact@v4
-        with:
-          name: DouDouAssistant-macOS
-          path: |
-            dist/DouDouAssistant-macOS.zip
-            dist/DouDouAssistant-macOS.zip.sha256
-
   release:
     # 仅在 Tag 触发时执行，将构建产物上传到 GitHub Release
+    # 临时策略：仅依赖 macOS 构建成功即可发布（Windows 修复中）
     name: 发布 Release
-    needs: build
+    needs: build_macos
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
 
     steps:
-      - name: 下载构建产物
+      - name: 下载 macOS 构建产物
         uses: actions/download-artifact@v4
         with:
-          path: artifacts
+          name: DouDouAssistant-macOS
+          path: artifacts/DouDouAssistant-macOS
+
+      - name: 尝试下载 Windows 构建产物（可选）
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: DouDouAssistant-Windows
+          path: artifacts/DouDouAssistant-Windows
 
       - name: 创建 GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            artifacts/DouDouAssistant-Windows/DouDouAssistant.exe
-            artifacts/DouDouAssistant-Windows/DouDouAssistant.exe.sha256
             artifacts/DouDouAssistant-macOS/DouDouAssistant-macOS.zip
             artifacts/DouDouAssistant-macOS/DouDouAssistant-macOS.zip.sha256
+            artifacts/DouDouAssistant-Windows/DouDouAssistant.exe
+            artifacts/DouDouAssistant-Windows/DouDouAssistant.exe.sha256
           draft: false
           prerelease: false
           generate_release_notes: true
+          body: |
+            ## 🚀 发布说明
+            
+            **当前状态**: 此版本包含 macOS 构建产物。Windows 构建正在修复中。
+            
+            ### macOS 用户
+            - 下载 `DouDouAssistant-macOS.zip`
+            - 解压后运行 `DouDouAssistant.app`
+            
+            ### Windows 用户
+            - Windows 版本正在修复中，敬请期待下一个版本
+            
+            ℹ️ 所有产物均附带 SHA256 校验文件
+          fail_on_unmatched_files: false

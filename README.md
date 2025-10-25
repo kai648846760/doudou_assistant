@@ -437,6 +437,94 @@ sudo pacman -S webkit2gtk
 3. 检查防火墙或代理是否阻止连接
 4. 查看日志中的具体错误消息
 
+## Windows 文件名限制与避免方法
+
+### 为什么有这些限制？
+
+Windows 文件系统对文件名和路径有特殊限制，这些限制源于历史原因和系统保留用途。违反这些限制会导致：
+- Git 仓库在 Windows 上无法 checkout
+- GitHub Actions Windows runner 构建失败
+- 文件无法在 Windows 系统上创建或访问
+
+### Windows 文件名禁止规则
+
+**1. 禁止的字符**
+以下字符不能出现在文件名或目录名中：
+```
+< > : " / \ | ? *
+```
+
+**示例违规**：
+- ❌ `log: error.txt`（包含冒号）
+- ❌ `file?.py`（包含问号）
+- ❌ `output|pipe.log`（包含管道符）
+- ✅ `log_error.txt`（使用下划线）
+- ✅ `file.py`（移除问号）
+
+**2. 禁止以空格或点结尾**
+文件名和目录名不能以空格或点结尾：
+```
+❌ "file .txt"（尾随空格）
+❌ "folder."（尾随点）
+✅ "file.txt"（正常）
+✅ "folder"（正常）
+```
+
+**3. 保留名称**
+以下名称为 Windows 系统保留，不能用作文件名或目录名（不区分大小写，无论是否有扩展名）：
+```
+CON, PRN, AUX, NUL
+COM1, COM2, COM3, COM4, COM5, COM6, COM7, COM8, COM9
+LPT1, LPT2, LPT3, LPT4, LPT5, LPT6, LPT7, LPT8, LPT9
+```
+
+**示例违规**：
+- ❌ `CON.txt`（保留名）
+- ❌ `aux.log`（保留名，不区分大小写）
+- ❌ `COM1`（保留名）
+- ✅ `console.txt`（不是保留名）
+- ✅ `auxiliary.log`（不是保留名）
+
+### 如何避免违规
+
+**开发时**：
+1. 使用下划线 `_` 或连字符 `-` 代替特殊字符
+2. 避免使用保留名称，即使在子目录中也要避免
+3. 确保文件名不以空格或点结尾
+
+**提交前检查**：
+运行路径检查脚本：
+```bash
+# 在 Linux/macOS 上
+./scripts/check_windows_paths.sh
+
+# 在 Windows PowerShell 上
+.\scripts\check_windows_paths.ps1
+```
+
+脚本会扫描仓库中所有 Git 追踪的文件，输出违规文件清单。
+
+**CI/CD 保护**：
+本仓库的 GitHub Actions 工作流在 Windows 构建前会自动运行路径检查，确保：
+1. 发现违规文件时给出明确的中文错误提示
+2. 阻止 Windows runner 在 checkout 阶段失败
+3. 提供违规文件的完整列表，便于修复
+
+### 常见问题
+
+**Q: 为什么 Linux/macOS 上可以创建这些文件，但 Windows 不行？**  
+A: Linux 和 macOS 的文件系统（如 ext4、APFS）允许更多字符，而 Windows 的 NTFS/FAT32 有历史遗留的限制。跨平台项目需要遵守最严格的规则。
+
+**Q: 如果已经提交了违规文件怎么办？**  
+A: 使用 `git rm` 删除违规文件，或用 `git mv` 重命名为合法名称，然后重新提交：
+```bash
+git rm "plitlines(), 1):"
+git commit -m "删除 Windows 非法文件名"
+```
+
+**Q: 我可以在 .gitignore 中忽略这些文件吗？**  
+A: 可以，但最好的做法是避免创建这些文件。如果是临时文件或工具生成的文件，应该加入 `.gitignore`。
+
 ## 验收标准
 
 ✅ `uv run python -m app.main` 启动 GUI
@@ -454,6 +542,10 @@ sudo pacman -S webkit2gtk
 ✅ 导出生成与当前表格行匹配的 CSV（UTF-8 带标题）
 
 ✅ 无 Playwright 依赖；仅 pywebview + 最小库
+
+✅ 路径检查脚本能正确识别 Windows 非法路径并在 CI 中阻止构建
+
+✅ macOS 构建可独立完成并发布 Release
 
 ## 许可证
 
