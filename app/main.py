@@ -115,22 +115,24 @@ def setup_console_logging(window) -> None:
 
 
 def main() -> None:
-    logger.info("Starting DouDou Assistant")
+    system = platform.system()
+    logger.info(f"启动豆豆助手 - 平台: {system} {platform.release()}")
 
     if not check_webview_runtime():
         show_webview2_error()
         sys.exit(1)
 
-    data_dir = pathlib.Path("./data")
+    # 使用用户家目录下的统一数据目录
+    data_dir = pathlib.Path.home() / ".doudou_assistant"
     data_dir.mkdir(parents=True, exist_ok=True)
-    logger.info(f"Data directory: {data_dir.resolve()}")
+    logger.info(f"数据目录: {data_dir.resolve()}")
 
     profile_dir = data_dir / "webview_profile"
     profile_dir.mkdir(parents=True, exist_ok=True)
-    logger.info(f"Profile directory: {profile_dir.resolve()}")
+    logger.info(f"WebView 配置目录: {profile_dir.resolve()}")
 
     db_path = data_dir / "douyin.db"
-    logger.info(f"Database path: {db_path.resolve()}")
+    logger.info(f"数据库路径: {db_path.resolve()}")
 
     api = BridgeAPI(db_path)
 
@@ -147,30 +149,37 @@ def main() -> None:
 
     combined_js = inject_js + "\n\n" + scroll_js
 
-    logger.info("Creating UI window")
+    logger.info("创建 UI 窗口")
     ui_window = webview.create_window(
         "DouDou Assistant",
         url=get_resource_path("app/ui/index.html").resolve().as_uri(),
         js_api=api,
-        storage_path=str(profile_dir.resolve()),
     )
     setup_console_logging(ui_window)
 
-    logger.info("Creating crawler window")
+    logger.info("创建爬虫窗口")
     crawler_window = webview.create_window(
         "Douyin Session",
         url="about:blank",
         js_api=api,
         hidden=True,
-        storage_path=str(profile_dir.resolve()),
     )
     setup_console_logging(crawler_window)
 
     api.bind_windows(ui_window, crawler_window, combined_js)
 
-    logger.info("Starting webview application")
-    webview.start()
-    logger.info("Application stopped")
+    # 分平台启动 webview
+    if system == "Windows":
+        logger.info(f"启动 WebView (EdgeChromium) - 用户数据路径: {profile_dir.resolve()}")
+        webview.start(gui="edgechromium", http_server=True, user_data_path=str(profile_dir))
+    elif system == "Darwin":
+        logger.info("启动 WebView (Cocoa/WKWebView) - macOS 不支持自定义存储路径")
+        webview.start(gui="cocoa", http_server=True)
+    else:
+        logger.info("启动 WebView (默认)")
+        webview.start(http_server=True)
+    
+    logger.info("应用程序已停止")
 
 
 if __name__ == "__main__":

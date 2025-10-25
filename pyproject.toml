@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "A pywebview-based Douyin data crawler application"
 requires-python = ">=3.11"
 dependencies = [
-    "pywebview>=5.0",
+    "pywebview>=4.5.1",
     "sqlmodel>=0.0.14",
     "sqlalchemy>=2.0",
     "pydantic>=2.0",

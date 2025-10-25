@@ -14,7 +14,9 @@
 - **Windows**：Microsoft Edge WebView2 运行时（Windows 10/11 通常已预装）
   - 如果缺失，应用会显示下载链接提示
   - 下载地址：https://developer.microsoft.com/microsoft-edge/webview2/
+  - 支持自定义存储路径（user_data_path），登录会话可持久化
 - **macOS**：macOS 10.10 或更高版本（使用内置 WKWebView，无需额外依赖）
+  - **注意**：WKWebView 不支持自定义存储路径，登录状态由系统管理
 - **Linux**：webkit2gtk 包（大多数发行版已预装）
 
 ### 安装
@@ -35,9 +37,11 @@ uv run python -m app.main
 ```
 
 应用程序会：
-- 创建 `./data/` 目录存储数据库和会话数据
+- 创建 `~/.doudou_assistant/` 目录存储数据库和会话数据
 - 启动豆豆助手 GUI 界面
-- 初始化 SQLite 数据库（`./data/douyin.db`）
+- 初始化 SQLite 数据库（`~/.doudou_assistant/douyin.db`）
+- Windows：WebView2 会话数据存储在 `~/.doudou_assistant/webview_profile/`
+- macOS：会话数据由 WKWebView 系统管理
 
 ### 首次使用设置
 
@@ -60,7 +64,7 @@ uv run python -m app.main
 1. 进入 **"数据"** 标签页
 2. 可选：应用筛选条件
 3. 点击 **"导出到 CSV"**
-4. CSV 文件会保存到 `./data/douyin_export_YYYYMMDD_HHMMSS.csv`
+4. CSV 文件会保存到 `~/.doudou_assistant/douyin_export_YYYYMMDD_HHMMSS.csv`
 
 ## 下载已打包版本
 
@@ -72,15 +76,17 @@ uv run python -m app.main
 **Windows 注意事项：**
 - 首次运行需要安装 WebView2 运行时（如果尚未安装）
 - 下载地址：https://developer.microsoft.com/microsoft-edge/webview2/
+- 登录会话数据存储在用户目录，支持持久化
 
 **macOS 注意事项：**
 - 首次运行可能提示"无法打开，因为来自身份不明的开发者"
 - 解决方法：右键点击应用 → 选择"打开" → 点击"打开"确认
 - 或在"系统偏好设置" → "安全性与隐私"中允许运行
+- **重要**：macOS 使用 WKWebView，不支持自定义存储路径，登录状态由系统管理
 
 ## 功能特性
 
-- **🔐 持久登录**：登录一次，会话在重启后仍然有效
+- **🔐 持久登录**：登录一次，会话在重启后仍然有效（Windows 完全支持，macOS 由系统管理）
 - **👤 作者主页爬取**：自动滚动并采集作者的所有视频
 - **🎬 单视频爬取**：提取单个视频的详细信息和统计数据
 - **📊 数据管理**：查看、筛选和分页浏览采集的数据
@@ -148,7 +154,7 @@ uv run python -m app.main
 
 ### 导出数据
 
-CSV 导出文件保存在 `./data/`，格式为：`douyin_export_YYYYMMDD_HHMMSS.csv`
+CSV 导出文件保存在 `~/.doudou_assistant/`，格式为：`douyin_export_YYYYMMDD_HHMMSS.csv`
 
 CSV 包含：
 - 视频 ID（Aweme ID）
@@ -234,9 +240,9 @@ CSV 包含：
 ├── scripts/             # 打包脚本
 │   ├── build_win.ps1    # Windows 打包脚本
 │   └── build_mac.sh     # macOS 打包脚本
-├── data/                # 运行时创建
+├── ~/.doudou_assistant/ # 运行时创建（用户家目录）
 │   ├── douyin.db        # SQLite 数据库
-│   ├── webview_profile/ # 持久登录会话
+│   ├── webview_profile/ # 持久登录会话（仅 Windows）
 │   └── *.csv            # CSV 导出
 ├── .github/
 │   └── workflows/
@@ -296,9 +302,16 @@ chmod +x ./scripts/build_mac.sh
 - macOS 10.10（Yosemite）或更高版本
 - 无需额外依赖（WKWebView 是 macOS 内置组件）
 
+**存储和会话管理：**
+- **重要**：WKWebView 不支持自定义存储路径（user_data_path）
+- 登录会话和 Cookie 由 macOS 系统的 WKWebView 管理
+- 会话数据存储在系统默认位置，应用重启后通常会保持
+- 如需清除登录状态，可在 Safari 设置中清除网站数据
+
 **常见问题：**
 - **"无法打开应用"**：在"系统偏好设置" → "安全性与隐私"中允许应用运行
 - **权限对话框**：macOS 首次运行时可能会请求网络或存储权限
+- **登录状态不持久**：这是 WKWebView 的限制，可能需要定期重新登录
 
 ### Linux：WebKit 问题
 
@@ -327,7 +340,9 @@ sudo pacman -S webkit2gtk
 4. 点击"检查登录状态"确认
 5. 如果 Cookie 被阻止，检查系统的隐私设置
 
-**注意：**会话存储在 `./data/webview_profile/` 中，重启后持续有效。
+**注意：**
+- Windows：会话存储在 `~/.doudou_assistant/webview_profile/` 中，重启后持续有效
+- macOS：会话由 WKWebView 系统管理，通常会持续但不保证
 
 ### 未捕获数据
 
@@ -357,23 +372,24 @@ sudo pacman -S webkit2gtk
 ### 数据库问题
 
 **"数据库被锁定"：**
-- 关闭其他正在访问 `data/douyin.db` 的应用或数据库工具
+- 关闭其他正在访问 `~/.doudou_assistant/douyin.db` 的应用或数据库工具
 - 应用使用 SQLite，一次只允许一个写入者
 - 如果错误持续，检查是否有 Python 进程仍在运行
 
 **数据库损坏：**
-- 备份 `data/douyin.db` 文件
+- 备份 `~/.doudou_assistant/douyin.db` 文件
 - 删除损坏的文件并重启应用
 - 应用会自动创建新数据库
 
 ### 权限错误
 
-**症状：**无法创建 `./data/` 目录或写入数据库。
+**症状：**无法创建 `~/.doudou_assistant/` 目录或写入数据库。
 
 **解决方法：**
-- 确保在项目目录中有写入权限
-- Linux/macOS：用 `ls -la` 检查，必要时使用 `chmod`
-- Windows：从你拥有的文件夹运行应用（不是 Program Files）
+- 数据目录现在位于用户家目录（`~/.doudou_assistant`），通常有完全权限
+- Linux/macOS：检查家目录权限 `ls -la ~`
+- Windows：确保用户配置文件目录可写
+- 如有必要，手动创建目录：`mkdir -p ~/.doudou_assistant`
 
 ### 日志和调试
 
