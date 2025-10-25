@@ -371,3 +371,168 @@ footer p {
     color: #6c757d;
     font-size: 0.9rem;
 }
+
+/* Login Status Card */
+.login-status-card {
+    margin: 1.5rem 0;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.status-dot.checking {
+    background-color: #ffc107;
+}
+
+.status-dot.logged-in {
+    background-color: #28a745;
+}
+
+.status-dot.logged-out {
+    background-color: #dc3545;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.status-text {
+    color: #333;
+}
+
+.status-details {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid #dee2e6;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+/* Crawl Status Section */
+.crawl-status-section {
+    margin-top: 2rem;
+}
+
+.status-card {
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.status-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.status-value {
+    font-weight: 600;
+    color: #28a745;
+    padding: 0.25rem 0.75rem;
+    background-color: rgba(40, 167, 69, 0.1);
+    border-radius: 4px;
+}
+
+.status-value.running {
+    color: #0066cc;
+    background-color: rgba(0, 102, 204, 0.1);
+}
+
+.status-value.error {
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.status-value.stopped {
+    color: #6c757d;
+    background-color: rgba(108, 117, 125, 0.1);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.stat-item {
+    padding: 0.75rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.error-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #fff5f5;
+    border-left: 4px solid #dc3545;
+    border-radius: 4px;
+    color: #721c24;
+}
+
+.error-message strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.progress-bar-container {
+    margin-top: 1rem;
+    height: 8px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(135deg, #fe2c55 0%, #ff6b6b 100%);
+    transition: width 0.3s ease;
+}
