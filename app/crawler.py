@@ -46,7 +46,7 @@ class CrawlState:
             self.target = target
             self.context = context or {}
             self.status = "running"
-            self.status_message = "Crawl started"
+            self.status_message = "采集已启动"
             self.started_at = dt.datetime.utcnow()
             self.items_received = 0
             self.items_inserted = 0
