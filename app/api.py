@@ -33,13 +33,13 @@ def retry_with_backoff(
             last_exception = exc
             if attempt < max_retries - 1:
                 logger.warning(
-                    f"Attempt {attempt + 1}/{max_retries} failed: {exc}. "
-                    f"Retrying in {delay:.1f}s..."
+                    f"第 {attempt + 1}/{max_retries} 次尝试失败: {exc}。"
+                    f"将在 {delay:.1f} 秒后重试..."
                 )
                 time.sleep(delay)
                 delay *= backoff_factor
             else:
-                logger.error(f"All {max_retries} attempts failed: {exc}")
+                logger.error(f"{max_retries} 次尝试均失败: {exc}")
 
     raise last_exception
 
@@ -57,7 +57,7 @@ class BridgeAPI:
         self._pending_action: dict[str, Any] | None = None
         self._duplicate_batches = 0
         self._video_complete_timer: Timer | None = None
-        logger.info("Bridge API initialised")
+        logger.info("桥接 API 已初始化")
 
     # ---------------------------------------------------------------------
     # Window binding and helpers
@@ -75,7 +75,7 @@ class BridgeAPI:
                 try:
                     crawler_window.evaluate_js(self.inject_js)
                 except Exception:  # pragma: no cover - pywebview runtime
-                    logger.exception("Failed to inject JavaScript into crawler window")
+                    logger.exception("向爬虫窗口注入脚本失败")
             self._apply_pending_action()
 
         ui_window.events.loaded += on_ui_loaded
@@ -93,7 +93,7 @@ class BridgeAPI:
             )
             self.ui_window.evaluate_js(js_code)
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.debug("UI window not ready for progress update")
+            logger.debug("UI 窗口尚未就绪，无法更新进度")
 
     def _apply_pending_action(self) -> None:
         if not self.crawler_window or not self._pending_action:
@@ -123,7 +123,7 @@ class BridgeAPI:
         try:
             self.crawler_window.evaluate_js(script)
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.exception("Failed to apply pending crawler action")
+            logger.exception("执行预期的爬虫动作失败")
 
     def _load_crawler_url(self, url: str) -> None:
         if not self.crawler_window:
@@ -132,10 +132,10 @@ class BridgeAPI:
         try:
             self.crawler_window.show()
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.debug("Unable to show crawler window")
+            logger.debug("无法显示爬虫窗口")
 
-        self.state.set_status("navigating", f"Opening {url}")
-        logger.info(f"Loading URL: {url}")
+        self.state.set_status("navigating", f"正在打开 {url}")
+        logger.info(f"加载页面: {url}")
 
         def load_with_retry():
             self.crawler_window.load_url(url)
@@ -144,24 +144,24 @@ class BridgeAPI:
             retry_with_backoff(
                 load_with_retry, max_retries=3, initial_delay=0.5, backoff_factor=2.0
             )
-            logger.info(f"Successfully loaded URL: {url}")
+            logger.info(f"页面加载成功: {url}")
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.exception("Failed to load URL in crawler window after retries")
-            self.state.set_error(f"Failed to load {url}")
+            logger.exception("多次重试后仍无法加载爬虫窗口 URL")
+            self.state.set_error(f"加载页面失败：{url}")
 
     def _stop_js_runtime(self) -> None:
         if not self.crawler_window:
             return
-        logger.info("Stopping JavaScript runtime")
+        logger.info("停止注入脚本运行")
         try:
             self.crawler_window.evaluate_js(
                 "window.__douyinScroller && window.__douyinScroller.stop && window.__douyinScroller.stop();"
             )
-            logger.debug("JavaScript scroller stopped successfully")
+            logger.debug("滚动脚本已停止")
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.warning("Failed to stop scroller runtime", exc_info=True)
+            logger.warning("停止滚动脚本失败", exc_info=True)
 
-    def _complete_crawl(self, message: str = "Crawl complete") -> None:
+    def _complete_crawl(self, message: str = "采集完成") -> None:
         self._stop_js_runtime()
         self._cancel_video_timer()
         self.state.complete(message)
@@ -169,7 +169,7 @@ class BridgeAPI:
             if self.crawler_window:
                 self.crawler_window.hide()
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.debug("Unable to hide crawler window")
+            logger.debug("无法隐藏爬虫窗口")
         self._emit_progress()
 
     def _cancel_video_timer(self) -> None:
@@ -184,8 +184,8 @@ class BridgeAPI:
 
         def complete_video_crawl():
             if self.state.active and self.state.mode == "video":
-                logger.info("Auto-completing video crawl after successful capture")
-                self._complete_crawl("Video captured successfully")
+                logger.info("捕获到视频数据，自动完成采集")
+                self._complete_crawl("视频数据采集完成")
 
         self._video_complete_timer = Timer(delay, complete_video_crawl)
         self._video_complete_timer.start()
@@ -195,7 +195,7 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     def login_state(self) -> dict[str, Any]:
         if not self.crawler_window:
-            return {"logged_in": False, "message": "Crawler window not ready"}
+            return {"logged_in": False, "message": "登录窗口尚未就绪"}
 
         try:
             current_url = self.crawler_window.get_current_url() or ""
@@ -230,8 +230,8 @@ class BridgeAPI:
         try:
             result = self.crawler_window.evaluate_js(script)
         except Exception as exc:  # pragma: no cover - pywebview runtime
-            logger.exception("Failed to evaluate login script")
-            return {"logged_in": False, "message": f"Login check failed: {exc}"}
+            logger.exception("执行登录状态脚本失败")
+            return {"logged_in": False, "message": f"检查登录状态失败：{exc}"}
 
         if isinstance(result, str):
             try:
@@ -243,9 +243,9 @@ class BridgeAPI:
 
         logged_in = bool(data.get("logged_in"))
         message = (
-            "Logged in to Douyin"
+            "已登录抖音"
             if logged_in
-            else "Not logged in – open the Douyin window and sign in."
+            else "未检测到登录，请点击“登录抖音”按钮完成登录。"
         )
         return {"logged_in": logged_in, "message": message, "details": data}
 
@@ -254,13 +254,13 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     def start_crawl_author(self, author_input: str) -> dict[str, Any]:
         if self.state.active:
-            return {"success": False, "error": "Another crawl is already running"}
+            return {"success": False, "error": "当前已有采集任务在运行，请稍候再试"}
 
         resolved = self._resolve_author_input(author_input)
         url = resolved.get("url")
         identifier = resolved.get("identifier")
         if not url:
-            return {"success": False, "error": "Could not resolve author input"}
+            return {"success": False, "error": "无法识别作者链接或 ID，请检查后重试"}
 
         author_record = None
         if identifier:
@@ -287,18 +287,18 @@ class BridgeAPI:
 
         return {
             "success": True,
-            "message": "Navigating to author profile",
+            "message": "正在打开作者主页...",
             "target": url,
             "context": context,
         }
 
     def start_crawl_video(self, url: str) -> dict[str, Any]:
         if self.state.active:
-            return {"success": False, "error": "Another crawl is already running"}
+            return {"success": False, "error": "当前已有采集任务在运行，请稍候再试"}
 
         cleaned_url = url.strip()
         if not cleaned_url:
-            return {"success": False, "error": "Video URL is required"}
+            return {"success": False, "error": "请输入视频链接"}
 
         if not cleaned_url.startswith("http"):
             cleaned_url = f"https://www.douyin.com/video/{cleaned_url}"
@@ -314,7 +314,7 @@ class BridgeAPI:
 
         return {
             "success": True,
-            "message": "Navigating to video",
+            "message": "正在打开视频页面...",
             "target": cleaned_url,
         }
 
@@ -349,9 +349,9 @@ class BridgeAPI:
     def push_chunk(self, items: list[dict[str, Any]]) -> dict[str, Any]:
         if not isinstance(items, list) or not items:
             logger.debug("Received empty or invalid items list")
-            return {"success": False, "error": "Items must be a non-empty list"}
+            return {"success": False, "error": "数据格式错误：需要包含内容的列表"}
 
-        logger.info(f"Received chunk of {len(items)} items")
+        logger.info(f"收到 {len(items)} 条数据")
 
         def process_chunk():
             self.state.increment_received(len(items))
@@ -366,8 +366,8 @@ class BridgeAPI:
             updated = result.get("updated", 0)
             self.state.update_counts(inserted, updated)
             logger.info(
-                f"Processed chunk: {inserted} inserted, {updated} updated, "
-                f"totals: {self.state.items_inserted} inserted, {self.state.items_updated} updated"
+                f"批量处理完成：新增 {inserted} 条，更新 {updated} 条；"
+                f"累计新增 {self.state.items_inserted} 条，累计更新 {self.state.items_updated} 条"
             )
 
             if self.state.mode == "author":
@@ -377,24 +377,24 @@ class BridgeAPI:
                     self._duplicate_batches = 0
 
                 if self._duplicate_batches >= 3:
-                    logger.info("Duplicate batches threshold reached; completing crawl")
-                    self._complete_crawl("Reached existing items")
+                    logger.info("连续收到重复数据，结束采集")
+                    self._complete_crawl("检测到重复数据，采集已结束")
                 else:
                     self.state.set_status(
                         "running",
-                        f"Inserted {inserted} new videos, {updated} refreshed",
+                        f"新增 {inserted} 条视频，更新 {updated} 条",
                     )
             elif self.state.mode == "video":
                 self.state.set_status(
-                    "running", f"Captured {inserted} new videos, {updated} refreshed"
+                    "running", f"已接收 {inserted} 个新视频，更新 {updated} 个"
                 )
                 # Auto-complete video crawl after capturing data
                 if inserted > 0 or updated > 0:
-                    logger.info("Video data captured, scheduling completion")
+                    logger.info("已获取视频数据，即将自动结束采集")
                     self._schedule_video_completion(delay=2.0)
             else:
                 self.state.set_status(
-                    "running", f"Captured {inserted} new videos, {updated} refreshed"
+                    "running", f"已接收 {inserted} 个新视频，更新 {updated} 个"
                 )
 
             self._emit_progress()
@@ -407,7 +407,7 @@ class BridgeAPI:
                 "total_updated": self.state.items_updated,
             }
         except Exception as exc:  # pragma: no cover - runtime side effects
-            logger.exception("Error processing chunk after retries")
+            logger.exception("多次重试处理数据仍失败")
             self.state.set_error(str(exc))
             self._emit_progress()
             return {"success": False, "error": str(exc)}
@@ -446,38 +446,38 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     def stop_crawl(self) -> dict[str, Any]:
         if not self.state.active:
-            logger.warning("Stop crawl requested but no active crawl")
-            return {"success": False, "error": "No active crawl"}
+            logger.warning("收到停止请求，但当前没有正在运行的采集任务")
+            return {"success": False, "error": "当前没有正在运行的采集任务"}
 
-        logger.info("Stopping crawl (user request)")
+        logger.info("用户请求停止采集")
         self._stop_event.set()
         self._stop_js_runtime()
         self._cancel_video_timer()
-        self.state.stop(message="Stopped by user")
+        self.state.stop(message="用户手动停止")
         try:
             if self.crawler_window:
                 self.crawler_window.hide()
-                logger.debug("Crawler window hidden")
+                logger.debug("已隐藏爬虫窗口")
         except Exception:  # pragma: no cover - pywebview runtime
-            logger.warning("Unable to hide crawler window", exc_info=True)
+            logger.warning("无法隐藏爬虫窗口", exc_info=True)
         self._emit_progress()
-        logger.info("Crawl stopped successfully")
-        return {"success": True, "message": "Crawl stopped"}
+        logger.info("采集已停止")
+        return {"success": True, "message": "采集已停止"}
 
     def on_scroll_complete(self) -> dict[str, Any]:
-        logger.info("Scroll reported as complete from JS bridge")
+        logger.info("前端通知：滚动已完成")
         if self.state.active:
-            self._complete_crawl("Reached end of list")
+            self._complete_crawl("已到达列表尾部")
         return {"success": True}
 
     def open_login(self) -> dict[str, Any]:
         self._pending_action = None
         try:
             self._load_crawler_url("https://www.douyin.com/")
-            return {"success": True, "message": "Douyin login window opened"}
+            return {"success": True, "message": "抖音页面已打开，请在弹窗中登录"}
         except Exception as exc:  # pragma: no cover - pywebview runtime
-            logger.exception("Failed to open Douyin login window")
-            return {"success": False, "error": str(exc)}
+            logger.exception("打开抖音登录窗口失败")
+            return {"success": False, "error": f"打开抖音失败：{exc}"}
 
     def open_login_window(self) -> dict[str, Any]:
         """创建独立登录窗口，检测登录状态，成功后自动关闭"""
@@ -579,6 +579,13 @@ class BridgeAPI:
                     attempt += 1
                 
                 logger.info("登录检测超时或用户关闭了窗口")
+                if self.ui_window:
+                    try:
+                        self.ui_window.evaluate_js(
+                            "window.dispatchEvent(new CustomEvent('login-timeout'));"
+                        )
+                    except Exception:
+                        pass
             
             # 在后台线程中检测登录状态
             thread = threading.Thread(target=check_login_status, daemon=True)
@@ -588,7 +595,7 @@ class BridgeAPI:
             
         except Exception as exc:  # pragma: no cover - pywebview runtime
             logger.exception("创建登录窗口失败")
-            return {"success": False, "error": str(exc)}
+            return {"success": False, "error": f"创建登录窗口失败：{exc}"}
 
     # ---------------------------------------------------------------------
     # Utilities
@@ -598,5 +605,5 @@ class BridgeAPI:
             try:
                 self.crawler_window.evaluate_js("window.__awemeBridge?.mockPush();")
             except Exception:  # pragma: no cover - pywebview runtime
-                logger.debug("Failed to trigger mock push")
+                logger.debug("触发模拟数据推送失败")
         return {"success": True}

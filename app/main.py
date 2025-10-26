@@ -32,35 +32,35 @@ def get_resource_path(relative_path: str) -> pathlib.Path:
 def check_webview_runtime() -> bool:
     """检查当前平台是否有所需的 WebView 运行时。"""
     system = platform.system()
-    logger.info(f"Running on {system} {platform.release()}")
+    logger.info(f"运行环境: {system} {platform.release()}")
 
     if system == "Windows":
         try:
             import winreg
         except ImportError:
-            logger.warning("Cannot check WebView2 status: winreg not available")
+            logger.warning("无法检测 WebView2：缺少 winreg 模块")
             return True
 
         try:
             key_path = r"SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}"
             with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path):
-                logger.info("WebView2 runtime detected")
+                logger.info("检测到已安装 WebView2 运行时")
                 return True
         except FileNotFoundError:
             try:
                 key_path = r"SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}"
                 with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, key_path):
-                    logger.info("WebView2 runtime detected")
+                    logger.info("检测到已安装 WebView2 运行时")
                     return True
             except FileNotFoundError:
-                logger.error("WebView2 runtime not found")
+                logger.error("未检测到 WebView2 运行时")
                 return False
     elif system == "Darwin":
-        logger.info("Using macOS WKWebView (built-in, no additional runtime required)")
+        logger.info("使用 macOS 内置的 WKWebView，无需额外运行时")
     elif system == "Linux":
-        logger.info("Using Linux WebKit (requires webkit2gtk)")
+        logger.info("使用 Linux WebKit（需预装 webkit2gtk）")
     else:
-        logger.warning(f"Unknown platform: {system}")
+        logger.warning(f"未知平台：{system}")
 
     return True
 
@@ -76,7 +76,7 @@ https://developer.microsoft.com/microsoft-edge/webview2/
 安装后重启应用程序。
 """
     print(error_message, file=sys.stderr)
-    logger.error("WebView2 runtime not installed. Application cannot start.")
+    logger.error("未安装 WebView2 运行时，应用程序无法启动")
 
     try:
         import tkinter as tk
@@ -114,6 +114,53 @@ def setup_console_logging(window) -> None:
         window.events.console_message += on_console_message
 
 
+def register_api_handlers(api: BridgeAPI) -> None:
+    """使用 pywebview.expose 暴露给前端的纯函数接口。"""
+
+    def login_state():
+        return api.login_state()
+
+    def start_crawl_author(author_input: str):
+        return api.start_crawl_author(author_input)
+
+    def start_crawl_video(video_url: str):
+        return api.start_crawl_video(video_url)
+
+    def stop_crawl():
+        return api.stop_crawl()
+
+    def list_videos(filters: dict | None = None, page: int = 1, page_size: int = 50):
+        return api.list_videos(filters or {}, page, page_size)
+
+    def export_csv(filters: dict | None = None):
+        return api.export_csv(filters or {})
+
+    def open_login_window():
+        return api.open_login_window()
+
+    def push_chunk(items):
+        return api.push_chunk(items)
+
+    def on_scroll_complete():
+        return api.on_scroll_complete()
+
+    def trigger_mock_push():
+        return api.trigger_mock_push()
+
+    webview.expose(
+        login_state,
+        start_crawl_author,
+        start_crawl_video,
+        stop_crawl,
+        list_videos,
+        export_csv,
+        open_login_window,
+        push_chunk,
+        on_scroll_complete,
+        trigger_mock_push,
+    )
+
+
 def main() -> None:
     system = platform.system()
     logger.info(f"启动豆豆助手 - 平台: {system} {platform.release()}")
@@ -127,9 +174,11 @@ def main() -> None:
     data_dir.mkdir(parents=True, exist_ok=True)
     logger.info(f"数据目录: {data_dir.resolve()}")
 
-    profile_dir = data_dir / "webview_profile"
-    profile_dir.mkdir(parents=True, exist_ok=True)
-    logger.info(f"WebView 配置目录: {profile_dir.resolve()}")
+    profile_dir: pathlib.Path | None = None
+    if system == "Windows":
+        profile_dir = data_dir / "webview_profile"
+        profile_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(f"WebView 配置目录: {profile_dir.resolve()}")
 
     db_path = data_dir / "douyin.db"
     logger.info(f"数据库路径: {db_path.resolve()}")
@@ -153,7 +202,6 @@ def main() -> None:
     ui_window = webview.create_window(
         "DouDou Assistant",
         url=get_resource_path("app/ui/index.html").resolve().as_uri(),
-        js_api=api,
     )
     setup_console_logging(ui_window)
 
@@ -161,24 +209,29 @@ def main() -> None:
     crawler_window = webview.create_window(
         "Douyin Session",
         url="about:blank",
-        js_api=api,
         hidden=True,
     )
     setup_console_logging(crawler_window)
 
     api.bind_windows(ui_window, crawler_window, combined_js)
+    register_api_handlers(api)
 
     # 分平台启动 webview
     if system == "Windows":
+        assert profile_dir is not None
         logger.info(f"启动 WebView (EdgeChromium) - 用户数据路径: {profile_dir.resolve()}")
-        webview.start(gui="edgechromium", http_server=True, user_data_path=str(profile_dir))
+        webview.start(
+            gui="edgechromium",
+            http_server=True,
+            user_data_path=str(profile_dir),
+        )
     elif system == "Darwin":
         logger.info("启动 WebView (Cocoa/WKWebView) - macOS 不支持自定义存储路径")
         webview.start(gui="cocoa", http_server=True)
     else:
         logger.info("启动 WebView (默认)")
         webview.start(http_server=True)
-    
+
     logger.info("应用程序已停止")
 
 

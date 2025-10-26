@@ -68,12 +68,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // Login tab
     // ------------------------------------------------------------
     async function updateLoginStatus() {
-        if (!api) {
-            return;
-        }
         const statusDot = document.getElementById("status-dot");
         const statusText = document.getElementById("status-text");
         const statusDetails = document.getElementById("status-details");
+
+        if (!statusDot || !statusText || !statusDetails) {
+            return;
+        }
+
+        if (!api) {
+            statusDot.className = "status-dot checking";
+            statusText.textContent = "等待 API 就绪...";
+            statusDetails.textContent = "请稍候，界面初始化完成后即可检查登录状态。";
+            return;
+        }
 
         try {
             // 显示检查状态
@@ -90,13 +98,13 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 statusDot.className = "status-dot logged-out";
                 statusText.textContent = "✗ 未登录";
-                statusDetails.innerHTML = 
-                    '请点击<strong>"登录抖音"</strong>按钮，在弹出窗口中登录您的抖音账号。';
+                statusDetails.innerHTML =
+                    '请点击<strong>“登录抖音”</strong>按钮，在弹出窗口中登录您的抖音账号。';
             }
         } catch (error) {
             statusDot.className = "status-dot logged-out";
             statusText.textContent = "✗ 检查登录状态失败";
-            statusDetails.textContent = error.message;
+            statusDetails.textContent = error.message || "登录状态检查出现未知错误。";
         }
     }
 
@@ -446,51 +454,66 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Initialize button states
-    updateCrawlButtons(false);
-    
-    loadData();
-});
+    document.addEventListener('pywebviewready', () => {
+        console.log('PyWebView API is ready');
+        api = window.pywebview.api;
 
-// 等待 pywebview 就绪
-document.addEventListener('pywebviewready', () => {
-    console.log('PyWebView API is ready');
-    api = window.pywebview.api;
-    
-    const messageElement = document.getElementById("message");
-    if (messageElement) {
-        messageElement.textContent = "就绪";
-    }
-    
-    // 启用所有按钮
-    document.querySelectorAll("button").forEach(btn => {
-        btn.disabled = false;
+        const messageElement = document.getElementById("message");
+        if (messageElement) {
+            messageElement.textContent = "就绪";
+        }
+
+        document.querySelectorAll("button").forEach(btn => {
+            btn.disabled = false;
+        });
+
+        const stopBtn = document.getElementById("stop-crawl-btn");
+        if (stopBtn) stopBtn.disabled = true;
+
+        // 在 API 就绪后初始化按钮状态并刷新登录提示
+        updateCrawlButtons(false);
+        updateLoginStatus();
     });
-    
-    // 停止按钮初始状态应为禁用
-    const stopBtn = document.getElementById("stop-crawl-btn");
-    if (stopBtn) stopBtn.disabled = true;
-});
 
-// 监听登录成功事件
-window.addEventListener('login-success', () => {
-    console.log('Login success event received');
-    const messageElement = document.getElementById("message");
-    if (messageElement) {
-        messageElement.textContent = "登录成功";
-    }
-    
-    // 如果当前在登录标签页，自动更新登录状态
-    const loginTab = document.querySelector('.tab-button[data-tab="login"]');
-    if (loginTab && loginTab.classList.contains('active')) {
+    window.addEventListener('login-success', () => {
+        console.log('Login success event received');
+        const messageElement = document.getElementById("message");
+        if (messageElement) {
+            messageElement.textContent = "登录成功";
+        }
+
         setTimeout(() => {
-            const statusDot = document.getElementById("status-dot");
-            const statusText = document.getElementById("status-text");
-            const statusDetails = document.getElementById("status-details");
-            
-            if (statusDot) statusDot.className = "status-dot logged-in";
-            if (statusText) statusText.textContent = "✓ 已登录抖音";
-            if (statusDetails) statusDetails.textContent = "您已成功登录，可以开始采集数据。";
+            updateLoginStatus();
         }, 500);
-    }
+    });
+
+    window.addEventListener('login-timeout', () => {
+        console.warn('Login timeout event received');
+        const messageElement = document.getElementById("message");
+        if (messageElement) {
+            messageElement.textContent = "登录检测超时，请重新尝试";
+        }
+
+        const statusDot = document.getElementById("status-dot");
+        if (statusDot) {
+            statusDot.className = "status-dot logged-out";
+        }
+
+        const statusText = document.getElementById("status-text");
+        if (statusText) {
+            statusText.textContent = "登录检测超时";
+        }
+
+        const statusDetails = document.getElementById("status-details");
+        if (statusDetails) {
+            statusDetails.innerHTML =
+                '若已完成登录，请点击<strong>“手动刷新”</strong>按钮确认；否则请重新打开登录窗口。';
+        }
+
+        setTimeout(() => {
+            updateLoginStatus();
+        }, 500);
+    });
+
+    loadData();
 });
