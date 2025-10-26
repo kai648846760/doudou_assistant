@@ -207,7 +207,7 @@ class BridgeAPI:
                 self.crawler_window.load_url("https://www.douyin.com/")
                 time.sleep(0.5)
             except Exception:  # pragma: no cover - pywebview runtime
-                logger.debug("Unable to navigate to Douyin for login check")
+                logger.debug("无法跳转至抖音首页以检查登录状态")
 
         script = """
             (function() {
@@ -348,7 +348,7 @@ class BridgeAPI:
     # ---------------------------------------------------------------------
     def push_chunk(self, items: list[dict[str, Any]]) -> dict[str, Any]:
         if not isinstance(items, list) or not items:
-            logger.debug("Received empty or invalid items list")
+            logger.debug("收到的批次为空或格式不正确")
             return {"success": False, "error": "数据格式错误：需要包含内容的列表"}
 
         logger.info(f"收到 {len(items)} 条数据")
@@ -424,7 +424,7 @@ class BridgeAPI:
         try:
             return self.db.list_videos(filters or {}, page, page_size)
         except Exception as exc:  # pragma: no cover - DB failure handling
-            logger.exception("Error listing videos")
+            logger.exception("查询视频列表时发生错误")
             return {
                 "error": str(exc),
                 "items": [],
@@ -438,7 +438,7 @@ class BridgeAPI:
             export_path = self.db.export_csv(filters or {})
             return {"success": True, "path": str(export_path)}
         except Exception as exc:  # pragma: no cover - IO failure
-            logger.exception("Error exporting CSV")
+            logger.exception("导出 CSV 文件时发生错误")
             return {"success": False, "error": str(exc)}
 
     # ---------------------------------------------------------------------

@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             await api?.trigger_mock_push();
         } catch (error) {
-            console.error("Failed to trigger mock push", error);
+            console.error("触发模拟数据推送失败", error);
         }
     });
 
@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
             totalItems = result.total || 0;
             renderData(result);
         } catch (error) {
-            console.error("Failed to load data:", error);
+            console.error("加载数据失败:", error);
         }
     }
 
@@ -455,7 +455,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener('pywebviewready', () => {
-        console.log('PyWebView API is ready');
+        console.log('PyWebView API 已就绪');
         api = window.pywebview.api;
 
         const messageElement = document.getElementById("message");
@@ -463,12 +463,7 @@ document.addEventListener("DOMContentLoaded", () => {
             messageElement.textContent = "就绪";
         }
 
-        document.querySelectorAll("button").forEach(btn => {
-            btn.disabled = false;
-        });
-
-        const stopBtn = document.getElementById("stop-crawl-btn");
-        if (stopBtn) stopBtn.disabled = true;
+        enableAllButtons();
 
         // 在 API 就绪后初始化按钮状态并刷新登录提示
         updateCrawlButtons(false);
@@ -476,7 +471,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener('login-success', () => {
-        console.log('Login success event received');
+        console.log('收到登录成功事件');
         const messageElement = document.getElementById("message");
         if (messageElement) {
             messageElement.textContent = "登录成功";
@@ -488,7 +483,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     window.addEventListener('login-timeout', () => {
-        console.warn('Login timeout event received');
+        console.warn('登录状态检测超时');
         const messageElement = document.getElementById("message");
         if (messageElement) {
             messageElement.textContent = "登录检测超时，请重新尝试";

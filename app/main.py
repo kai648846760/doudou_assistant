@@ -200,14 +200,14 @@ def main() -> None:
 
     logger.info("创建 UI 窗口")
     ui_window = webview.create_window(
-        "DouDou Assistant",
+        "豆豆助手",
         url=get_resource_path("app/ui/index.html").resolve().as_uri(),
     )
     setup_console_logging(ui_window)
 
     logger.info("创建爬虫窗口")
     crawler_window = webview.create_window(
-        "Douyin Session",
+        "抖音会话",
         url="about:blank",
         hidden=True,
     )
