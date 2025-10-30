@@ -20,6 +20,7 @@ from .runtime import (
     start as start_runtime,
     stop as stop_runtime,
 )
+from .storage import SQLiteStorage
 from .utils.logging import configure_logging, get_logger
 
 __all__ = [
@@ -39,6 +40,7 @@ __all__ = [
     "acquire_reader",
     "release_reader",
     "reader_session",
+    "SQLiteStorage",
     "configure_logging",
     "get_logger",
 ]

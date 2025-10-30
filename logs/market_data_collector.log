@@ -1,0 +1,358 @@
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpw8c8zto1/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmpno8zz3z6/nested/storage/ETHUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTC/USDT:USDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTC/USDT:USDT at /tmp/tmpay5oarbo/BTC_USDT_USDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp5ehmn4cn/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpu094w34i/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpqk7n0urf/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp6qc7ot8k/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpwuj8d4mr/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp8ztylono/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpr1dhs_3i/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpn4io_n4m/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpdzyg_ppl/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpmnadqnu1/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmph97qj6iy/BTCUSDT.db
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:22 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpm4zqsssj/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpidbhr0j6/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpao8h46q9/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpq91gp_ym/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpgarx73qr/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpj7cof0ox/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp97jr4up2/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp8fhi25oo/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmptcyll7vx/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmprevinh75/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpvmcfxejr/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpz0wfxn01/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpxpn46xdb/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpdrgkbxva/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpodi5_yqs/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpsfvt9gck/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpk7l5fluo/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp6rpx0b6w/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmp6rpx0b6w/ETHUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpdu1g1f0w/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmpdu1g1f0w/ETHUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpohi4s9vi/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpecve0gse/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpae4skfhd/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp3dj54nrd/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:25:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpiakq3qc8/BTCUSDT.db
+2025-10-30 14:25:23 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:27:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for TEST
+2025-10-30 14:27:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for TEST at /tmp/tmphzpb3eqr/TEST.db
+2025-10-30 14:27:36 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:27:49 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for TEST
+2025-10-30 14:27:49 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for TEST at /tmp/tmp5826o1au/TEST.db
+2025-10-30 14:27:49 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:28:07 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for TEST
+2025-10-30 14:28:07 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for TEST at /tmp/tmpyrndvrbm/TEST.db
+2025-10-30 14:28:07 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpgals7uad/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmpgvdy823s/nested/storage/ETHUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTC/USDT:USDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTC/USDT:USDT at /tmp/tmpt5mp7hnz/BTC_USDT_USDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpvdc776pn/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp9j9t2run/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp0dna5bk7/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpp68jmyjy/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpk4xsxwmf/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp2ovwteq7/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpt4yin5lr/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpjpz2pmck/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpj0jl5tc_/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmplx37b3sp/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpa8rbttf5/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp5vml5emh/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp6gtwfu6s/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpsscxdckh/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpcxi35xha/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmprmog_fci/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpsmwfompc/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpfwvixuzg/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpmfwvemtt/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpgxj57ifb/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpqrexqpak/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpv24gxqz7/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpw5zdu68j/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpnco2ymx9/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmprr2vug4l/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpbq43h4rp/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpe1acrac1/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpzzder4xx/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpqnqfg5jh/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmpqnqfg5jh/ETHUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpvpun2rkq/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmpvpun2rkq/ETHUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp7fj3k9ja/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpusful63_/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp1zp4j5b9/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpalhk79cc/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:24 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp1dcq72t_/BTCUSDT.db
+2025-10-30 14:28:24 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:28:43 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:43 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpcrkqxk5l/BTCUSDT.db
+2025-10-30 14:28:43 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:28:55 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:28:55 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpy1wgp7t1/BTCUSDT.db
+2025-10-30 14:28:55 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:29:05 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:29:05 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpimj9ah_h/BTCUSDT.db
+2025-10-30 14:29:05 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:29:15 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:29:15 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmps8xsblb0/BTCUSDT.db
+2025-10-30 14:29:15 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:29:23 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:29:23 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpj792hg93/BTCUSDT.db
+2025-10-30 14:29:23 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:29:40 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:29:40 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmptr6cn2ml/BTCUSDT.db
+2025-10-30 14:29:40 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:29:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:29:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpl31bi8mp/BTCUSDT.db
+2025-10-30 14:29:56 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:30:18 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:18 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpanthrep3/BTCUSDT.db
+2025-10-30 14:30:18 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpg1eex11p/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmp3vc04r5e/nested/storage/ETHUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTC/USDT:USDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTC/USDT:USDT at /tmp/tmpt0_hn1x6/BTC_USDT_USDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpzgnf5p4x/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpeybm9oas/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmplzz1zy5b/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpueas8z5l/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp1_b241ec/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp74n4zenl/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpcdy6sd9d/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp9_95l7s8/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp2vt0wvbj/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpbx40vbgk/BTCUSDT.db
+2025-10-30 14:30:36 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpb22u2nvl/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp8b_ayvtl/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpvm_0mqi0/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpz_t2faxb/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpi7vrqqrk/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp2k6cs4i1/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp31v7vkc_/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpv024u6xd/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp5mnncbpr/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp3r34u2a9/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp7jzt44nr/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp4l56mjlr/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp8ge91022/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmprplkkx60/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpbqabp9i8/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpudox5gwj/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpjqblco5k/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpko0z2a2b/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp47jlgzr6/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmp47jlgzr6/ETHUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpdybuq5s9/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmpdybuq5s9/ETHUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpx2h1d6rb/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp11tz52c2/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp423lwg_z/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmphc5j730s/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:30:37 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp6_xyj1ge/BTCUSDT.db
+2025-10-30 14:30:37 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:31:18 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpio7t3z5y/BTCUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmp47xvog2t/nested/storage/ETHUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTC/USDT:USDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTC/USDT:USDT at /tmp/tmpzoad4m8s/BTC_USDT_USDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpdcl6c4ef/BTCUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpam2_4n02/BTCUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp_g1w2mkb/BTCUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpsi5lir3_/BTCUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp368l7nax/BTCUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmphyqmg7_i/BTCUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpss5y01r2/BTCUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpdpr7fa8n/BTCUSDT.db
+2025-10-30 14:31:56 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp9q7qf483/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp8c8l6g7x/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpu2ilhh4y/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpr7o98ghb/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmptjjb3ba0/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpu81fjzgv/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpzrvlf05v/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp5wudyls5/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpvae0_7nc/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp6kerzeh_/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp96k03xrn/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpu1pirgvl/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpth0i2zcc/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpgg7zgf4_/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpe7k2hf9k/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpqlzlkozc/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpff55yota/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp4yxdz8cf/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpratq4qoj/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpq8at8zd5/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp_6qf5eji/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmp_6qf5eji/ETHUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp5gb3cp2m/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for ETHUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for ETHUSDT at /tmp/tmp5gb3cp2m/ETHUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmppizqxcsh/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpshit63c6/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp8h5eziva/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmpegicc1ti/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
+2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp885z28r9/BTCUSDT.db
+2025-10-30 14:31:57 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
