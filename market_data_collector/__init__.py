@@ -22,6 +22,7 @@ from .runtime import (
     stop as stop_runtime,
 )
 from .storage import SQLiteStorage
+from .subscriptions import SubscriptionManager
 from .utils.logging import configure_logging, get_logger
 
 __all__ = [
@@ -44,6 +45,7 @@ __all__ = [
     "release_reader",
     "reader_session",
     "SQLiteStorage",
+    "SubscriptionManager",
     "configure_logging",
     "get_logger",
 ]

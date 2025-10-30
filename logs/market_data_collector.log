@@ -734,3 +734,540 @@ Testing normalization in data structures:
 2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
 2025-10-30 14:43:41 [INFO] market_data_collector.exchange: Exchange adapter closed
 2025-10-30 14:43:41 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting subscriptions for 2 symbols: BTC/USDT:USDT, ETH/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Started 14 subscription tasks
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: BTC/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting trades subscription: BTC/USDT:USDT (interval: realtime)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: BTC/USDT:USDT (interval: 8h)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting mark price subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: ETH/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting trades subscription: ETH/USDT:USDT (interval: realtime)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: ETH/USDT:USDT (interval: 8h)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting mark price subscription: ETH/USDT:USDT (interval: 1m)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Stopping subscription manager...
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Subscription manager stopped
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting subscriptions for 2 symbols: BTC/USDT:USDT, ETH/USDT:USDT
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Started 14 subscription tasks
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: BTC/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting trades subscription: BTC/USDT:USDT (interval: realtime)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: BTC/USDT:USDT (interval: 8h)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting mark price subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: ETH/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting trades subscription: ETH/USDT:USDT (interval: realtime)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: ETH/USDT:USDT (interval: 8h)
+2025-10-30 15:11:11 [INFO] market_data_collector.subscriptions: Starting mark price subscription: ETH/USDT:USDT (interval: 1m)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting subscriptions for 2 symbols: BTC/USDT:USDT, ETH/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Started 14 subscription tasks
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: BTC/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting trades subscription: BTC/USDT:USDT (interval: realtime)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: BTC/USDT:USDT (interval: 8h)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting mark price subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: ETH/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting trades subscription: ETH/USDT:USDT (interval: realtime)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: ETH/USDT:USDT (interval: 8h)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting mark price subscription: ETH/USDT:USDT (interval: 1m)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Stopping subscription manager...
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Subscription manager stopped
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting subscriptions for 2 symbols: BTC/USDT:USDT, ETH/USDT:USDT
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Started 14 subscription tasks
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: BTC/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting trades subscription: BTC/USDT:USDT (interval: realtime)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: BTC/USDT:USDT (interval: 8h)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting mark price subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: ETH/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting trades subscription: ETH/USDT:USDT (interval: realtime)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: ETH/USDT:USDT (interval: 8h)
+2025-10-30 15:11:12 [INFO] market_data_collector.subscriptions: Starting mark price subscription: ETH/USDT:USDT (interval: 1m)
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Stopping subscription manager...
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Subscription manager stopped
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting subscriptions for 2 symbols: BTC/USDT:USDT, ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Started 14 subscription tasks
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: BTC/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting trades subscription: BTC/USDT:USDT (interval: realtime)
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: BTC/USDT:USDT (interval: 8h)
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting mark price subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: ETH/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting trades subscription: ETH/USDT:USDT (interval: realtime)
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: ETH/USDT:USDT (interval: 8h)
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting mark price subscription: ETH/USDT:USDT (interval: 1m)
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m', '5m']
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Starting subscriptions for 2 symbols: BTC/USDT:USDT, ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Started 14 subscription tasks
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Stopping subscription manager...
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Subscription manager stopped
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: ETH/USDT:USDT
+2025-10-30 15:11:13 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ticker_BTC/USDT:USDT' coro=<SubscriptionManager._subscribe_ticker() done, defined at /home/engine/project/market_data_collector/subscriptions.py:207> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 215, in _subscribe_ticker
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ohlcv_BTC/USDT:USDT_1m' coro=<SubscriptionManager._subscribe_ohlcv() done, defined at /home/engine/project/market_data_collector/subscriptions.py:349> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 358, in _subscribe_ohlcv
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ohlcv_BTC/USDT:USDT_5m' coro=<SubscriptionManager._subscribe_ohlcv() done, defined at /home/engine/project/market_data_collector/subscriptions.py:349> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 358, in _subscribe_ohlcv
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ticker_ETH/USDT:USDT' coro=<SubscriptionManager._subscribe_ticker() done, defined at /home/engine/project/market_data_collector/subscriptions.py:207> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 215, in _subscribe_ticker
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ohlcv_ETH/USDT:USDT_1m' coro=<SubscriptionManager._subscribe_ohlcv() done, defined at /home/engine/project/market_data_collector/subscriptions.py:349> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 358, in _subscribe_ohlcv
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ohlcv_ETH/USDT:USDT_5m' coro=<SubscriptionManager._subscribe_ohlcv() done, defined at /home/engine/project/market_data_collector/subscriptions.py:349> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 358, in _subscribe_ohlcv
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ticker_BTC/USDT:USDT' coro=<SubscriptionManager._subscribe_ticker() done, defined at /home/engine/project/market_data_collector/subscriptions.py:207> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 215, in _subscribe_ticker
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ohlcv_BTC/USDT:USDT_1m' coro=<SubscriptionManager._subscribe_ohlcv() done, defined at /home/engine/project/market_data_collector/subscriptions.py:349> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 358, in _subscribe_ohlcv
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ohlcv_BTC/USDT:USDT_5m' coro=<SubscriptionManager._subscribe_ohlcv() done, defined at /home/engine/project/market_data_collector/subscriptions.py:349> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 358, in _subscribe_ohlcv
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ticker_ETH/USDT:USDT' coro=<SubscriptionManager._subscribe_ticker() done, defined at /home/engine/project/market_data_collector/subscriptions.py:207> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 215, in _subscribe_ticker
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ohlcv_ETH/USDT:USDT_1m' coro=<SubscriptionManager._subscribe_ohlcv() done, defined at /home/engine/project/market_data_collector/subscriptions.py:349> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 358, in _subscribe_ohlcv
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:13 [ERROR] asyncio: Task exception was never retrieved
+future: <Task finished name='ohlcv_ETH/USDT:USDT_5m' coro=<SubscriptionManager._subscribe_ohlcv() done, defined at /home/engine/project/market_data_collector/subscriptions.py:349> exception=ValueError("could not convert string to float: '1m,5'")>
+Traceback (most recent call last):
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 358, in _subscribe_ohlcv
+    interval = self._parse_interval(interval_str)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/engine/project/market_data_collector/subscriptions.py", line 108, in _parse_interval
+    return float(interval_str[:-1]) * 60
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: could not convert string to float: '1m,5'
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m']
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Starting subscriptions for 1 symbols: BTC/USDT:USDT
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Started 4 subscription tasks
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Starting ticker subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: BTC/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:11:29 [ERROR] market_data_collector.subscriptions: Error in orderbook subscription for BTC/USDT:USDT: object MagicMock can't be used in 'await' expression
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Starting trades subscription: BTC/USDT:USDT (interval: realtime)
+2025-10-30 15:11:29 [ERROR] market_data_collector.subscriptions: Error in trades subscription for BTC/USDT:USDT: object MagicMock can't be used in 'await' expression
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Starting OHLCV subscription: BTC/USDT:USDT @ 1m (interval: 1m)
+2025-10-30 15:11:29 [ERROR] market_data_collector.subscriptions: Error in OHLCV subscription for BTC/USDT:USDT @ 1m: object MagicMock can't be used in 'await' expression
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Stopping subscription manager...
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Ticker subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: OHLCV subscription cancelled: BTC/USDT:USDT @ 1m
+2025-10-30 15:11:29 [INFO] market_data_collector.subscriptions: Subscription manager stopped
+2025-10-30 15:11:29 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 15:12:36 [INFO] __main__: ============================================================
+2025-10-30 15:12:36 [INFO] __main__: Simple Subscription Demo (Mock Exchange)
+2025-10-30 15:12:36 [INFO] __main__: ============================================================
+2025-10-30 15:12:36 [INFO] __main__: Symbols: BTC/USDT:USDT
+2025-10-30 15:12:36 [INFO] __main__: Intervals: {'klines': '1m', 'orderbook_snapshot': '1m', 'trades': 'realtime', 'funding': '8h', 'mark_price': '1m'}
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m']
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:12:36 [INFO] __main__: Starting subscriptions...
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: Starting subscriptions for 1 symbols: BTC/USDT:USDT
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: Started 6 subscription tasks
+2025-10-30 15:12:36 [INFO] __main__: Started 6 subscription tasks
+2025-10-30 15:12:36 [INFO] __main__: Collecting data for 5 seconds...
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: Starting ticker subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: BTC/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: Starting trades subscription: BTC/USDT:USDT (interval: realtime)
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: Starting OHLCV subscription: BTC/USDT:USDT @ 1m (interval: 1m)
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: BTC/USDT:USDT (interval: 8h)
+2025-10-30 15:12:36 [INFO] market_data_collector.subscriptions: Starting mark price subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:12:36 [INFO] __main__: Ticker: BTC/USDT:USDT = $35000.0
+2025-10-30 15:12:36 [INFO] __main__: Orderbook: BTC/USDT:USDT - 3 bids, 3 asks
+2025-10-30 15:12:36 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:36 [INFO] __main__: OHLCV: BTC/USDT:USDT @ 1m - C: $35000.0, V: 123.45
+2025-10-30 15:12:36 [INFO] __main__: Funding: BTC/USDT:USDT - rate: 0.0001
+2025-10-30 15:12:36 [INFO] __main__: Mark Price: BTC/USDT:USDT - $35005.5
+2025-10-30 15:12:36 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:37 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:38 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:39 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:40 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:40 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:40 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:40 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:40 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:40 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:40 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:40 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:40 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:41 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:41 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:41 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:41 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:41 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:41 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:41 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:41 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:41 [INFO] __main__: Stopping subscriptions...
+2025-10-30 15:12:41 [INFO] market_data_collector.subscriptions: Stopping subscription manager...
+2025-10-30 15:12:41 [INFO] market_data_collector.subscriptions: Ticker subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:12:41 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:12:41 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:12:41 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:12:41 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:12:41 [INFO] market_data_collector.subscriptions: OHLCV subscription cancelled: BTC/USDT:USDT @ 1m
+2025-10-30 15:12:41 [INFO] market_data_collector.subscriptions: Subscription manager stopped
+2025-10-30 15:12:41 [INFO] __main__: ============================================================
+2025-10-30 15:12:41 [INFO] __main__: Data Collection Summary:
+2025-10-30 15:12:41 [INFO] __main__:   ticker: 1 updates
+2025-10-30 15:12:41 [INFO] __main__:   orderbook: 1 updates
+2025-10-30 15:12:41 [INFO] __main__:   trades: 49 updates
+2025-10-30 15:12:41 [INFO] __main__:   ohlcv: 1 updates
+2025-10-30 15:12:41 [INFO] __main__:   funding: 1 updates
+2025-10-30 15:12:41 [INFO] __main__:   mark_price: 1 updates
+2025-10-30 15:12:41 [INFO] __main__: ============================================================
+2025-10-30 15:12:41 [INFO] __main__: Demo complete!
+2025-10-30 15:12:41 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 15:12:55 [INFO] __main__: ============================================================
+2025-10-30 15:12:55 [INFO] __main__: Simple Subscription Demo (Mock Exchange)
+2025-10-30 15:12:55 [INFO] __main__: ============================================================
+2025-10-30 15:12:55 [INFO] __main__: Symbols: BTC/USDT:USDT
+2025-10-30 15:12:55 [INFO] __main__: Intervals: {'klines': '1m', 'orderbook_snapshot': '1m', 'trades': 'realtime', 'funding': '8h', 'mark_price': '1m'}
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m']
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:12:55 [INFO] __main__: Starting subscriptions...
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: Starting subscriptions for 1 symbols: BTC/USDT:USDT
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: Started 6 subscription tasks
+2025-10-30 15:12:55 [INFO] __main__: Started 6 subscription tasks
+2025-10-30 15:12:55 [INFO] __main__: Collecting data for 5 seconds...
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: Starting ticker subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: BTC/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: Starting trades subscription: BTC/USDT:USDT (interval: realtime)
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: Starting OHLCV subscription: BTC/USDT:USDT @ 1m (interval: 1m)
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: BTC/USDT:USDT (interval: 8h)
+2025-10-30 15:12:55 [INFO] market_data_collector.subscriptions: Starting mark price subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:12:55 [INFO] __main__: Ticker: BTC/USDT:USDT = $35000.0
+2025-10-30 15:12:55 [INFO] __main__: Orderbook: BTC/USDT:USDT - 3 bids, 3 asks
+2025-10-30 15:12:55 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:55 [INFO] __main__: OHLCV: BTC/USDT:USDT @ 1m - C: $35000.0, V: 123.45
+2025-10-30 15:12:55 [INFO] __main__: Funding: BTC/USDT:USDT - rate: 0.0001
+2025-10-30 15:12:55 [INFO] __main__: Mark Price: BTC/USDT:USDT - $35005.5
+2025-10-30 15:12:55 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:55 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:55 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:55 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:55 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:55 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:55 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:56 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:57 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:58 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:12:59 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:00 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:00 [INFO] __main__: Stopping subscriptions...
+2025-10-30 15:13:00 [INFO] market_data_collector.subscriptions: Stopping subscription manager...
+2025-10-30 15:13:00 [INFO] market_data_collector.subscriptions: Ticker subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:00 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:00 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:00 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:00 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:00 [INFO] market_data_collector.subscriptions: OHLCV subscription cancelled: BTC/USDT:USDT @ 1m
+2025-10-30 15:13:00 [INFO] market_data_collector.subscriptions: Subscription manager stopped
+2025-10-30 15:13:00 [INFO] __main__: ============================================================
+2025-10-30 15:13:00 [INFO] __main__: Data Collection Summary:
+2025-10-30 15:13:00 [INFO] __main__:   ticker: 1 updates
+2025-10-30 15:13:00 [INFO] __main__:   orderbook: 1 updates
+2025-10-30 15:13:00 [INFO] __main__:   trades: 49 updates
+2025-10-30 15:13:00 [INFO] __main__:   ohlcv: 1 updates
+2025-10-30 15:13:00 [INFO] __main__:   funding: 1 updates
+2025-10-30 15:13:00 [INFO] __main__:   mark_price: 1 updates
+2025-10-30 15:13:00 [INFO] __main__: ============================================================
+2025-10-30 15:13:00 [INFO] __main__: Demo complete!
+2025-10-30 15:13:00 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 15:13:08 [INFO] __main__: ============================================================
+2025-10-30 15:13:08 [INFO] __main__: Simple Subscription Demo (Mock Exchange)
+2025-10-30 15:13:08 [INFO] __main__: ============================================================
+2025-10-30 15:13:08 [INFO] __main__: Symbols: BTC/USDT:USDT
+2025-10-30 15:13:08 [INFO] __main__: Intervals: {'klines': '1m', 'orderbook_snapshot': '1m', 'trades': 'realtime', 'funding': '8h', 'mark_price': '1m'}
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: OHLCV timeframes: ['1m']
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: Subscription manager initialized
+2025-10-30 15:13:08 [INFO] __main__: Starting subscriptions...
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: Starting subscriptions for 1 symbols: BTC/USDT:USDT
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: Started 6 subscription tasks
+2025-10-30 15:13:08 [INFO] __main__: Started 6 subscription tasks
+2025-10-30 15:13:08 [INFO] __main__: Collecting data for 5 seconds...
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: Starting ticker subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: Starting orderbook subscription: BTC/USDT:USDT (depth: 200, interval: 1m)
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: Starting trades subscription: BTC/USDT:USDT (interval: realtime)
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: Starting OHLCV subscription: BTC/USDT:USDT @ 1m (interval: 1m)
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: Starting funding rate subscription: BTC/USDT:USDT (interval: 8h)
+2025-10-30 15:13:08 [INFO] market_data_collector.subscriptions: Starting mark price subscription: BTC/USDT:USDT (interval: 1m)
+2025-10-30 15:13:08 [INFO] __main__: Ticker: BTC/USDT:USDT = $35000.0
+2025-10-30 15:13:08 [INFO] __main__: Orderbook: BTC/USDT:USDT - 3 bids, 3 asks
+2025-10-30 15:13:08 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:08 [INFO] __main__: OHLCV: BTC/USDT:USDT @ 1m - C: $35000.0, V: 123.45
+2025-10-30 15:13:08 [INFO] __main__: Funding: BTC/USDT:USDT - rate: 0.0001
+2025-10-30 15:13:08 [INFO] __main__: Mark Price: BTC/USDT:USDT - $35005.5
+2025-10-30 15:13:08 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:08 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:08 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:09 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:10 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:11 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:12 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:13 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:13 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:13 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:13 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:13 [INFO] __main__: Trade: BTC/USDT:USDT - buy 0.5 @ $35000.0
+2025-10-30 15:13:13 [INFO] __main__: Stopping subscriptions...
+2025-10-30 15:13:13 [INFO] market_data_collector.subscriptions: Stopping subscription manager...
+2025-10-30 15:13:13 [INFO] market_data_collector.subscriptions: Ticker subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:13 [INFO] market_data_collector.subscriptions: Funding rate subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:13 [INFO] market_data_collector.subscriptions: Trades subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:13 [INFO] market_data_collector.subscriptions: Mark price subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:13 [INFO] market_data_collector.subscriptions: Orderbook subscription cancelled: BTC/USDT:USDT
+2025-10-30 15:13:13 [INFO] market_data_collector.subscriptions: OHLCV subscription cancelled: BTC/USDT:USDT @ 1m
+2025-10-30 15:13:13 [INFO] market_data_collector.subscriptions: Subscription manager stopped
+2025-10-30 15:13:13 [INFO] __main__: ============================================================
+2025-10-30 15:13:13 [INFO] __main__: Data Collection Summary:
+2025-10-30 15:13:13 [INFO] __main__:   ticker: 1 updates
+2025-10-30 15:13:13 [INFO] __main__:   orderbook: 1 updates
+2025-10-30 15:13:13 [INFO] __main__:   trades: 49 updates
+2025-10-30 15:13:13 [INFO] __main__:   ohlcv: 1 updates
+2025-10-30 15:13:13 [INFO] __main__:   funding: 1 updates
+2025-10-30 15:13:13 [INFO] __main__:   mark_price: 1 updates
+2025-10-30 15:13:13 [INFO] __main__: ============================================================
+2025-10-30 15:13:13 [INFO] __main__: Demo complete!
+2025-10-30 15:13:13 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 15:16:13 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
