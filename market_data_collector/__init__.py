@@ -10,6 +10,7 @@ from .config import (
     get_settings,
     settings,
 )
+from .exchange import ExchangeAdapter, create_exchange_adapter
 from .runtime import (
     Runtime,
     acquire_reader,
@@ -32,6 +33,8 @@ __all__ = [
     "StorageSettings",
     "get_settings",
     "settings",
+    "ExchangeAdapter",
+    "create_exchange_adapter",
     "Runtime",
     "runtime",
     "get_runtime",

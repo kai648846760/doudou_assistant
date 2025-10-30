@@ -356,3 +356,381 @@
 2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: Applying schema migration v1 for BTCUSDT
 2025-10-30 14:31:57 [INFO] market_data_collector.storage.sqlite: SQLite storage initialized for BTCUSDT at /tmp/tmp885z28r9/BTCUSDT.db
 2025-10-30 14:31:57 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:41:13 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:41:56 [INFO] __main__: 
+================================================================================
+2025-10-30 14:41:56 [INFO] __main__: EXCHANGE ADAPTER DRY-RUN TEST
+2025-10-30 14:41:56 [INFO] __main__: ================================================================================
+2025-10-30 14:41:56 [INFO] __main__: ================================================================================
+2025-10-30 14:41:56 [INFO] __main__: TEST: Exchange Adapter Initialization
+2025-10-30 14:41:56 [INFO] __main__: ================================================================================
+2025-10-30 14:41:56 [INFO] __main__: 
+1. Testing basic initialization...
+2025-10-30 14:41:56 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=False)
+2025-10-30 14:41:56 [INFO] __main__: ✓ Adapter initialized successfully
+2025-10-30 14:41:56 [INFO] __main__:   - Exchange: bybit
+2025-10-30 14:41:56 [INFO] __main__:   - Default type: swap
+2025-10-30 14:41:56 [INFO] __main__:   - Sandbox: False
+2025-10-30 14:41:56 [INFO] __main__:   - Max retries: 5
+2025-10-30 14:41:56 [INFO] __main__:   - Base backoff: 1.0s
+2025-10-30 14:41:56 [INFO] __main__: 
+2. Testing initialization with sandbox mode...
+2025-10-30 14:41:56 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:41:56 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:41:56 [INFO] __main__: ✓ Sandbox adapter initialized
+2025-10-30 14:41:56 [INFO] __main__:   - Sandbox: True
+2025-10-30 14:41:56 [INFO] __main__: 
+3. Testing factory function...
+2025-10-30 14:41:56 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:41:56 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:41:56 [INFO] __main__: ✓ Factory function works
+2025-10-30 14:41:56 [INFO] __main__: 
+4. Testing context manager...
+2025-10-30 14:41:56 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:41:56 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:41:56 [INFO] __main__: ✓ Context manager entered
+2025-10-30 14:41:57 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:41:57 [INFO] __main__: ✓ Context manager exited cleanly
+2025-10-30 14:41:57 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:41:57 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:41:57 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:41:57 [INFO] __main__: 
+✓ Initialization tests passed!
+2025-10-30 14:41:57 [INFO] __main__: 
+================================================================================
+2025-10-30 14:41:57 [INFO] __main__: TEST: Timestamp Normalization
+2025-10-30 14:41:57 [INFO] __main__: ================================================================================
+2025-10-30 14:41:57 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:41:57 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:41:57 [INFO] __main__: 
+Testing timestamp normalization:
+2025-10-30 14:41:57 [INFO] __main__: ✓ seconds to milliseconds: 1609459200 -> 1609459200000
+2025-10-30 14:41:57 [INFO] __main__: ✓ already in milliseconds: 1609459200000 -> 1609459200000
+2025-10-30 14:41:57 [INFO] __main__: ✓ None value: None -> None
+2025-10-30 14:41:57 [INFO] __main__: 
+Testing normalization in data structures:
+2025-10-30 14:41:57 [INFO] __main__: ✓ Ticker timestamp normalized: 1609459200000 -> 1609459200000
+2025-10-30 14:41:57 [INFO] __main__: ✓ Trade timestamp normalized
+2025-10-30 14:41:57 [INFO] __main__: ✓ OHLCV timestamp normalized: 1609459200000 -> 1609459200000
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:41:58 [INFO] __main__: 
+✓ Timestamp normalization tests passed!
+2025-10-30 14:41:58 [INFO] __main__: 
+================================================================================
+2025-10-30 14:41:58 [INFO] __main__: TEST: Symbol Formatting
+2025-10-30 14:41:58 [INFO] __main__: ================================================================================
+2025-10-30 14:41:58 [INFO] __main__: 
+1. Testing swap symbol formatting...
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:41:58 [INFO] __main__: ✓ Swap symbol: BTC/USDT:USDT
+2025-10-30 14:41:58 [INFO] __main__: 
+2. Testing spot symbol formatting...
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=spot, sandbox=True)
+2025-10-30 14:41:58 [INFO] __main__: ✓ Spot symbol: BTC/USDT
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:41:58 [INFO] __main__: 
+✓ Symbol formatting tests passed!
+2025-10-30 14:41:58 [INFO] __main__: 
+================================================================================
+2025-10-30 14:41:58 [INFO] __main__: TEST: Exchange Instance Creation
+2025-10-30 14:41:58 [INFO] __main__: ================================================================================
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:41:58 [INFO] __main__: 
+1. Checking ccxt.pro (async) instance...
+2025-10-30 14:41:58 [INFO] __main__: ✓ exchange_pro: bybit
+2025-10-30 14:41:58 [INFO] __main__: 
+2. Checking ccxt (sync) instance...
+2025-10-30 14:41:58 [INFO] __main__: ✓ exchange: bybit
+2025-10-30 14:41:58 [INFO] __main__: 
+3. Checking configuration...
+2025-10-30 14:41:58 [INFO] __main__: ✓ defaultType configured: swap
+2025-10-30 14:41:58 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:41:58 [INFO] __main__: 
+✓ Exchange instance tests passed!
+2025-10-30 14:41:58 [INFO] __main__: 
+================================================================================
+2025-10-30 14:41:58 [INFO] __main__: TEST SUMMARY
+2025-10-30 14:41:58 [INFO] __main__: ================================================================================
+2025-10-30 14:41:58 [INFO] __main__: ✓ PASSED: Initialization
+2025-10-30 14:41:58 [INFO] __main__: ✓ PASSED: Timestamp Normalization
+2025-10-30 14:41:58 [INFO] __main__: ✓ PASSED: Symbol Formatting
+2025-10-30 14:41:58 [INFO] __main__: ✓ PASSED: Exchange Instances
+2025-10-30 14:41:58 [INFO] __main__: 
+================================================================================
+2025-10-30 14:41:58 [INFO] __main__: 🎉 ALL DRY-RUN TESTS PASSED!
+2025-10-30 14:41:58 [INFO] __main__: ================================================================================
+2025-10-30 14:41:58 [INFO] __main__: 
+✅ The exchange adapter:
+2025-10-30 14:41:58 [INFO] __main__:   ✓ Initializes correctly with Bybit swap configuration
+2025-10-30 14:41:58 [INFO] __main__:   ✓ Supports configurable sandbox mode
+2025-10-30 14:41:58 [INFO] __main__:   ✓ Creates both ccxt.pro (async) and ccxt (sync) instances
+2025-10-30 14:41:58 [INFO] __main__:   ✓ Normalizes timestamps to milliseconds correctly
+2025-10-30 14:41:58 [INFO] __main__:   ✓ Formats symbols correctly for swap/spot markets
+2025-10-30 14:41:58 [INFO] __main__:   ✓ Implements reconnection/backoff settings
+2025-10-30 14:41:58 [INFO] __main__:   ✓ Provides async wrappers for watchers and fetch methods
+2025-10-30 14:41:58 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:42:09 [INFO] __main__: 
+================================================================================
+2025-10-30 14:42:09 [INFO] __main__: EXCHANGE ADAPTER DRY-RUN TEST
+2025-10-30 14:42:09 [INFO] __main__: ================================================================================
+2025-10-30 14:42:09 [INFO] __main__: ================================================================================
+2025-10-30 14:42:09 [INFO] __main__: TEST: Exchange Adapter Initialization
+2025-10-30 14:42:09 [INFO] __main__: ================================================================================
+2025-10-30 14:42:09 [INFO] __main__: 
+1. Testing basic initialization...
+2025-10-30 14:42:09 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=False)
+2025-10-30 14:42:09 [INFO] __main__: ✓ Adapter initialized successfully
+2025-10-30 14:42:09 [INFO] __main__:   - Exchange: bybit
+2025-10-30 14:42:09 [INFO] __main__:   - Default type: swap
+2025-10-30 14:42:09 [INFO] __main__:   - Sandbox: False
+2025-10-30 14:42:09 [INFO] __main__:   - Max retries: 5
+2025-10-30 14:42:09 [INFO] __main__:   - Base backoff: 1.0s
+2025-10-30 14:42:09 [INFO] __main__: 
+2. Testing initialization with sandbox mode...
+2025-10-30 14:42:09 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:42:09 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:42:09 [INFO] __main__: ✓ Sandbox adapter initialized
+2025-10-30 14:42:09 [INFO] __main__:   - Sandbox: True
+2025-10-30 14:42:09 [INFO] __main__: 
+3. Testing factory function...
+2025-10-30 14:42:09 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:42:09 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:42:09 [INFO] __main__: ✓ Factory function works
+2025-10-30 14:42:09 [INFO] __main__: 
+4. Testing context manager...
+2025-10-30 14:42:09 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:42:09 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:42:09 [INFO] __main__: ✓ Context manager entered
+2025-10-30 14:42:10 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:42:10 [INFO] __main__: ✓ Context manager exited cleanly
+2025-10-30 14:42:10 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:42:10 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:42:10 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:42:10 [INFO] __main__: 
+✓ Initialization tests passed!
+2025-10-30 14:42:10 [INFO] __main__: 
+================================================================================
+2025-10-30 14:42:10 [INFO] __main__: TEST: Timestamp Normalization
+2025-10-30 14:42:10 [INFO] __main__: ================================================================================
+2025-10-30 14:42:10 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:42:10 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:42:10 [INFO] __main__: 
+Testing timestamp normalization:
+2025-10-30 14:42:10 [INFO] __main__: ✓ seconds to milliseconds: 1609459200 -> 1609459200000
+2025-10-30 14:42:10 [INFO] __main__: ✓ already in milliseconds: 1609459200000 -> 1609459200000
+2025-10-30 14:42:10 [INFO] __main__: ✓ None value: None -> None
+2025-10-30 14:42:10 [INFO] __main__: 
+Testing normalization in data structures:
+2025-10-30 14:42:10 [INFO] __main__: ✓ Ticker timestamp normalized: 1609459200000 -> 1609459200000
+2025-10-30 14:42:10 [INFO] __main__: ✓ Trade timestamp normalized
+2025-10-30 14:42:10 [INFO] __main__: ✓ OHLCV timestamp normalized: 1609459200000 -> 1609459200000
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:42:11 [INFO] __main__: 
+✓ Timestamp normalization tests passed!
+2025-10-30 14:42:11 [INFO] __main__: 
+================================================================================
+2025-10-30 14:42:11 [INFO] __main__: TEST: Symbol Formatting
+2025-10-30 14:42:11 [INFO] __main__: ================================================================================
+2025-10-30 14:42:11 [INFO] __main__: 
+1. Testing swap symbol formatting...
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:42:11 [INFO] __main__: ✓ Swap symbol: BTC/USDT:USDT
+2025-10-30 14:42:11 [INFO] __main__: 
+2. Testing spot symbol formatting...
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=spot, sandbox=True)
+2025-10-30 14:42:11 [INFO] __main__: ✓ Spot symbol: BTC/USDT
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:42:11 [INFO] __main__: 
+✓ Symbol formatting tests passed!
+2025-10-30 14:42:11 [INFO] __main__: 
+================================================================================
+2025-10-30 14:42:11 [INFO] __main__: TEST: Exchange Instance Creation
+2025-10-30 14:42:11 [INFO] __main__: ================================================================================
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:42:11 [INFO] __main__: 
+1. Checking ccxt.pro (async) instance...
+2025-10-30 14:42:11 [INFO] __main__: ✓ exchange_pro: bybit
+2025-10-30 14:42:11 [INFO] __main__: 
+2. Checking ccxt (sync) instance...
+2025-10-30 14:42:11 [INFO] __main__: ✓ exchange: bybit
+2025-10-30 14:42:11 [INFO] __main__: 
+3. Checking configuration...
+2025-10-30 14:42:11 [INFO] __main__: ✓ defaultType configured: swap
+2025-10-30 14:42:11 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:42:11 [INFO] __main__: 
+✓ Exchange instance tests passed!
+2025-10-30 14:42:11 [INFO] __main__: 
+================================================================================
+2025-10-30 14:42:11 [INFO] __main__: TEST SUMMARY
+2025-10-30 14:42:11 [INFO] __main__: ================================================================================
+2025-10-30 14:42:11 [INFO] __main__: ✓ PASSED: Initialization
+2025-10-30 14:42:11 [INFO] __main__: ✓ PASSED: Timestamp Normalization
+2025-10-30 14:42:11 [INFO] __main__: ✓ PASSED: Symbol Formatting
+2025-10-30 14:42:11 [INFO] __main__: ✓ PASSED: Exchange Instances
+2025-10-30 14:42:11 [INFO] __main__: 
+================================================================================
+2025-10-30 14:42:11 [INFO] __main__: 🎉 ALL DRY-RUN TESTS PASSED!
+2025-10-30 14:42:11 [INFO] __main__: ================================================================================
+2025-10-30 14:42:11 [INFO] __main__: 
+✅ The exchange adapter:
+2025-10-30 14:42:11 [INFO] __main__:   ✓ Initializes correctly with Bybit swap configuration
+2025-10-30 14:42:11 [INFO] __main__:   ✓ Supports configurable sandbox mode
+2025-10-30 14:42:11 [INFO] __main__:   ✓ Creates both ccxt.pro (async) and ccxt (sync) instances
+2025-10-30 14:42:11 [INFO] __main__:   ✓ Normalizes timestamps to milliseconds correctly
+2025-10-30 14:42:11 [INFO] __main__:   ✓ Formats symbols correctly for swap/spot markets
+2025-10-30 14:42:11 [INFO] __main__:   ✓ Implements reconnection/backoff settings
+2025-10-30 14:42:11 [INFO] __main__:   ✓ Provides async wrappers for watchers and fetch methods
+2025-10-30 14:42:11 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:42:22 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:43:01 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:01 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:01 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:01 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:43:11 [INFO] __main__: 
+================================================================================
+2025-10-30 14:43:11 [INFO] __main__: EXCHANGE ADAPTER DRY-RUN TEST
+2025-10-30 14:43:11 [INFO] __main__: ================================================================================
+2025-10-30 14:43:11 [INFO] __main__: ================================================================================
+2025-10-30 14:43:11 [INFO] __main__: TEST: Exchange Adapter Initialization
+2025-10-30 14:43:11 [INFO] __main__: ================================================================================
+2025-10-30 14:43:11 [INFO] __main__: 
+1. Testing basic initialization...
+2025-10-30 14:43:11 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=False)
+2025-10-30 14:43:11 [INFO] __main__: ✓ Adapter initialized successfully
+2025-10-30 14:43:11 [INFO] __main__:   - Exchange: bybit
+2025-10-30 14:43:11 [INFO] __main__:   - Default type: swap
+2025-10-30 14:43:11 [INFO] __main__:   - Sandbox: False
+2025-10-30 14:43:11 [INFO] __main__:   - Max retries: 5
+2025-10-30 14:43:11 [INFO] __main__:   - Base backoff: 1.0s
+2025-10-30 14:43:11 [INFO] __main__: 
+2. Testing initialization with sandbox mode...
+2025-10-30 14:43:11 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:11 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:11 [INFO] __main__: ✓ Sandbox adapter initialized
+2025-10-30 14:43:11 [INFO] __main__:   - Sandbox: True
+2025-10-30 14:43:11 [INFO] __main__: 
+3. Testing factory function...
+2025-10-30 14:43:11 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:11 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:11 [INFO] __main__: ✓ Factory function works
+2025-10-30 14:43:11 [INFO] __main__: 
+4. Testing context manager...
+2025-10-30 14:43:11 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:11 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:11 [INFO] __main__: ✓ Context manager entered
+2025-10-30 14:43:11 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:11 [INFO] __main__: ✓ Context manager exited cleanly
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:12 [INFO] __main__: 
+✓ Initialization tests passed!
+2025-10-30 14:43:12 [INFO] __main__: 
+================================================================================
+2025-10-30 14:43:12 [INFO] __main__: TEST: Timestamp Normalization
+2025-10-30 14:43:12 [INFO] __main__: ================================================================================
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:12 [INFO] __main__: 
+Testing timestamp normalization:
+2025-10-30 14:43:12 [INFO] __main__: ✓ seconds to milliseconds: 1609459200 -> 1609459200000
+2025-10-30 14:43:12 [INFO] __main__: ✓ already in milliseconds: 1609459200000 -> 1609459200000
+2025-10-30 14:43:12 [INFO] __main__: ✓ None value: None -> None
+2025-10-30 14:43:12 [INFO] __main__: 
+Testing normalization in data structures:
+2025-10-30 14:43:12 [INFO] __main__: ✓ Ticker timestamp normalized: 1609459200000 -> 1609459200000
+2025-10-30 14:43:12 [INFO] __main__: ✓ Trade timestamp normalized
+2025-10-30 14:43:12 [INFO] __main__: ✓ OHLCV timestamp normalized: 1609459200000 -> 1609459200000
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:12 [INFO] __main__: 
+✓ Timestamp normalization tests passed!
+2025-10-30 14:43:12 [INFO] __main__: 
+================================================================================
+2025-10-30 14:43:12 [INFO] __main__: TEST: Symbol Formatting
+2025-10-30 14:43:12 [INFO] __main__: ================================================================================
+2025-10-30 14:43:12 [INFO] __main__: 
+1. Testing swap symbol formatting...
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:12 [INFO] __main__: ✓ Swap symbol: BTC/USDT:USDT
+2025-10-30 14:43:12 [INFO] __main__: 
+2. Testing spot symbol formatting...
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:12 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=spot, sandbox=True)
+2025-10-30 14:43:12 [INFO] __main__: ✓ Spot symbol: BTC/USDT
+2025-10-30 14:43:13 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:13 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:13 [INFO] __main__: 
+✓ Symbol formatting tests passed!
+2025-10-30 14:43:13 [INFO] __main__: 
+================================================================================
+2025-10-30 14:43:13 [INFO] __main__: TEST: Exchange Instance Creation
+2025-10-30 14:43:13 [INFO] __main__: ================================================================================
+2025-10-30 14:43:13 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:13 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:13 [INFO] __main__: 
+1. Checking ccxt.pro (async) instance...
+2025-10-30 14:43:13 [INFO] __main__: ✓ exchange_pro: bybit
+2025-10-30 14:43:13 [INFO] __main__: 
+2. Checking ccxt (sync) instance...
+2025-10-30 14:43:13 [INFO] __main__: ✓ exchange: bybit
+2025-10-30 14:43:13 [INFO] __main__: 
+3. Checking configuration...
+2025-10-30 14:43:13 [INFO] __main__: ✓ defaultType configured: swap
+2025-10-30 14:43:13 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:13 [INFO] __main__: 
+✓ Exchange instance tests passed!
+2025-10-30 14:43:13 [INFO] __main__: 
+================================================================================
+2025-10-30 14:43:13 [INFO] __main__: TEST SUMMARY
+2025-10-30 14:43:13 [INFO] __main__: ================================================================================
+2025-10-30 14:43:13 [INFO] __main__: ✓ PASSED: Initialization
+2025-10-30 14:43:13 [INFO] __main__: ✓ PASSED: Timestamp Normalization
+2025-10-30 14:43:13 [INFO] __main__: ✓ PASSED: Symbol Formatting
+2025-10-30 14:43:13 [INFO] __main__: ✓ PASSED: Exchange Instances
+2025-10-30 14:43:13 [INFO] __main__: 
+================================================================================
+2025-10-30 14:43:13 [INFO] __main__: 🎉 ALL DRY-RUN TESTS PASSED!
+2025-10-30 14:43:13 [INFO] __main__: ================================================================================
+2025-10-30 14:43:13 [INFO] __main__: 
+✅ The exchange adapter:
+2025-10-30 14:43:13 [INFO] __main__:   ✓ Initializes correctly with Bybit swap configuration
+2025-10-30 14:43:13 [INFO] __main__:   ✓ Supports configurable sandbox mode
+2025-10-30 14:43:13 [INFO] __main__:   ✓ Creates both ccxt.pro (async) and ccxt (sync) instances
+2025-10-30 14:43:13 [INFO] __main__:   ✓ Normalizes timestamps to milliseconds correctly
+2025-10-30 14:43:13 [INFO] __main__:   ✓ Formats symbols correctly for swap/spot markets
+2025-10-30 14:43:13 [INFO] __main__:   ✓ Implements reconnection/backoff settings
+2025-10-30 14:43:13 [INFO] __main__:   ✓ Provides async wrappers for watchers and fetch methods
+2025-10-30 14:43:13 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=False)
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:39 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=spot, sandbox=True)
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Sandbox mode enabled for bybit
+2025-10-30 14:43:40 [INFO] market_data_collector.exchange: Exchange adapter initialized: bybit (type=swap, sandbox=True)
+2025-10-30 14:43:41 [INFO] market_data_collector.exchange: Exchange adapter closed
+2025-10-30 14:43:41 [INFO] market_data_collector.runtime: Market data runtime stopped (reason=atexit)
