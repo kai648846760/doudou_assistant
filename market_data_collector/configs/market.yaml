@@ -1,0 +1,35 @@
+exchange:
+  name: Bybit
+  market_type: usdt_perpetual
+  base_rest_url: https://api.bybit.com
+  base_websocket_url: wss://stream.bybit.com/v5/public/linear
+
+symbols:
+  - BTCUSDT
+  - ETHUSDT
+  - SOLUSDT
+
+intervals:
+  klines: 1m
+  orderbook_snapshot: 1m
+  trades: realtime
+  funding: 8h
+
+orderbook:
+  depth: 200
+
+storage:
+  backend: filesystem
+  path: data/market_data
+  compression: gzip
+
+logging:
+  level: INFO
+  file: logs/market_data_collector.log
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+  datefmt: "%Y-%m-%d %H:%M:%S"
+
+runtime:
+  dry_run: false
+  enable_metrics: true
+  use_proxy: false

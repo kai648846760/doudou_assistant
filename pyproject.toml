@@ -8,6 +8,7 @@ dependencies = [
     "sqlmodel>=0.0.14",
     "sqlalchemy>=2.0",
     "pydantic>=2.0",
+    "PyYAML>=6.0",
 ]
 
 [dependency-groups]
@@ -19,7 +20,7 @@ dev = [
 managed = true
 
 [tool.setuptools]
-packages = ["app"]
+packages = ["app", "market_data_collector"]
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
