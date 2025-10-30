@@ -10,10 +10,11 @@ symbols:
   - SOLUSDT
 
 intervals:
-  klines: 1m
+  klines: 1m,5m,15m,1h  # Multiple timeframes supported (comma-separated)
   orderbook_snapshot: 1m
   trades: realtime
   funding: 8h
+  mark_price: 1m
 
 orderbook:
   depth: 200

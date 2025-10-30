@@ -48,6 +48,10 @@ data/
 *.sqlite
 *.sqlite3
 
+# Logs
+logs/
+*.log
+
 # Ruff
 .ruff_cache/
 
